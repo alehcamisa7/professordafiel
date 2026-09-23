@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Caveat:wght@500;700&family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
 <style>
 /* ============ CONFIGURAÇÃO ============
    ID da planilha "Professor da Fiel | Aulas do site".
@@ -26,6 +26,7 @@
   --preto:#000;
   --display:"Oswald", "Arial Narrow", Arial, sans-serif;
   --mao:"Caveat", "Comic Sans MS", cursive;
+  --giz-font:"Cabin Sketch", "Chalkboard SE", "Chalkduster", "Comic Sans MS", cursive;
   --r:6px;
 }
 *{box-sizing:border-box}
@@ -75,8 +76,11 @@ img{max-width:100%}
 /* hero */
 .hero{padding:34px 0 40px}
 .hero h1{
-  font-weight:700;text-transform:uppercase;
-  font-size:clamp(44px,11vw,104px);line-height:.92;margin:0;letter-spacing:-.01em;
+  font-family:var(--giz-font);font-weight:700;text-transform:uppercase;
+  font-size:clamp(42px,10.5vw,100px);line-height:1;margin:0;letter-spacing:.01em;
+  color:var(--giz);
+  /* poeira de giz */
+  text-shadow:0 0 1px rgba(242,240,234,.55),1px 1px 0 rgba(242,240,234,.12),-1px 0 2px rgba(242,240,234,.18);
 }
 .risco{position:relative;display:inline-block}
 .risco svg{position:absolute;left:-2%;bottom:-.14em;width:104%;height:.32em;overflow:visible}
@@ -111,6 +115,10 @@ section.bloco{padding:34px 0}
 }
 .materia:hover{border-color:var(--giz);transform:translateY(-2px)}
 .materia .nome{font-weight:500;font-size:22px;line-height:1.08}
+.materia .topo-card{display:flex;flex-direction:column;gap:12px}
+.materia .ico{width:38px;height:38px;display:block;color:var(--giz)}
+.materia .ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:url(#giz)}
+.materia.destaque .ico{color:var(--lousa)}
 .materia .qtd{font-family:var(--mao);font-size:24px;color:var(--giz-2);line-height:1}
 .materia .qtd b{font-family:var(--display);font-weight:700;font-size:40px;color:var(--giz);margin-right:6px;vertical-align:-4px}
 .materia.destaque{background:var(--giz);color:var(--lousa);border-color:var(--giz)}
@@ -147,19 +155,41 @@ section.bloco{padding:34px 0}
 .sala{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:34px;align-items:start;padding-bottom:30px}
 .tela{background:#fff;border-radius:var(--r);overflow:hidden;width:100%;max-width:440px;margin:0 auto}
 .tela iframe{display:block;width:100%;height:min(78vh,720px);min-height:560px;border:0}
-.info h1{font-weight:500;font-size:clamp(24px,4.4vw,34px);line-height:1.15;margin:4px 0 14px}
+.info h1{font-weight:700;text-transform:uppercase;font-size:clamp(34px,6vw,54px);line-height:1;margin:4px 0 14px}
+.info h1 small{font-family:var(--mao);font-weight:500;text-transform:none;font-size:.5em;color:var(--giz-2)}
+.coluna-video{width:100%;max-width:440px;margin:0 auto}
+.cab-aula-m{display:none}
+.cab-aula-m .quem{font-family:var(--mao);font-size:22px;color:var(--giz-2);line-height:1.1}
+.cab-aula-m h2{font-weight:700;text-transform:uppercase;font-size:34px;line-height:1;margin:2px 0 12px}
+.cab-aula-m h2 small{font-family:var(--mao);font-weight:500;text-transform:none;font-size:.55em;color:var(--giz-2)}
+.legenda{margin-top:14px;padding:16px 18px;border:2px dashed rgba(242,240,234,.35);border-radius:var(--r)}
+.rot-legenda{display:block;font-family:var(--mao);font-size:20px;color:var(--giz-2);line-height:1;margin-bottom:6px}
+.legenda p{margin:0;font-weight:400;font-size:16px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.legenda a{color:var(--giz);text-decoration-color:var(--vermelho);text-underline-offset:3px}
 .info .quem{font-family:var(--mao);font-size:24px;color:var(--giz-2);line-height:1.1}
 .info .acoes{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
 .navega{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
-.navega a,.navega span{
+.navega > a,.navega > span{
   display:block;padding:12px 14px;border:2px solid rgba(242,240,234,.4);border-radius:var(--r);text-decoration:none;min-height:70px
 }
-.navega a:hover{border-color:var(--giz)}
+.navega > a:hover{border-color:var(--giz)}
 .navega .rot{display:block;font-family:var(--mao);font-size:19px;color:var(--giz-2);line-height:1}
 .navega .alvo{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400;font-size:15px;line-height:1.3;margin-top:4px}
 .navega .prox{text-align:right;border-color:var(--vermelho)}
-.navega span{opacity:.45}
+.navega > span{opacity:.45}
 
+.convite{
+  display:grid;grid-template-columns:1fr auto;gap:20px 28px;align-items:center;
+  padding:26px 26px;border:2px solid var(--giz);border-radius:3px 12px 4px 10px / 10px 3px 12px 4px;
+  background:linear-gradient(90deg,rgba(216,38,46,.16),transparent 70%);
+}
+.convite h2{font-family:var(--giz-font);font-weight:700;font-size:clamp(28px,5vw,44px);line-height:1;margin:0 0 8px;text-transform:uppercase}
+.convite p{margin:0;max-width:52ch;font-size:17px}
+.convite .nota{display:block;margin-top:8px}
+.convite.mini{grid-template-columns:1fr;padding:18px;gap:12px;margin:0 0 22px}
+.convite.mini h2{font-size:26px}
+.formulario{background:#fff;border-radius:var(--r);overflow:hidden;max-width:760px}
+.formulario iframe{display:block;width:100%;height:min(1400px,160vh);border:0}
 .vazio{font-family:var(--mao);font-size:26px;color:var(--giz-2);padding:20px 0}
 
 /* rodapé */
@@ -176,6 +206,11 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .materias{grid-template-columns:1fr 1fr;gap:10px}
   .materia{min-height:118px;gap:14px;padding:14px 12px 12px}
   .materia .nome{font-size:17px}
+  .materia .ico{width:30px;height:30px}
+  .cab-aula-m{display:block}
+  .convite{grid-template-columns:1fr;padding:20px}
+  .info > .quem,.info > h1{display:none}
+  .info .acoes{margin-top:0}
   .materia .qtd{font-size:20px}
   .materia .qtd b{font-size:30px}
   .materia.destaque{grid-column:1 / -1}
@@ -183,6 +218,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="giz"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="1.3"/></filter></svg>
 <div class="listras" aria-hidden="true"></div>
 <div class="wrap">
   <header class="topo">
@@ -201,6 +237,9 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
    Troque só o ID se um dia mudar de planilha. */
 const PLANILHA_ID = "1xveT_RjSCrXK_JV06xBgfOWkeM5NES_bEnBcfOwpq3E";
 const PRIMEIRA_MATERIA = "Corinthianês"; // matéria marcada como "comece aqui"
+/* Formulário "Vai Corinthians" (envio de vídeos da torcida) */
+const FORM_ID = "1CYHvJMRQDWwB6XNQiHyAfIuoehqOidM4YqvQ7v8IjKo";
+const FORM_URL = `https://docs.google.com/forms/d/${FORM_ID}/viewform`;
 const URL_CSV = `https://docs.google.com/spreadsheets/d/${PLANILHA_ID}/gviz/tq?tqx=out:csv`;
 
 /* Cópia de segurança: usada só se a planilha não puder ser lida
@@ -293,13 +332,64 @@ const codigoIG=url=>{const m=String(url||"").match(/instagram\.com\/(?:[^\/]+\/)
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const dois=n=>String(n).padStart(2,"0");
 
+/* @perfis e #hashtags da legenda viram links do Instagram */
+const legendaHTML=t=>esc(t)
+  .replace(/(^|[\s(])@([A-Za-z0-9._]{2,30})/g,(x,a,u)=>`${a}<a href="https://www.instagram.com/${u.replace(/\.$/,"")}/" target="_blank" rel="noopener">@${u}</a>`)
+  .replace(/(^|[\s(])#([\p{L}0-9_]{2,40})/gu,(x,a,h)=>`${a}<a href="https://www.instagram.com/explore/tags/${encodeURIComponent(h)}/" target="_blank" rel="noopener">#${h}</a>`);
+
+/* Ícones das matérias (traço de giz). A matéria nova recebe o ícone
+   pela palavra-chave do nome; se nenhuma bater, ganha o livro. */
+const ICONES={
+  fala:'<path d="M4 5h16v10H10l-5 4v-4H4z"/><path d="M8 9h8M8 12h5"/>',
+  camisa:'<path d="M8.5 3 3 6l2 5 3-1.2V21h8V9.8l3 1.2 2-5-5.5-3c-.6 1.8-2 2.8-3.5 2.8S9.1 4.8 8.5 3z"/>',
+  coluna:'<path d="M3 9l9-5 9 5z"/><path d="M5.5 10v8M10 10v8M14 10v8M18.5 10v8M3 20.5h18"/>',
+  grafico:'<path d="M4 3v17h17"/><path d="M7 16l4-5 3 3 6-8"/><path d="M17 6h3v3"/>',
+  urna:'<path d="M4 11h16v9H4z"/><path d="M8 11V4h8v7"/><path d="M10 7.5l1.5 1.5L14.5 6M9 15h6"/>',
+  trofeu:'<path d="M8 3h8v6a4 4 0 0 1-8 0z"/><path d="M8 5H5a3 3 0 0 0 3 4.5M16 5h3a3 3 0 0 1-3 4.5M12 13v4M9 20.5h6M10 17h4"/>',
+  bandeira:'<path d="M3 5h18v14H3z"/><path d="M12 7l7 5-7 5-7-5z"/><circle cx="12" cy="12" r="2.2"/>',
+  olho:'<path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  boia:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.8"/><path d="M5.6 5.6l3.7 3.7M18.4 5.6l-3.7 3.7M5.6 18.4l3.7-3.7M18.4 18.4l-3.7-3.7"/>',
+  dupla:'<circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 5.5-6s5.5 2.5 5.5 6M14.5 14.3c3.3-.6 6 1.8 6.5 5.7"/>',
+  estrela:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  megafone:'<path d="M3 10v4h4l8 4V6l-8 4z"/><path d="M18 9.5a3.5 3.5 0 0 1 0 5M7 14l1.3 5h2.9l-1.2-4"/>',
+  prancheta:'<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M6.5 8l3 3M9.5 8l-3 3"/><circle cx="16.5" cy="15.5" r="2"/><path d="M9 14c1.8 2.6 3.6 3.4 5 2.6"/>',
+  nota:'<path d="M9 18V5.5L20 3v12.5"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="15.5" r="3"/>',
+  cabide:'<path d="M10 6a2 2 0 1 1 2 2v2"/><path d="M12 10 3 17h18z"/>',
+  alvo:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/><path d="M12 12l7-7M16 5h3v3"/>',
+  livro:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/>'
+};
+const REGRAS=[
+  [["corinthianes","linguistica","dicionario"],"fala"],
+  [["camisa","uniforme","manto"],"camisa"],
+  [["historia"],"coluna"],
+  [["matematica","estatistica"],"grafico"],
+  [["cidadania","politica","governanca"],"urna"],
+  [["fregues"],"trofeu"],
+  [["brasileir"],"bandeira"],
+  [["comportament","psicolog"],"olho"],
+  [["sobreviv"],"boia"],
+  [["pratica","collab"],"dupla"],
+  [["extra","especial"],"estrela"],
+  [["desabafo"],"megafone"],
+  [["tatica","analise"],"prancheta"],
+  [["musica","canto"],"nota"],
+  [["moda","vestuario"],"cabide"],
+  [["estrategia","planejamento"],"alvo"]
+];
+function iconeMateria(nome){
+  const n=norm(nome);
+  const r=REGRAS.find(([chaves])=>chaves.some(k=>n.includes(k)));
+  return `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[r?r[1]:"livro"]}</svg>`;
+}
+
 function montar(linhas){
   // linhas: [[materia, nº, titulo, link], ...] na ordem da planilha
   AULAS=[];
   linhas.forEach((l,i)=>{
     const materia=String(l[0]||"").trim(), cod=codigoIG(l[3]);
     if(!materia||!cod) return;
-    AULAS.push({materia,mslug:slug(materia),num:parseInt(l[1],10)||0,titulo:String(l[2]||"").trim()||"Aula sem título",cod,ordem:i});
+    const titulo=String(l[2]||"").trim()||"Aula sem título";
+    AULAS.push({materia,mslug:slug(materia),num:parseInt(l[1],10)||0,titulo,legenda:String(l[4]||"").trim()||titulo,cod,ordem:i});
   });
   const mapa=new Map();
   AULAS.forEach(a=>{
@@ -321,9 +411,9 @@ async function carregar(){
     const rows=parseCSV(await r.text());
     const cab=rows[0].map(norm);
     const idx=k=>cab.findIndex(h=>h.startsWith(k));
-    const iM=idx("materia"),iN=idx("n"),iT=idx("titulo"),iI=idx("instagram");
+    const iM=idx("materia"),iN=idx("n"),iT=idx("titulo"),iI=idx("instagram"),iL=idx("legenda");
     if(iM<0||iT<0||iI<0) throw new Error("colunas");
-    const linhas=rows.slice(1).map(r=>[r[iM],r[iN],r[iT],r[iI]]);
+    const linhas=rows.slice(1).map(r=>[r[iM],r[iN],r[iT],r[iI],iL>=0?r[iL]:""]);
     montar(linhas);
     if(!AULAS.length) throw new Error("vazia");
   }catch(e){
@@ -341,6 +431,26 @@ function itemAula(a,mostrarMateria,atual){
     <span class="num">${dois(a.num)}<small>aula</small></span>
     <span>${mostrarMateria?`<span class="mat">${esc(a.materia)}</span>`:""}<span class="tit">${esc(a.titulo)}</span></span>
     <span class="play">${iconePlay}</span></a></li>`;
+}
+
+function convite(mini){
+  return `<aside class="convite${mini?" mini":""}">
+    <div><h2>Trabalho de campo</h2>
+      <p>Me mostra como você usa o "Vai Corinthians". Grava, manda pelo formulário, e as melhores aplicações entram numa aula, com o seu @.</p>
+      ${mini?"":'<span class="nota">o professor corrige com carinho</span>'}</div>
+    <a class="btn cheio" href="#/participe">Mandar meu vídeo</a>
+  </aside>`;
+}
+const ehCorinthianes=m=>norm(m.nome).includes("corinthianes")||norm(m.nome).includes("pratica");
+
+function telaParticipe(){
+  app.innerHTML=`
+  <a class="voltar" href="#/">← todas as matérias</a>
+  <header class="cab-materia"><h1>Mande seu Vai Corinthians</h1>
+    <span class="nota">as melhores aplicações entram numa aula, com o seu @</span></header>
+  <p style="margin:0 0 16px">Se o formulário não carregar aqui, <a href="${FORM_URL}" target="_blank" rel="noopener">abra ele em outra aba</a>.</p>
+  <div class="formulario"><iframe src="${FORM_URL}?embedded=true" title="Formulário Vai Corinthians" loading="lazy">Carregando…</iframe></div>
+  <p style="margin-top:16px"><a class="btn" href="${FORM_URL}" target="_blank" rel="noopener">Abrir o formulário em outra aba</a></p>`;
 }
 
 function telaInicio(filtro=""){
@@ -371,11 +481,12 @@ function telaInicio(filtro=""){
       <div class="titulo-bloco"><h2>Matérias</h2><span class="nota">escolha por onde começar</span></div>
       <div class="materias">${MATERIAS.map((m,i)=>`
         <a class="materia${i===0?" destaque":""}" href="#/materia/${m.slug}">
-          <span class="nome">${esc(m.nome)}</span>
+          <span class="topo-card"><span class="ico">${iconeMateria(m.nome)}</span><span class="nome">${esc(m.nome)}</span></span>
           <span class="qtd"><b>${m.aulas.length}</b>${m.aulas.length===1?"aula":"aulas"}</span>
         </a>`).join("")}
       </div>
     </section>
+    <section class="bloco">${convite(false)}</section>
     <section class="bloco">
       <div class="titulo-bloco"><h2>Saiu agora</h2><span class="nota">as últimas aulas</span></div>
       <ul class="aulas">${recentes.map(a=>itemAula(a,true)).join("")}</ul>
@@ -392,7 +503,8 @@ function telaMateria(s){
   <a class="voltar" href="#/">← todas as matérias</a>
   <header class="cab-materia"><h1>${esc(m.nome)}</h1>
     <span class="nota">${m.aulas.length} ${m.aulas.length===1?"aula":"aulas"}, na ordem</span></header>
-  <ul class="aulas">${m.aulas.map(a=>itemAula(a,false)).join("")}</ul>`;
+  <ul class="aulas">${m.aulas.map(a=>itemAula(a,false)).join("")}</ul>
+  ${ehCorinthianes(m)?`<section class="bloco">${convite(false)}</section>`:""}`;
 }
 
 function telaAula(cod){
@@ -404,10 +516,14 @@ function telaAula(cod){
   app.innerHTML=`
   <a class="voltar" href="#/materia/${m.slug}">← ${esc(m.nome)}</a>
   <div class="sala">
-    <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
+    <div class="coluna-video">
+      <div class="cab-aula-m"><h2>Aula ${dois(a.num)} <small>de ${dois(m.aulas[m.aulas.length-1].num)}</small></h2></div>
+      <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
+      <div class="legenda"><span class="rot-legenda">legenda do post</span><p>${legendaHTML(a.legenda)}</p></div>
+    </div>
     <div class="info">
-      <span class="quem">${esc(m.nome)}, aula ${dois(a.num)} de ${dois(m.aulas[m.aulas.length-1].num)}</span>
-      <h1>${esc(a.titulo)}</h1>
+      <span class="quem">${esc(m.nome)}</span>
+      <h1>Aula ${dois(a.num)} <small>de ${dois(m.aulas[m.aulas.length-1].num)}</small></h1>
       <div class="acoes">
         <a class="btn cheio" href="${linkIG}" target="_blank" rel="noopener">Assistir no Instagram</a>
         <button class="btn" id="compartilhar">Compartilhar esta aula</button>
@@ -416,6 +532,7 @@ function telaAula(cod){
         ${ant?`<a href="#/aula/${ant.cod}"><span class="rot">← aula anterior</span><span class="alvo">${esc(ant.titulo)}</span></a>`:`<span><span class="rot">primeira aula</span></span>`}
         ${prox?`<a class="prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span class="alvo">${esc(prox.titulo)}</span></a>`:`<a class="prox" href="#/"><span class="rot">matéria concluída</span><span class="alvo">Escolher outra matéria</span></a>`}
       </nav>
+      ${ehCorinthianes(m)?convite(true):""}
       <ul class="aulas">${m.aulas.map(x=>itemAula(x,false,x===a)).join("")}</ul>
     </div>
   </div>`;
@@ -436,6 +553,7 @@ function rota(){
   const [,tipo,id]=(location.hash||"#/").split("/");
   if(tipo==="materia") telaMateria(id);
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
+  else if(tipo==="participe") telaParticipe();
   else telaInicio();
   window.scrollTo(0,0);
   const h1=app.querySelector("h1");
