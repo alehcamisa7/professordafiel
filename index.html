@@ -311,6 +311,32 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .menu button:hover{color:var(--giz);border-color:var(--giz)}
 .menu button.ativo{color:var(--giz);border-color:var(--vermelho);background:rgba(216,38,46,.16)}
 [id^="sec-"]{scroll-margin-top:70px}
+.menu .mi,.menu .mc{display:none}
+.menu button[hidden]{display:none}
+/* O Professor por aí */
+.lives{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.live-card{display:flex;flex-direction:column;text-decoration:none;border-radius:var(--r);overflow:hidden;background:var(--lousa-2);transition:transform .15s}
+.live-card:hover{transform:translateY(-3px)}
+.live-card .thumb{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat}
+.live-card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.55))}
+.live-card .thumb .play-yt{position:absolute;left:12px;bottom:10px;z-index:1;width:40px;height:40px;border-radius:50%;background:var(--vermelho);display:grid;place-items:center}
+.live-card .thumb .play-yt svg{width:14px;height:14px;fill:#fff;margin-left:3px}
+.live-card .info-live{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px}
+.live-card .prog-live{font-family:var(--mao);font-size:19px;color:var(--giz-2);line-height:1.1}
+.live-card .ep{font-weight:500;font-size:18px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.live-card .dt{font-family:var(--mao);font-size:17px;color:var(--giz-2)}
+.ver-todas{margin-top:18px}
+.palco{margin:0 0 22px}
+.palco .tela16{position:relative;aspect-ratio:16/9;background:#000;border-radius:var(--r);overflow:hidden}
+.palco .tela16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.caderno-live{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 34px;align-items:start}
+.caderno-live .botoes{grid-area:auto;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:8px}
+.caderno-live .postit .dica,.caderno-live .postit .acao{white-space:nowrap}
+.caderno-live .col{grid-template-columns:minmax(0,1fr)}
+.caderno-live .navega{grid-area:auto}
+.caderno-live .col{display:grid;gap:16px}
+.caderno-live .navega{margin:8px 0 0;grid-template-columns:1fr;gap:20px}
+.turma-campo{margin-bottom:14px}
 .submenu{position:fixed;z-index:40;display:grid;gap:4px;min-width:250px;padding:8px;background:var(--lousa);border:1.5px solid var(--giz);border-radius:8px;box-shadow:0 14px 30px rgba(0,0,0,.6)}
 .submenu[hidden]{display:none}
 .submenu button{display:block;text-align:left;font:inherit;color:var(--giz);background:transparent;border:0;border-radius:5px;padding:9px 12px;cursor:pointer}
@@ -334,7 +360,29 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 
 @media (max-width:760px){
   .passos{grid-template-columns:1fr;gap:8px}
-  .menu button{font-size:14px;padding:6px 12px}
+  /* menu vira barra inferior estilo app */
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+  .menu{position:fixed;top:auto;left:0;right:0;bottom:0;margin:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));
+    display:grid;grid-template-columns:repeat(var(--itens,5),1fr);gap:0;overflow:visible;border-bottom:0;border-top:1px solid rgba(242,240,234,.18);background:rgba(22,24,22,.97)}
+  .menu button{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding:6px 2px;border:0;border-radius:8px;font-size:12px;line-height:1;color:var(--giz-2)}
+  .menu button.ativo{background:transparent;color:var(--giz)}
+  .menu button.ativo .mi{background:rgba(216,38,46,.22);border-color:var(--vermelho)}
+  .menu .mi{display:grid;place-items:center;width:40px;height:30px;border-radius:15px;border:1.5px solid transparent}
+  .menu .mi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .menu .ml{display:none}
+  .menu .mc{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  [id^="sec-"]{scroll-margin-top:12px}
+  .aviso{bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+  .caderno-live{grid-template-columns:1fr;gap:16px}
+  .caderno-live .botoes{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .caderno-live .postit{flex-direction:column;justify-content:center;text-align:center;padding:14px 6px 12px;gap:6px}
+  .caderno-live .postit .txt{align-items:center}
+  .caderno-live .postit .dica{display:none}
+  .caderno-live .postit .acao{font-size:13px}
+  .caderno-live .navega{grid-template-columns:1fr 1fr;gap:14px}
+  .lives{grid-template-columns:1fr}
+  .titulo-bloco{flex-wrap:wrap;row-gap:4px}
+  .titulo-bloco h2{flex:1 1 100%}
   .subtitulo .nota{display:none}
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
   .tela{grid-row:auto}
@@ -355,10 +403,11 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
     <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">Seguir<span class="long">&nbsp;no Instagram</span></a>
   </header>
   <nav class="menu" id="menu" aria-label="Seções da página inicial">
-    <button type="button" data-grupo="sec-materias" id="btn-materias" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-materias">Matérias <span aria-hidden="true">▾</span></button>
-    <button type="button" data-sec="sec-ultimas">Últimas aulas</button>
-    <button type="button" data-sec="sec-turma">Faça parte da turma</button>
-    <button type="button" data-sec="sec-beneficios">Benefícios do Aluno</button>
+    <button type="button" data-grupo="sec-materias" id="btn-materias" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-materias"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/></svg></span><span class="ml">Matérias <span class="seta" aria-hidden="true">▾</span></span><span class="mc">Matérias</span></button>
+    <button type="button" data-sec="sec-ultimas"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9v6l5-3z"/></svg></span><span class="ml">Últimas aulas</span><span class="mc">Aulas</span></button>
+    <button type="button" data-sec="sec-beneficios"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/></svg></span><span class="ml">Benefícios do Aluno</span><span class="mc">Benefícios</span></button>
+    <button type="button" data-sec="sec-turma"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="12" cy="6.5" r="2.8"/><path d="M2.5 19c0-3 2-5 4.5-5M21.5 19c0-3-2-5-4.5-5M7 20c0-3.5 2.2-6 5-6s5 2.5 5 6"/></svg></span><span class="ml">Faça parte da turma</span><span class="mc">Turma</span></button>
+    <button type="button" data-sec="sec-porai" id="btn-porai" hidden><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9.2 9.2 0 0 0 0 13M18.5 5.5a9.2 9.2 0 0 1 0 13"/></svg></span><span class="ml">O Professor por aí</span><span class="mc">Por aí</span></button>
   </nav>
   <div class="submenu" id="submenu-materias" hidden>
     <button type="button" data-sec="sec-obrigatorias"><b>Obrigatórias</b><small>a grade principal do curso</small></button>
@@ -375,7 +424,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const PLANILHA_ID = "1UjWBhjfe7zEHhGIGebdJkmvhNJ9OTBLYFLvq96FY18E"; // "Professor da Fiel | Aulas do site v2"
-const ABA_AULAS = "Aulas", ABA_MATERIAS = "Matérias";
+const ABA_AULAS = "Aulas", ABA_MATERIAS = "Matérias", ABA_LIVES = "Lives";
 const PRIMEIRA_MATERIA = "Corinthianês";   // recebe o selo "comece aqui"
 const MIN_AULAS_GRADE = 3;                 // menos que isso: vai para Eletivas
 const MIN_AULAS_CERT = 8;                  // matéria só dá certificado a partir daqui
@@ -404,7 +453,7 @@ const csvURL = aba => `https://docs.google.com/spreadsheets/d/${PLANILHA_ID}/gvi
 const RESERVA = {"aulas": [["Corinthianês", 1, "", "Como usar o Vai Corinthians?", "Corinthiano não fala oi. Não fala tchau. Não fala obrigado. Agora você sabe o porquê. 🖤🤍 Aula 01 de Corinthianês", "https://www.instagram.com/reel/DXr7ychjIXl/", "28/04/2026"], ["Corinthianês", 2, "", "Como usar o Aqui é Corinthians", "O corinthiano tem uma maneira específica de se expressar. Papel e caneta na mão pra aula 02 de Corinthianês. 🖤🤍", "https://www.instagram.com/reel/DXzQFupAPWR/", "01/05/2026"], ["Corinthianês", 3, "", "Como usar o Vai Corinthians? - Pt 2", "O corinthiano comumente expressa a sua corinthianidade em situações cotidianas. Papel e caneta na mão para a Aula 03 do Corinthianês. 🖤🤍", "https://www.instagram.com/reel/DX4WTAdAKVQ/", "03/05/2026"], ["Corinthianês", 4, "", "Como responder a \"E o Corinthians hein?!\"", "Tem dia que é noite. E tem pergunta que nem merece resposta. Aula 4 de Corinthianês.", "https://www.instagram.com/reel/DX5p1zRg6RO/", "03/05/2026"], ["Corinthianês", 5, "", "Aqui é Corinthians Pt 2", "Os conceitos de posse e territorialidade aplicados ao Corinthianês. Aula 05 no ar!!", "https://www.instagram.com/reel/DX9QOx_A8a7/", "05/05/2026"], ["Corinthianês", 6, "", "O Superlativo Vai Curintcha", "O superlativo VAI CURINTCHA, aplicado na prática. Se liga na aula 06.", "https://www.instagram.com/reel/DYDNgZ2MGOI/", "07/05/2026"], ["Corinthianês", 7, "", "Eu nunca vou te abandonar", "O corinthiano não gosta de futebol, ele gosta do Corinthians!!! Aula 07 sobre o protocolo de sobrevivência do corinthiano", "https://www.instagram.com/reel/DYP6JbHs-hx/", "12/05/2026"], ["Corinthianês", 8, "", "Salve o Corinthians", "Salve o Corinthians é uma interjeição de saudação. Também é um pedido de socorro. Não importa a sua religião. Só reza. Papel e caneta na mão, para a aula 08.", "https://www.instagram.com/reel/DYXRL35gWZ_/", "15/05/2026"], ["Comportamental", 1, "", "Papo de Undaia", "Aula de Corinthianês: Análise Comportamental Prática @diegoaraujo.13", "https://www.instagram.com/reel/DYi1QxHgQII/", "19/05/2026"], ["Corinthianês", 9, "", "Que fase que tá o Corinthians?!", "O corinthiano é sua eterna dualidade de sentimentos. Daí, nasce uma das frases mais icônicas da torcida: Que fase que tá o Corinthians!!! Papel e caneta na mão, aula 9 no ar!", "https://www.instagram.com/reel/DYp-ZzxscCZ/", "22/05/2026"], ["Brasileirês", 1, "", "A Descoberta de Neymar", "Não era sacanagem, era poesia que Neymar criava.", "https://www.instagram.com/reel/DY0V9J6AFSR/", "26/05/2026"], ["Corinthianês", 10, "", "Sofrer é título", "No dicionário, sofrer é negativo. No Corinthianês, sofrer é título. 🖤🤍 Aula 10 de Corinthianês.", "https://www.instagram.com/reel/DY42eIRAIvk/", "28/05/2026"], ["História", 1, "", "Por que o Corinthians é o Campeão dos Campeões?", "Por que o Corinthians é o Campeão dos Campeões? Vem aprender na aula 01 da História do Corinthians. 🎥: @decio.lopes1", "https://www.instagram.com/reel/DZFRCyQO79v/", "02/06/2026"], ["História", 2, "", "A invasão de 1976", "Em 1976, 70 mil corintianos foram ao Rio ver uma semifinal. O Corinthians perdeu o título naquele ano. E esse é o episódio mais lembrado da história da Fiel. 🖤 Manda isso pro corintiano que você conhece desde sempre.", "https://www.instagram.com/reel/DZUpurSOR9n/", "08/06/2026"], ["História", 3, "", "Por que o Corinthians é o time do Povo?", "Em 1910, o futebol era esporte de elite. Daí cinco operários resolveram fundar um clube. 🖤", "https://www.instagram.com/reel/DZaCYN-ulc1/", "10/06/2026"], ["História", 4, "", "A Democracia Corinthiana", "Em 1982, nenhum brasileiro podia votar para presidente. Exceto os jogadores do Corinthians, que votavam até na própria escalação. Manda isso pro corintiano que ainda não sabe dessa história.", "https://www.instagram.com/reel/DZgEfQdMeOC/", "12/06/2026"], ["Corinthianês", 11, "", "Corinthiano, Maloqueiro e Sofredor", "", "https://www.instagram.com/reel/DZn01BBspzj/", "15/06/2026"], ["Sobrevivência", 1, "", "Como sobreviver à Copa do Mundo sem Corinthians?", "", "https://www.instagram.com/reel/DZsZPMvgAL6/", "17/06/2026"], ["História", 5, "", "A invasão de 2012", "", "https://www.instagram.com/reel/DZxgX9aAPqy/", "19/06/2026"], ["Corinthianês", 12, "", "Corinthiano é com ou sem TH?", "", "https://www.instagram.com/reel/DZ4wTZqslMZ/", "22/06/2026"], ["História", 6, "", "Como assim Corinthiano Roxo?", "", "https://www.instagram.com/p/DZ-ToXKgygC/", "24/06/2026"], ["História", 7, "", "Por que Corinthiano Fiel?", "", "https://www.instagram.com/p/DaDP_qbAT9z/", "26/06/2026"], ["História", 8, "", "Por que Bando de Loucos?", "", "https://www.instagram.com/p/DaMG9DtgNDO/", "29/06/2026"], ["História", 9, "", "Por que chamamos o Corinthians de Todo Poderoso?", "", "https://www.instagram.com/p/DaQKo79AIvK/", "01/07/2026"], ["História", 10, "", "Fiel, Bando de Loucos, Todo Poderoso - De onde vem tudo isso?", "", "https://www.instagram.com/reel/DaVVqqDsYvp/", "03/07/2026"], ["História", 11, "", "Copas pra você se orgulhar", "", "https://www.instagram.com/p/DadPijBgikB/", "06/07/2026"], ["Corinthianês", 13, "", "Hino do Corinthians", "", "https://www.instagram.com/reel/DaiY-0Ng5Cd/", "08/07/2026"], ["Fregueses", 1, "", "Vasco da Gama", "", "https://www.instagram.com/p/DaoE80RsPS9/", "10/07/2026"], ["História", 12, "", "Por que o Corinthians usa Preto e Branco?", "", "https://www.instagram.com/p/DavqMUGMsrK/", "13/07/2026"], ["História", 13, "", "Como surgiu o Poropopó", "", "https://www.instagram.com/p/Da0QPa-gqQA/", "15/07/2026"], ["Corinthianês", 14, "", "Como usar o Vai Corinthians - Locução Interjetiva", "", "https://www.instagram.com/reel/Da5hrqKgKMx/", "17/07/2026"], ["Corinthianês", 15, "", "A definição de Corinthians", "", "https://www.instagram.com/reel/DbDoivkAd9d/", "21/07/2026"], ["Matemática e Estatística", 1, "", "Por que a torcida do Corinthians é a maior que existe?", "", "https://www.instagram.com/p/DbMNjJ4sN37/", "24/07/2026"], ["Corinthianês", 16, "", "Usos avançados do Vai Corinthians", "", "https://www.instagram.com/p/DbT9Mt6M6OH/", "27/07/2026"], ["Matemática e Estatística", 2, "", "A matemática do amor corinthiano", "O amor corinthiano explicado em correlações e provas cruzadas. Aula 02 de matemática E estatística no ar.", "https://www.instagram.com/reel/DbYIjYMuNvU/", "29/07/2026"], ["Corinthianês na Prática", 1, "", "Vai Corinthians, com o Rafa Cabral", "O mais novo louco do bando de loucos está firme nos estudos. @orafacabral veio aprender as aplicações e diferenças da interjeição Vai Corinthians. Episódio 1 do Corinthianês na prática no ar.", "https://www.instagram.com/p/DbbcUO3Mmj6/", "30/07/2026"], ["Matemática e Estatística", 3, "", "Os 0,004%: o impossível é questão de opinião", "Pro corinthiano, o impossível é só questão de opinião. Aula 03 de matemática e estatística no ar!", "https://www.instagram.com/p/Dbdj7Rfg5BB/", "31/07/2026"], ["Aulas Extras", 1, "", "A revolução do Dinizismo", "Chegou e já é uma realidade. @timediniz trouxe uma revolução para o futebol corinthiano. Aula extra no ar!", "https://www.instagram.com/p/Dbgj1mxMSCT/", "01/08/2026"], ["Corinthianês", 17, "", "O verbo certo: SER, não TORCER", "O Corinthiano não torce para o Corinthians. Ele vive o Corinthians. Ele é o Corinthians!!! Aula 17 de Corinthianês no ar.", "https://www.instagram.com/p/Dbl5yR6suye/", "03/08/2026"], ["Corinthianês na Prática", 2, "", "Aqui é Corinthians, com o Rafa Cabral", "Seguindo os estudos, @orafacabral agora entende as diferentes aplicações para o AQUI É CORINTHIANS. Aula 02 do Corinthianês na prática!", "https://www.instagram.com/p/Dbn1MwcglHl/", "04/08/2026"], ["Desabafos do Professor", 1, "", "O corinthiano não desiste nunca", "O Corinthiano não desiste nunca. Eu não tô entendendo Corinthiano dizendo por aí que “já era”, que “o jogo já acabou”. Você precisa acreditar meu irmão. Desabafos do Professor #01 no ar.", "https://www.instagram.com/p/DbqMnabualr/", "05/08/2026"], ["Cidadania Corinthiana", 1, "", "Como se elege um presidente do Corinthians", "É importante estar informado pra não sair falando besteira por aí. Se liga hein?! Se informa pra não passar informação falsa. Aprende. Estuda. Aula 1 de cidadania do Corinthians no ar.", "https://www.instagram.com/p/Db867WAsOkF/", "12/08/2026"], ["Cidadania Corinthiana", 2, "", "Onde está o dinheiro do Corinthians?", "Parece simples, mas o básico tem que ser dito: se gasta mais do que arrecada, a dívida cresce. Onde está o dinheiro do Corinthians? Aula 02 da cidadania corinthiana no ar.", "https://www.instagram.com/p/Db_m-xYsD13/", "13/08/2026"], ["Cidadania Corinthiana", 3, "", "A intervenção judicial é a solução?", "Então, a Intervenção Judicial e a solução para o Corinthians? Vem entender do que se trata e como isso impacta de verdade o Corinthians. Aula 03 de Cidadania Corinthiana no ar.", "https://www.instagram.com/p/DcB1W01MwGi/", "14/08/2026"], ["Corinthianês na Prática", 3, "", "O colossal de Itaquera, com o Rafa Cabral", "@orafacabral segue estudando e aprendendo cada vez mais sobre o colossal de Itaquera. Aula 04 de Corinthianês na prática no ar.", "https://www.instagram.com/p/DcEKTKktKlM/", "15/08/2026"], ["Aulas Extras", 2, "", "Entendendo a novela Memphis", "E aí, você curtiu a continuação do Memphis no Corinthians?", "https://www.instagram.com/p/DcLoR6ts1F-/", "18/08/2026"], ["Cidadania Corinthiana", 4, "1", "SAFiel: o que é?", "Você sabe me explicar a tal da SaFiel? Ela vai salvar o Corinthians?!?! Aula 4 - Parte 1 da Cidadania Corinthiana no ar.", "https://www.instagram.com/p/DcOd4KOuaUS/", "19/08/2026"], ["Cidadania Corinthiana", 4, "2", "SAFiel: quem manda nessa empresa?", "Se a SaFiel é uma empresa, quem é que vai mandar nessa empresa? Aula 04 - pt2 da Cidadania Corinthiana no ar!", "https://www.instagram.com/p/DcUfQz8s0ag/", "21/08/2026"], ["Cidadania Corinthiana", 4, "3", "SAFiel: e se der errado?", "O que acontece se a SaFiel der errado? Quais são os riscos? Aula 04 parte 03 da Cidadania Corinthiana no ar!!!", "https://www.instagram.com/p/DceXw9zsfst/", "25/08/2026"], ["Cidadania Corinthiana", 4, "Guia", "SAFiel: o guia definitivo", "Então você ainda não entendeu os detalhes da proposta da SAFiel? Tá bem! Teu professor salva tua vida sempre! Aula 04 da Cidadania Corinthiana traz um guia definitivo pra você se informar. Já no ar!", "https://www.instagram.com/p/Dcl36TSML2y/", "28/08/2026"], ["Aulas Extras", 3, "", "Modelo associativo × SAFiel", "Agora é sério! Não tem mais desculpa pra você falar que não entendeu a SaFiel! Guia rápido com as diferenças entre o modelo associativo e o modelo proposto pela SaFiel explicadinho", "https://www.instagram.com/p/Dcoexl7M9db/", "29/08/2026"], ["Cidadania Corinthiana", 5, "", "O que é o Conselho Deliberativo?", "No Corinthians, tudo tem que passar pelo tal Conselho Deliberativo. Afinal, o que é o conselho deliberativo? Aula 05 de Cidadania Corinthiana no ar.", "https://www.instagram.com/p/DcylQsdMXKL/", "02/09/2026"], ["Cidadania Corinthiana", 6, "", "O Fiel Torcedor e o voto", "O Fiel Torcedor do Corinthians ainda não tem nenhum poder de influência na política do clube. Até quando? Aula 06 da Cidadania Corinthiana no ar!", "https://www.instagram.com/p/Dc376tBM8p_/", "04/09/2026"], ["Análise Para Além da Tática", 1, "", "O ciclo do Dinizismo explica a crise?", "O Diniz é o culpado da má fase do Corinthians? O ciclo do dinizismo está chegando ao fim? Aula 01, da Análise para além da Tática, no ar!", "https://www.instagram.com/p/Dc_o6YsM3m4/", "07/09/2026"], ["Matemática e Estatística", 4, "", "A constante que a ciência não explica", "Aula 04 de matemática e estatística explica pra você o porque o Corinthiano não desiste nunca. Aula no ar!", "https://www.instagram.com/p/DdEgPj0MZod/", "09/09/2026"], ["História das Camisas do Corinthians", 1, "", "A camisa de 1992", "A camisa de 1992 do Corinthians é uma camisa que divide eras. A era dos craques, começa a finalizar o primeiro ciclo do craque Neto e inicia o do Viola, e também a termina a era das camisas de algodão e inicia a era do poliéster. Aula 01, da História das Camisas do Corinthians, no ar!", "https://www.instagram.com/p/DdOuY1YsdRb/", "13/09/2026"], ["Músicas da Torcida do Corinthians", 1, "", "Sou Corinthiano, Maloqueiro e Sofredor", "A torcida do Corinthians é reconhecidamente a torcida que mais canta em estádios. Mas, de onde vem tanta inspiração? Na aula de hoje, analisamos o canto “Sou Corinthiano, maloqueiro e sofredor” inspirado em Anunciação, do grande Alceu Valença. Aula 01 das músicas da torcida do Corinthians, no ar.", "https://www.instagram.com/p/DdUGB4VsTTS/", "15/09/2026"], ["Desabafos do Professor", 2, "", "O fim do futebol brasileiro", "", "https://www.instagram.com/p/DdcmI_xAYSw/", "18/09/2026"], ["Moda e Vestuário", 1, "", "Um manto pra cada ocasião", "Existem situações que pedem um determinado tipo de roupas. Alguns precisam ser mais formais, outros mais casuais. Todos esses estilos podem ser completados com uma camisa do Corinthians. E todas elas você encontra na @corinthianslojaoficial", "https://www.instagram.com/p/DdgpXDDsO1T/", "20/09/2026"], ["Estratégia Aplicada", 1, "", "O problema começa no planejamento", "Torcedor, pode sim ficar chateado com resultado, jogador e técnico. Mas, o problema começa bem antes do jogo. Começa no planejamento do clube. Ou na falta dele.", "https://www.instagram.com/p/Ddkeq_mA4LS/", "21/09/2026"]], "materias": [["Corinthianês", "Como o corinthiano fala — e por que cada expressão quer dizer muito mais do que parece."], ["Corinthianês na Prática", "O Professor ensina o Corinthianês ao vivo, com convidados."], ["História", "De onde vêm os apelidos, as cores e as histórias que todo corinthiano precisa saber."], ["Cidadania Corinthiana", "Como o clube funciona por dentro: eleição, dinheiro, Conselho e as propostas em debate."], ["Matemática e Estatística", "O fanatismo da Fiel provado com gráficos, fórmulas e muita lógica."], ["Aulas Extras", "Aulas fora da grade, sobre o que está movimentando o Corinthians."], ["Desabafos do Professor", "Quando o Professor larga o giz e fala de torcedor pra torcedor."], ["Análise Para Além da Tática", "O que a prancheta sozinha não explica sobre os resultados."], ["História das Camisas do Corinthians", "Cada manto conta uma era do clube."], ["Músicas da Torcida do Corinthians", "Os cantos da Fiel: de onde vêm e por que arrepiam."], ["Fregueses", "Os adversários que o Corinthians costuma bater."], ["Brasileirês", "O futebol brasileiro traduzido pelo Professor."], ["Comportamental", "Como o corinthiano se comporta — no estádio e fora dele."], ["Sobrevivência", "Guias pra atravessar os dias sem Corinthians."], ["Moda e Vestuário", "Como usar o manto em qualquer ocasião."], ["Estratégia Aplicada", "Planejamento e gestão: o jogo antes do jogo."]]};
 
 /* ================= UTILIDADES ================= */
-let AULAS=[], MATERIAS=[], GRADE=[], ELETIVAS=[];
+let AULAS=[], MATERIAS=[], GRADE=[], ELETIVAS=[], LIVES=[];
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 const slug=s=>norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -502,7 +551,31 @@ function montar(linhas, descricoes){
   ELETIVAS=MATERIAS.filter(m=>!GRADE.includes(m));
 }
 async function lerAba(aba){ const r=await fetch(csvURL(aba),{cache:"no-store"}); if(!r.ok) throw new Error(aba+" "+r.status); return parseCSV(await r.text()); }
+/* Lives do YouTube (aba "Lives": Título, YouTube, Descrição, Data) */
+function lerYouTube(url){
+  const u=String(url||"").trim(); let id=null, t=0;
+  let m=u.match(/(?:youtube\.com\/(?:watch\?[^#]*v=|live\/|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/); if(m) id=m[1];
+  m=u.match(/[?&#](?:t|start)=([0-9hms]+)/);
+  if(m){ const v=m[1]; if(/^\d+$/.test(v)) t=+v; else { const h=v.match(/(\d+)h/),mi=v.match(/(\d+)m/),se=v.match(/(\d+)s/); t=(h?+h[1]*3600:0)+(mi?+mi[1]*60:0)+(se?+se[1]:0); } }
+  return id?{id,t}:null;
+}
+function montarLives(rows){
+  LIVES=[]; if(!rows||rows.length<2) return;
+  const cab=rows[0].map(norm), idx=k=>cab.findIndex(h=>h.startsWith(k));
+  const iT=idx("titulo"), iY=idx("youtube"), iD=idx("descri"), iDt=idx("data"); if(iT<0||iY<0) return;
+  const usados=new Set();
+  rows.slice(1).forEach((r,i)=>{
+    const yt=lerYouTube(r[iY]); const titulo=String(r[iT]||"").trim(); if(!yt||!titulo) return;
+    let chave=yt.id; if(usados.has(chave)) chave=`${yt.id}-${i}`; usados.add(chave);
+    const partes=titulo.split(/\s+[-–—|]\s+/);
+    LIVES.push({chave,id:yt.id,t:yt.t,titulo,programa:partes.length>1?partes[0].trim():"",episodio:partes.length>1?partes.slice(1).join(" - ").trim():titulo,
+      desc:iD>=0?String(r[iD]||"").trim():"",data:iDt>=0?lerData(r[iDt]):null,ordem:i});
+  });
+  LIVES.sort((a,b)=>((a.data||0)-(b.data||0))||a.ordem-b.ordem);
+}
+let promessaLives;
 async function carregar(){
+  promessaLives=lerAba(ABA_LIVES).then(montarLives).catch(()=>{}).finally(()=>{ const b=document.getElementById("btn-porai"); if(b){ b.hidden=!LIVES.length; document.getElementById("menu").style.setProperty("--itens",LIVES.length?5:4); } });
   try{
     const [aulas,mats]=await Promise.all([lerAba(ABA_AULAS),lerAba(ABA_MATERIAS).catch(()=>[[]])]);
     const cab=aulas[0].map(norm), idx=k=>cab.findIndex(h=>h.startsWith(k));
@@ -513,6 +586,7 @@ async function carregar(){
     montar(linhas, iM>=0&&iD>=0?mats.slice(1).map(r=>[r[iM],r[iD]]):[]);
     if(!AULAS.length) throw new Error("vazia");
   }catch(e){ console.warn("Planilha indisponível, usando cópia de segurança:",e); montar(RESERVA.aulas,RESERVA.materias); }
+  await promessaLives;
 }
 
 /* ================= PEÇAS ================= */
@@ -554,6 +628,7 @@ function turma(){
   const st=statusLive();
   const selo={agora:'<span class="status agora">🔴 Ao vivo agora</span>',hoje:'<span class="status">É hoje, 20h!</span>',semana:'<span class="status">toda terça, 20h</span>'}[st];
   return `<div class="titulo-bloco"><h2>Faça parte da turma</h2><span class="nota">a aula continua fora do site</span></div>
+  <div class="turma-campo">${convite()}</div>
   <div class="turma">
     <a href="${LINKS.comunidade}" target="_blank" rel="noopener">${svgIco("turma")}<span class="t">Comunidade no Instagram</span><span class="d">Recados do Professor, bastidores e aviso de aula nova antes de todo mundo.</span></a>
     <a href="${LINKS.tiktok}" target="_blank" rel="noopener">${svgIco("celular")}<span class="t">Me segue no TikTok</span><span class="d">As aulas também saem por lá, @alehcamisa7.</span></a>
@@ -605,15 +680,17 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharModal(); });
 const zap=texto=>`https://wa.me/?text=${encodeURIComponent(texto)}`;
 
 function menuCompartilhar(a,m){
-  const url=`${SITE}#/aula/${a.cod}`, texto=`Olha essa aula do Professor da Fiel: ${a.titulo} 👉 ${url}`;
-  const f=abrirModal(`<h2>Compartilhar aula</h2><p class="sub">${esc(m.nome)}: ${esc(a.titulo)}</p>
+  compartilhar({titulo:"Compartilhar aula",sub:`${m.nome}: ${a.titulo}`,url:`${SITE}#/aula/${a.cod}`,texto:`Olha essa aula do Professor da Fiel: ${a.titulo}`});
+}
+function compartilhar({titulo,sub,url,texto}){
+  const f=abrirModal(`<h2>${esc(titulo)}</h2><p class="sub">${esc(sub)}</p>
     <div class="opcoes">
-      <a class="btn cheio" href="${zap(texto)}" target="_blank" rel="noopener">Mandar no WhatsApp</a>
+      <a class="btn cheio" href="${zap(`${texto} 👉 ${url}`)}" target="_blank" rel="noopener">Mandar no WhatsApp</a>
       <button class="btn" type="button" id="copiar-link">Copiar link</button>
       ${navigator.share?'<button class="btn" type="button" id="outros-apps">Outros apps</button>':""}
     </div>`);
   f.querySelector("#copiar-link").onclick=async e=>{ try{await navigator.clipboard.writeText(url);}catch(err){} e.target.textContent="Link copiado!"; };
-  const o=f.querySelector("#outros-apps"); if(o) o.onclick=async()=>{ try{ await navigator.share({title:a.titulo,text:`Olha essa aula do Professor da Fiel: ${a.titulo}`,url}); fecharModal(); }catch(err){} };
+  const o=f.querySelector("#outros-apps"); if(o) o.onclick=async()=>{ try{ await navigator.share({title:sub,text:texto,url}); fecharModal(); }catch(err){} };
 }
 
 /* ================= CERTIFICADO ================= */
@@ -742,8 +819,9 @@ const btnMaterias=document.getElementById("btn-materias"), submenu=document.getE
 function abrirSubmenu(){
   const r=btnMaterias.getBoundingClientRect();
   submenu.hidden=false;
-  const w=submenu.offsetWidth;
-  submenu.style.top=`${r.bottom+8}px`;
+  const w=submenu.offsetWidth, celular=window.matchMedia("(max-width:760px)").matches;
+  if(celular){ submenu.style.top="auto"; submenu.style.bottom=`${window.innerHeight-r.top+8}px`; }
+  else { submenu.style.bottom="auto"; submenu.style.top=`${r.bottom+8}px`; }
   submenu.style.left=`${Math.max(12,Math.min(r.left,window.innerWidth-w-12))}px`;
   btnMaterias.setAttribute("aria-expanded","true");
   submenu.querySelector("button")?.focus({preventScroll:true});
@@ -818,13 +896,17 @@ function telaInicio(){
         <span class="qtd">${p.feitas?`${p.feitas}/`:""}${plural(p.total,"aula","aulas")}</span></a></li>`}).join("")}</ul>
     </div>`:""}
     </section>
-    <section class="bloco">${convite()}</section>
-    <section class="bloco" id="sec-turma">${turma()}</section>
     <section class="bloco" id="sec-ultimas">
       <div class="titulo-bloco"><h2>Últimas aulas</h2><span class="nota">acabou de sair do forno</span></div>
       <ul class="aulas">${recentes.map(a=>itemAula(a,true)).join("")}</ul>
     </section>
-    <section class="bloco" id="sec-beneficios">${parceiros(PARCEIROS)}</section>`;
+    <section class="bloco" id="sec-beneficios">${parceiros(PARCEIROS)}</section>
+    <section class="bloco" id="sec-turma">${turma()}</section>
+    ${LIVES.length?`<section class="bloco" id="sec-porai">
+      <div class="titulo-bloco"><h2>O Professor por aí</h2><span class="nota">lives e programas em que o Professor já deu aula</span></div>
+      <div class="lives">${[...LIVES].reverse().slice(0,6).map(cardLive).join("")}</div>
+      <a class="btn ver-todas" href="#/por-ai">Ver todas as ${plural(LIVES.length,"live","lives")}</a>
+    </section>`:""}`;
     observarSecoes();
   };
   inp.addEventListener("input",desenhar);
@@ -922,6 +1004,62 @@ function telaAula(cod){
   ligarFeita();
 }
 
+const dataExtenso=d=>d?d.toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"}):"";
+const dataCurta=d=>d?d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"}):"";
+function cardLive(l){
+  return `<a class="live-card" href="#/live/${encodeURIComponent(l.chave)}">
+    <span class="thumb" style="background-image:url('https://i.ytimg.com/vi/${l.id}/hqdefault.jpg')"><span class="play-yt">${iconePlay}</span></span>
+    <span class="info-live">${l.programa?`<span class="prog-live">${esc(l.programa)}</span>`:""}<span class="ep">${esc(l.episodio)}</span>${l.data?`<span class="dt">${dataCurta(l.data)}</span>`:""}</span></a>`;
+}
+function telaPorAi(){
+  if(!LIVES.length) return naoAchou();
+  const grupos=new Map();
+  [...LIVES].reverse().forEach(l=>{ const g=l.programa||"Outras participações"; if(!grupos.has(g)) grupos.set(g,[]); grupos.get(g).push(l); });
+  app.innerHTML=`
+  <a class="voltar" href="#/" data-sec="sec-porai">← página inicial</a>
+  <header class="cab-materia">${svgIco("antena")}<h1>O Professor por aí</h1>
+    <p>Lives e programas em que o Professor já participou. ${plural(LIVES.length,"live","lives")} até agora.</p></header>
+  ${[...grupos].map(([g,ls])=>`<div class="subsec"><div class="subtitulo"><h3>${esc(g)}</h3><span class="nota">${plural(ls.length,"live","lives")}</span></div>
+    <div class="lives">${ls.map(cardLive).join("")}</div></div>`).join("")}`;
+}
+function telaLive(chave){
+  const l=LIVES.find(x=>x.chave===chave); if(!l) return naoAchou();
+  const i=LIVES.indexOf(l), ant=LIVES[i-1], prox=LIVES[i+1];
+  const linkYT=`https://www.youtube.com/watch?v=${l.id}${l.t?`&t=${l.t}s`:""}`;
+  const ref=x=>esc([x.programa,dataCurta(x.data)].filter(Boolean).join(", "));
+  const outras=[...LIVES].reverse().filter(x=>x!==l).slice(0,6);
+  app.innerHTML=`
+  <a class="voltar" href="#/por-ai">← O Professor por aí</a>
+  <header class="cab-aula">
+    <h1>${esc(l.episodio)}</h1>
+    <span class="num-aula">${esc([l.programa,dataExtenso(l.data)].filter(Boolean).join(", ")||"live")}</span>
+  </header>
+  <div class="palco"><div class="tela16"><iframe src="https://www.youtube-nocookie.com/embed/${l.id}?rel=0${l.t?`&start=${l.t}`:""}" title="${esc(l.titulo)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+  <div class="caderno-live">
+    <div class="col">
+      <div class="botoes">
+        <a class="postit vermelho" href="${linkYT}" target="_blank" rel="noopener">
+          <span class="bola"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+          <span class="txt"><span class="dica">abre no app</span><span class="acao">No YouTube</span></span></a>
+        <a class="postit" href="${linkYT}" target="_blank" rel="noopener">
+          <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H10l-5 4v-4H4z"/></svg></span>
+          <span class="txt"><span class="dica">deixa sua opinião</span><span class="acao">Comentar</span></span></a>
+        <button class="postit" id="compartilhar-live" type="button">
+          <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v7h14v-7"/></svg></span>
+          <span class="txt"><span class="dica">manda pro amigo</span><span class="acao">Compartilhar</span></span></button>
+      </div>
+      ${l.desc?`<div class="quadro"><span class="rot">sobre a live</span><p>${legendaHTML(l.desc)}</p></div>`:""}
+    </div>
+    <nav class="navega" aria-label="Navegar entre lives">
+      ${ant?`<a class="ficha" href="#/live/${encodeURIComponent(ant.chave)}"><span class="rot">← live anterior</span><span class="alvo">${esc(ant.episodio)}</span><span class="ref">${ref(ant)}</span></a>`:`<span class="ficha inativa"><span class="rot">primeira live</span><span class="alvo">Essa foi a estreia</span></span>`}
+      ${prox?`<a class="ficha prox" href="#/live/${encodeURIComponent(prox.chave)}"><span class="rot">próxima live →</span><span><span class="alvo">${esc(prox.episodio)}</span></span><span class="ref">${ref(prox)}</span></a>`:`<a class="ficha prox" href="#/"><span class="rot">live mais recente</span><span><span class="alvo">Voltar pras aulas</span></span><span class="ref">a sala continua aberta</span></a>`}
+    </nav>
+  </div>
+  ${outras.length?`<section class="bloco"><div class="titulo-bloco"><h2>Mais lives</h2><a class="nota" href="#/por-ai">ver todas</a></div>
+    <div class="lives">${outras.map(cardLive).join("")}</div></section>`:""}`;
+  document.getElementById("compartilhar-live").onclick=()=>compartilhar({titulo:"Compartilhar live",sub:l.titulo,url:`${SITE}#/live/${encodeURIComponent(l.chave)}`,texto:`Olha essa live com o Professor da Fiel: ${l.titulo}`});
+}
+
 function telaParticipe(){
   app.innerHTML=`
   <a class="voltar" href="#/">← todas as matérias</a>
@@ -939,6 +1077,8 @@ function rota(){
   if(tipo==="materia") telaMateria(id);
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
   else if(tipo==="participe") telaParticipe();
+  else if(tipo==="por-ai") telaPorAi();
+  else if(tipo==="live") telaLive(decodeURIComponent(id||""));
   else telaInicio();
   rodapeTurma();
   if(tipo){ observador?.disconnect(); marcarMenu(null); }
