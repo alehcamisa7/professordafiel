@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aulas do Professor da Fiel</title>
+<meta name="description" content="Todas as aulas do Professor da Fiel (@alehcamisa7), organizadas por matéria e na ordem certa.">
+<meta name="theme-color" content="#161816">
+<meta property="og:title" content="Aulas do Professor da Fiel">
+<meta property="og:description" content="Ser corinthiano explica tudo. Todas as aulas, por matéria.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ CONFIGURAÇÃO ============
+   ID da planilha "Professor da Fiel | Aulas do site".
+   A planilha precisa estar compartilhada como
+   "Qualquer pessoa com o link: Leitor". */
+:root{
+  --lousa:#161816;        /* quadro-negro */
+  --lousa-2:#1f2220;      /* quadro mais claro (cartões) */
+  --giz:#f2f0ea;          /* giz branco */
+  --giz-2:#b9b8b2;        /* giz apagado */
+  --vermelho:#d8262e;     /* giz de destaque */
+  --preto:#000;
+  --display:"Oswald", "Arial Narrow", Arial, sans-serif;
+  --mao:"Caveat", "Comic Sans MS", cursive;
+  --r:6px;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0}
+body{
+  background:var(--lousa);
+  color:var(--giz);
+  font-family:var(--display);
+  font-weight:300;
+  font-size:17px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  /* textura de giz no quadro */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  min-height:100vh;
+}
+a{color:inherit}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--vermelho);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* faixa listrada = camisa */
+.listras{
+  height:18px;
+  background:repeating-linear-gradient(90deg,var(--preto) 0 22px,var(--giz) 22px 44px);
+  opacity:.92;
+}
+
+/* topo */
+.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+.marca{font-weight:700;font-size:20px;letter-spacing:.02em;text-decoration:none;line-height:1}
+.marca small{display:block;font-family:var(--mao);font-weight:500;font-size:19px;color:var(--giz-2);letter-spacing:0;margin-top:2px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--display);font-weight:500;font-size:16px;
+  padding:11px 18px;border-radius:var(--r);border:2px solid var(--giz);
+  background:transparent;color:var(--giz);text-decoration:none;cursor:pointer;
+  transition:background .15s,color .15s;
+}
+.btn:hover{background:var(--giz);color:var(--lousa)}
+.btn.cheio{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+.btn.cheio:hover{background:#b51d24;border-color:#b51d24}
+.btn.peq{padding:8px 14px;font-size:15px}
+
+/* hero */
+.hero{padding:34px 0 40px}
+.hero h1{
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(44px,11vw,104px);line-height:.92;margin:0;letter-spacing:-.01em;
+}
+.risco{position:relative;display:inline-block}
+.risco svg{position:absolute;left:-2%;bottom:-.14em;width:104%;height:.32em;overflow:visible}
+.risco path{fill:none;stroke:var(--vermelho);stroke-width:5;stroke-linecap:round;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:traco 1s .35s ease-out forwards}
+@keyframes traco{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.risco path{animation:none;stroke-dashoffset:0}}
+.hero p.lead{font-family:var(--mao);font-size:clamp(24px,5vw,32px);color:var(--giz-2);margin:22px 0 26px;max-width:32ch;line-height:1.15}
+.hero .acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.busca{position:relative;flex:1 1 260px;max-width:420px}
+.busca input{
+  width:100%;font:inherit;font-weight:400;color:var(--giz);
+  background:transparent;border:0;border-bottom:2px dashed var(--giz-2);
+  padding:10px 4px;font-size:18px;
+}
+.busca input::placeholder{color:var(--giz-2)}
+.busca input:focus{outline:none;border-bottom-color:var(--vermelho)}
+
+/* seções */
+section.bloco{padding:34px 0}
+.titulo-bloco{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 18px}
+.titulo-bloco h2{font-weight:700;text-transform:uppercase;font-size:clamp(26px,5vw,38px);margin:0;line-height:1}
+.nota{font-family:var(--mao);font-size:22px;color:var(--giz-2);line-height:1.1}
+
+/* grade de matérias (quadro de horários) */
+.materias{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.materia{
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:26px;
+  min-height:150px;padding:18px 18px 16px;text-decoration:none;
+  border:2px solid rgba(242,240,234,.55);border-radius:3px 9px 4px 11px / 10px 3px 12px 4px;
+  transition:border-color .15s,transform .15s;
+}
+.materia:hover{border-color:var(--giz);transform:translateY(-2px)}
+.materia .nome{font-weight:500;font-size:22px;line-height:1.08}
+.materia .qtd{font-family:var(--mao);font-size:24px;color:var(--giz-2);line-height:1}
+.materia .qtd b{font-family:var(--display);font-weight:700;font-size:40px;color:var(--giz);margin-right:6px;vertical-align:-4px}
+.materia.destaque{background:var(--giz);color:var(--lousa);border-color:var(--giz)}
+.materia.destaque .qtd,.materia.destaque .qtd b{color:var(--lousa)}
+.materia.destaque::after{
+  content:"comece aqui";position:absolute;top:-14px;right:12px;
+  font-family:var(--mao);font-size:21px;font-weight:700;color:#fff;background:var(--vermelho);
+  padding:0 9px;border-radius:3px;transform:rotate(3deg);
+}
+
+/* lista de aulas */
+.aulas{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.aula a{
+  display:grid;grid-template-columns:62px 1fr auto;gap:14px;align-items:center;
+  padding:12px 14px;text-decoration:none;background:var(--lousa-2);border-radius:var(--r);
+  border-left:4px solid transparent;transition:border-color .15s,background .15s;
+}
+.aula a:hover{border-left-color:var(--vermelho);background:#262a27}
+.aula .num{font-weight:700;font-size:30px;line-height:1;text-align:center;color:var(--giz)}
+.aula .num small{display:block;font-family:var(--mao);font-weight:500;font-size:17px;color:var(--giz-2)}
+.aula .tit{font-weight:400;font-size:17px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.aula .mat{display:block;font-family:var(--mao);font-size:19px;color:var(--giz-2);line-height:1.1;margin-bottom:2px}
+.aula .play{width:36px;height:36px;border-radius:50%;border:2px solid var(--giz-2);display:grid;place-items:center}
+.aula .play svg{width:13px;height:13px;fill:var(--giz);margin-left:2px}
+.aula.atual a{border-left-color:var(--vermelho);background:#2b2f2c}
+
+/* página de matéria */
+.voltar{display:inline-block;font-family:var(--mao);font-size:22px;color:var(--giz-2);text-decoration:none;margin:18px 0 4px}
+.voltar:hover{color:var(--giz)}
+.cab-materia{padding:6px 0 26px}
+.cab-materia h1{font-weight:700;text-transform:uppercase;font-size:clamp(36px,8vw,72px);line-height:.95;margin:0 0 10px}
+
+/* player */
+.sala{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:34px;align-items:start;padding-bottom:30px}
+.tela{background:#fff;border-radius:var(--r);overflow:hidden;width:100%;max-width:440px;margin:0 auto}
+.tela iframe{display:block;width:100%;height:min(78vh,720px);min-height:560px;border:0}
+.info h1{font-weight:500;font-size:clamp(24px,4.4vw,34px);line-height:1.15;margin:4px 0 14px}
+.info .quem{font-family:var(--mao);font-size:24px;color:var(--giz-2);line-height:1.1}
+.info .acoes{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
+.navega{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.navega a,.navega span{
+  display:block;padding:12px 14px;border:2px solid rgba(242,240,234,.4);border-radius:var(--r);text-decoration:none;min-height:70px
+}
+.navega a:hover{border-color:var(--giz)}
+.navega .rot{display:block;font-family:var(--mao);font-size:19px;color:var(--giz-2);line-height:1}
+.navega .alvo{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400;font-size:15px;line-height:1.3;margin-top:4px}
+.navega .prox{text-align:right;border-color:var(--vermelho)}
+.navega span{opacity:.45}
+
+.vazio{font-family:var(--mao);font-size:26px;color:var(--giz-2);padding:20px 0}
+
+/* rodapé */
+footer{padding:40px 0 50px;color:var(--giz-2);font-size:15px}
+footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 6px;line-height:1.1}
+
+@media (max-width:760px){
+  .sala{grid-template-columns:1fr;gap:22px}
+  .tela iframe{min-height:520px;height:72vh}
+  .aula a{grid-template-columns:48px 1fr;padding:12px}
+  .aula .play{display:none}
+  .aula .num{font-size:26px}
+  .topo .btn span.long{display:none}
+  .materias{grid-template-columns:1fr 1fr;gap:10px}
+  .materia{min-height:118px;gap:14px;padding:14px 12px 12px}
+  .materia .nome{font-size:17px}
+  .materia .qtd{font-size:20px}
+  .materia .qtd b{font-size:30px}
+  .materia.destaque{grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+<div class="listras" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="topo">
+    <a class="marca" href="#/">PROFESSOR DA FIEL<small>@alehcamisa7</small></a>
+    <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">Seguir<span class="long">&nbsp;no Instagram</span></a>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <footer>
+    <p class="frase">O Professor explica.</p>
+    <p>Aulas publicadas no Instagram <a href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">@alehcamisa7</a>. Site de fã, sem vínculo oficial com o Sport Club Corinthians Paulista.</p>
+  </footer>
+</div>
+
+<script>
+/* ================= CONFIGURAÇÃO =================
+   Troque só o ID se um dia mudar de planilha. */
+const PLANILHA_ID = "1xveT_RjSCrXK_JV06xBgfOWkeM5NES_bEnBcfOwpq3E";
+const PRIMEIRA_MATERIA = "Corinthianês"; // matéria marcada como "comece aqui"
+const URL_CSV = `https://docs.google.com/spreadsheets/d/${PLANILHA_ID}/gviz/tq?tqx=out:csv`;
+
+/* Cópia de segurança: usada só se a planilha não puder ser lida
+   (ex.: ainda não foi compartilhada). Atualizada em 22/09/2026. */
+const RESERVA = [
+["Corinthianês",1,"Como usar o Vai Corinthians?","https://www.instagram.com/reel/DXr7ychjIXl/"],
+["Corinthianês",2,"Como usar o Aqui é Corinthians","https://www.instagram.com/reel/DXzQFupAPWR/"],
+["Corinthianês",3,"Como usar o Vai Corinthians? - Pt 2","https://www.instagram.com/reel/DX4WTAdAKVQ/"],
+["Corinthianês",4,"Como responder a \"E o Corinthians hein?!\"","https://www.instagram.com/reel/DX5p1zRg6RO/"],
+["Corinthianês",5,"Aqui é Corinthians Pt 2","https://www.instagram.com/reel/DX9QOx_A8a7/"],
+["Corinthianês",6,"O Superlativo Vai Curintcha","https://www.instagram.com/reel/DYDNgZ2MGOI/"],
+["Corinthianês",7,"Eu nunca vou te abandonar","https://www.instagram.com/reel/DYP6JbHs-hx/"],
+["Corinthianês",8,"Salve o Corinthians","https://www.instagram.com/reel/DYXRL35gWZ_/"],
+["Corinthianês",9,"Que fase que tá o Corinthians?!","https://www.instagram.com/reel/DYp-ZzxscCZ/"],
+["Corinthianês",10,"Como usar o Vai Corinthians?","https://www.instagram.com/reel/DY42eIRAIvk/"],
+["Corinthianês",11,"Corinthiano, Maloqueiro e Sofredor","https://www.instagram.com/reel/DZn01BBspzj/"],
+["Corinthianês",12,"Corinthiano é com ou sem TH?","https://www.instagram.com/reel/DZ4wTZqslMZ/"],
+["Corinthianês",13,"Hino do Corinthians","https://www.instagram.com/reel/DaiY-0Ng5Cd/"],
+["Corinthianês",14,"Como usar o Vai Corinthians - Locução Interjetiva","https://www.instagram.com/reel/Da5hrqKgKMx/"],
+["Corinthianês",15,"A definição de Corinthians","https://www.instagram.com/reel/DbDoivkAd9d/"],
+["Corinthianês",16,"Usos avançados do Vai Corinthians","https://www.instagram.com/p/DbT9Mt6M6OH/"],
+["História",1,"Por que o Corinthians é o Campeão dos Campeões?","https://www.instagram.com/reel/DZFRCyQO79v/"],
+["História",2,"A invasão de 1976","https://www.instagram.com/reel/DZUpurSOR9n/"],
+["História",3,"Por que o Corinthians é o time do Povo?","https://www.instagram.com/reel/DZaCYN-ulc1/"],
+["História",4,"A Democracia Corinthiana","https://www.instagram.com/reel/DZgEfQdMeOC/"],
+["História",5,"A invasão de 2012","https://www.instagram.com/reel/DZxgX9aAPqy/"],
+["História",6,"Como assim Corinthiano Roxo?","https://www.instagram.com/p/DZ-ToXKgygC/"],
+["História",7,"Por que Corinthiano Fiel?","https://www.instagram.com/p/DaDP_qbAT9z/"],
+["História",8,"Por que Bando de Loucos?","https://www.instagram.com/p/DaMG9DtgNDO/"],
+["História",9,"Por que chamamos o Corinthians de Todo Poderoso?","https://www.instagram.com/p/DaQKo79AIvK/"],
+["História",10,"Fiel, Bando de Loucos, Todo Poderoso - De onde vem tudo isso?","https://www.instagram.com/reel/DaVVqqDsYvp/"],
+["História",11,"Copas pra você se orgulhar","https://www.instagram.com/p/DadPijBgikB/"],
+["História",12,"Por que o Corinthians usa Preto e Branco?","https://www.instagram.com/p/DavqMUGMsrK/"],
+["História",13,"Como surgiu o Poropopó","https://www.instagram.com/p/Da0QPa-gqQA/"],
+["Matemática e Estatística",1,"Por que a torcida do Corinthians é a maior que existe?","https://www.instagram.com/p/DbMNjJ4sN37/"],
+["Fregueses",1,"Vasco da Gama","https://www.instagram.com/p/DaoE80RsPS9/"],
+["Brasileiros",1,"A Descoberta de Neymar","https://www.instagram.com/reel/DY0V9J6AFSR/"],
+["Comportamental",1,"Papo de Undaia","https://www.instagram.com/reel/DYi1QxHgQII/"],
+["Sobrevivência",1,"Como sobreviver à Copa do Mundo sem Corinthians?","https://www.instagram.com/reel/DZsZPMvgAL6/"],
+["Matemática e Estatística",2,"O amor corinthiano explicado em correlações e provas cruzadas. Aula 02 de matemática E estatística no ar.","https://www.instagram.com/reel/DbYIjYMuNvU/"],
+["Aula Prática - Collab O Rafa Cabral",1,"O mais novo louco do bando de loucos está firme nos estudos. @orafacabral veio aprender as aplicações e diferenças da interjeição Vai Corinthians. Episódio 1 do Corinthianês na prática no ar.","https://www.instagram.com/p/DbbcUO3Mmj6/"],
+["Matemática e Estatística",3,"Pro corinthiano, o impossível é só questão de opinião. Aula 03 de matemática e estatística no ar!","https://www.instagram.com/p/Dbdj7Rfg5BB/"],
+["Aula Extra",1,"Chegou e já é uma realidade. @timediniz trouxe uma revolução para o futebol corinthiano. Aula extra no ar!","https://www.instagram.com/p/Dbgj1mxMSCT/"],
+["Corinthianês",17,"O Corinthiano não torce para o Corinthians. Ele vive o Corinthians. Ele é o Corinthians!!! Aula 17 de Corinthianês no ar.","https://www.instagram.com/p/Dbl5yR6suye/"],
+["Aula Prática - Collab O Rafa Cabral",2,"Seguindo os estudos, @orafacabral agora entende as diferentes aplicações para o AQUI É CORINTHIANS. Aula 02 do Corinthianês na prática!","https://www.instagram.com/p/Dbn1MwcglHl/"],
+["Desabafos do Professor",1,"O Corinthiano não desiste nunca. Você precisa acreditar meu irmão. Desabafos do Professor #01 no ar.","https://www.instagram.com/p/DbqMnabualr/"],
+["Cidadania Corinthiana",1,"É importante estar informado pra não sair falando besteira por aí. Aula 1 de cidadania do Corinthians no ar.","https://www.instagram.com/p/Db867WAsOkF/"],
+["Cidadania Corinthiana",2,"Onde está o dinheiro do Corinthians? Aula 02 da cidadania corinthiana no ar.","https://www.instagram.com/p/Db_m-xYsD13/"],
+["Cidadania Corinthiana",3,"A Intervenção Judicial é a solução para o Corinthians? Aula 03 de Cidadania Corinthiana no ar.","https://www.instagram.com/p/DcB1W01MwGi/"],
+["Aula Prática - Collab O Rafa Cabral",3,"@orafacabral segue estudando e aprendendo cada vez mais sobre o colossal de Itaquera. Aula 04 de Corinthianês na prática no ar.","https://www.instagram.com/p/DcEKTKktKlM/"],
+["Aula Extra",2,"E aí, você curtiu a continuação do Memphis no Corinthians?","https://www.instagram.com/p/DcLoR6ts1F-/"],
+["Cidadania Corinthiana",4,"Você sabe me explicar a tal da SaFiel? Aula 4 - Parte 1 da Cidadania Corinthiana no ar.","https://www.instagram.com/p/DcOd4KOuaUS/"],
+["Cidadania Corinthiana",4,"Se a SaFiel é uma empresa, quem é que vai mandar nessa empresa? Aula 04 - pt2 da Cidadania Corinthiana no ar!","https://www.instagram.com/p/DcUfQz8s0ag/"],
+["Cidadania Corinthiana",4,"O que acontece se a SaFiel der errado? Quais são os riscos? Aula 04 parte 03 da Cidadania Corinthiana no ar!","https://www.instagram.com/p/DceXw9zsfst/"],
+["Cidadania Corinthiana",4,"Guia definitivo da SAFiel. Aula 04 da Cidadania Corinthiana.","https://www.instagram.com/p/Dcl36TSML2y/"],
+["Aula Extra",3,"Guia rápido com as diferenças entre o modelo associativo e o modelo proposto pela SaFiel","https://www.instagram.com/p/Dcoexl7M9db/"],
+["Cidadania Corinthiana",5,"Afinal, o que é o Conselho Deliberativo? Aula 05 de Cidadania Corinthiana no ar.","https://www.instagram.com/p/DcylQsdMXKL/"],
+["Cidadania Corinthiana",6,"O Fiel Torcedor ainda não tem poder de influência na política do clube. Até quando? Aula 06 da Cidadania Corinthiana no ar!","https://www.instagram.com/p/Dc376tBM8p_/"],
+["Análise Além da Tática",1,"O Diniz é o culpado da má fase do Corinthians? Aula 01 da Análise para além da Tática.","https://www.instagram.com/p/Dc_o6YsM3m4/"],
+["Matemática e Estatística",4,"Por que o Corinthiano não desiste nunca. Aula 04 de matemática e estatística.","https://www.instagram.com/p/DdEgPj0MZod/"],
+["História das Camisas do Corinthians",1,"A camisa de 1992 do Corinthians, a camisa que divide eras.","https://www.instagram.com/p/DdOuY1YsdRb/"],
+["Músicas da Torcida do Corinthians",1,"Sou Corinthiano, maloqueiro e sofredor — inspirado em Anunciação, de Alceu Valença.","https://www.instagram.com/p/DdUGB4VsTTS/"],
+["Moda e Vestuário",1,"Todos os estilos podem ser completados com uma camisa do Corinthians.","https://www.instagram.com/p/DdgpXDDsO1T/"],
+["Estratégia Aplicada",1,"O problema começa bem antes do jogo. Começa no planejamento do clube.","https://www.instagram.com/p/Ddkeq_mA4LS/"]
+];
+
+/* ================= DADOS ================= */
+let AULAS = [], MATERIAS = [];
+
+function parseCSV(txt){
+  const rows=[];let row=[],cell="",q=false;
+  for(let i=0;i<txt.length;i++){
+    const c=txt[i];
+    if(q){
+      if(c==='"'){ if(txt[i+1]==='"'){cell+='"';i++;} else q=false; }
+      else cell+=c;
+    } else if(c==='"') q=true;
+    else if(c===','){row.push(cell);cell="";}
+    else if(c==='\n'||c==='\r'){
+      if(c==='\r'&&txt[i+1]==='\n') i++;
+      row.push(cell);rows.push(row);row=[];cell="";
+    } else cell+=c;
+  }
+  if(cell!==""||row.length){row.push(cell);rows.push(row);}
+  return rows;
+}
+const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+const slug=s=>norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const codigoIG=url=>{const m=String(url||"").match(/instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/);return m?m[1]:null};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dois=n=>String(n).padStart(2,"0");
+
+function montar(linhas){
+  // linhas: [[materia, nº, titulo, link], ...] na ordem da planilha
+  AULAS=[];
+  linhas.forEach((l,i)=>{
+    const materia=String(l[0]||"").trim(), cod=codigoIG(l[3]);
+    if(!materia||!cod) return;
+    AULAS.push({materia,mslug:slug(materia),num:parseInt(l[1],10)||0,titulo:String(l[2]||"").trim()||"Aula sem título",cod,ordem:i});
+  });
+  const mapa=new Map();
+  AULAS.forEach(a=>{
+    if(!mapa.has(a.mslug)) mapa.set(a.mslug,{nome:a.materia,slug:a.mslug,aulas:[],primeira:a.ordem});
+    mapa.get(a.mslug).aulas.push(a);
+  });
+  MATERIAS=[...mapa.values()];
+  MATERIAS.forEach(m=>m.aulas.sort((x,y)=>x.num-y.num||x.ordem-y.ordem));
+  MATERIAS.sort((x,y)=>{
+    const px=norm(x.nome)===norm(PRIMEIRA_MATERIA)?-1:0, py=norm(y.nome)===norm(PRIMEIRA_MATERIA)?-1:0;
+    return px-py||y.aulas.length-x.aulas.length||x.primeira-y.primeira;
+  });
+}
+
+async function carregar(){
+  try{
+    const r=await fetch(URL_CSV,{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    const rows=parseCSV(await r.text());
+    const cab=rows[0].map(norm);
+    const idx=k=>cab.findIndex(h=>h.startsWith(k));
+    const iM=idx("materia"),iN=idx("n"),iT=idx("titulo"),iI=idx("instagram");
+    if(iM<0||iT<0||iI<0) throw new Error("colunas");
+    const linhas=rows.slice(1).map(r=>[r[iM],r[iN],r[iT],r[iI]]);
+    montar(linhas);
+    if(!AULAS.length) throw new Error("vazia");
+  }catch(e){
+    console.warn("Planilha indisponível, usando cópia de segurança:",e);
+    montar(RESERVA);
+  }
+}
+
+/* ================= TELAS ================= */
+const app=document.getElementById("app");
+const iconePlay='<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>';
+
+function itemAula(a,mostrarMateria,atual){
+  return `<li class="aula${atual?" atual":""}"><a href="#/aula/${a.cod}">
+    <span class="num">${dois(a.num)}<small>aula</small></span>
+    <span>${mostrarMateria?`<span class="mat">${esc(a.materia)}</span>`:""}<span class="tit">${esc(a.titulo)}</span></span>
+    <span class="play">${iconePlay}</span></a></li>`;
+}
+
+function telaInicio(filtro=""){
+  const primeira=MATERIAS[0]?.aulas[0];
+  const recentes=[...AULAS].sort((x,y)=>y.ordem-x.ordem).slice(0,6);
+  app.innerHTML=`
+  <section class="hero">
+    <h1>Ser corinthiano <span class="risco">explica tudo.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 70 4, 150 18, 297 6"/></svg></span></h1>
+    <p class="lead">Todas as ${AULAS.length} aulas do Professor da Fiel, separadas por matéria e na ordem certa.</p>
+    <div class="acoes">
+      ${primeira?`<a class="btn cheio" href="#/aula/${primeira.cod}">Assistir a Aula 1</a>`:""}
+      <label class="busca"><span class="sr" style="position:absolute;left:-9999px">Buscar aula</span>
+        <input id="busca" type="search" placeholder="Procurar uma aula…" value="${esc(filtro)}" autocomplete="off"></label>
+    </div>
+  </section>
+  <div id="resultado"></div>`;
+  const inp=document.getElementById("busca"), res=document.getElementById("resultado");
+  const desenhar=()=>{
+    const q=norm(inp.value);
+    if(q){
+      const achou=AULAS.filter(a=>norm(a.titulo+" "+a.materia).includes(q));
+      res.innerHTML=`<section class="bloco"><div class="titulo-bloco"><h2>Busca</h2><span class="nota">${achou.length} ${achou.length===1?"aula":"aulas"}</span></div>
+        ${achou.length?`<ul class="aulas">${achou.map(a=>itemAula(a,true)).join("")}</ul>`:`<p class="vazio">Nenhuma aula com esse nome. Tenta outra palavra, tipo "Vai Corinthians" ou "SAFiel".</p>`}</section>`;
+      return;
+    }
+    res.innerHTML=`
+    <section class="bloco">
+      <div class="titulo-bloco"><h2>Matérias</h2><span class="nota">escolha por onde começar</span></div>
+      <div class="materias">${MATERIAS.map((m,i)=>`
+        <a class="materia${i===0?" destaque":""}" href="#/materia/${m.slug}">
+          <span class="nome">${esc(m.nome)}</span>
+          <span class="qtd"><b>${m.aulas.length}</b>${m.aulas.length===1?"aula":"aulas"}</span>
+        </a>`).join("")}
+      </div>
+    </section>
+    <section class="bloco">
+      <div class="titulo-bloco"><h2>Saiu agora</h2><span class="nota">as últimas aulas</span></div>
+      <ul class="aulas">${recentes.map(a=>itemAula(a,true)).join("")}</ul>
+    </section>`;
+  };
+  inp.addEventListener("input",desenhar);
+  desenhar();
+}
+
+function telaMateria(s){
+  const m=MATERIAS.find(x=>x.slug===s);
+  if(!m) return naoAchou();
+  app.innerHTML=`
+  <a class="voltar" href="#/">← todas as matérias</a>
+  <header class="cab-materia"><h1>${esc(m.nome)}</h1>
+    <span class="nota">${m.aulas.length} ${m.aulas.length===1?"aula":"aulas"}, na ordem</span></header>
+  <ul class="aulas">${m.aulas.map(a=>itemAula(a,false)).join("")}</ul>`;
+}
+
+function telaAula(cod){
+  const a=AULAS.find(x=>x.cod===cod);
+  if(!a) return naoAchou();
+  const m=MATERIAS.find(x=>x.slug===a.mslug), i=m.aulas.indexOf(a);
+  const ant=m.aulas[i-1], prox=m.aulas[i+1];
+  const linkIG=`https://www.instagram.com/p/${a.cod}/`;
+  app.innerHTML=`
+  <a class="voltar" href="#/materia/${m.slug}">← ${esc(m.nome)}</a>
+  <div class="sala">
+    <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
+    <div class="info">
+      <span class="quem">${esc(m.nome)}, aula ${dois(a.num)} de ${dois(m.aulas[m.aulas.length-1].num)}</span>
+      <h1>${esc(a.titulo)}</h1>
+      <div class="acoes">
+        <a class="btn cheio" href="${linkIG}" target="_blank" rel="noopener">Assistir no Instagram</a>
+        <button class="btn" id="compartilhar">Compartilhar esta aula</button>
+      </div>
+      <nav class="navega" aria-label="Navegar entre aulas">
+        ${ant?`<a href="#/aula/${ant.cod}"><span class="rot">← aula anterior</span><span class="alvo">${esc(ant.titulo)}</span></a>`:`<span><span class="rot">primeira aula</span></span>`}
+        ${prox?`<a class="prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span class="alvo">${esc(prox.titulo)}</span></a>`:`<a class="prox" href="#/"><span class="rot">matéria concluída</span><span class="alvo">Escolher outra matéria</span></a>`}
+      </nav>
+      <ul class="aulas">${m.aulas.map(x=>itemAula(x,false,x===a)).join("")}</ul>
+    </div>
+  </div>`;
+  document.getElementById("compartilhar").onclick=async()=>{
+    const url=location.href, b=document.getElementById("compartilhar");
+    try{
+      if(navigator.share) await navigator.share({title:a.titulo,text:`${m.nome}: ${a.titulo}`,url});
+      else{await navigator.clipboard.writeText(url);b.textContent="Link copiado";setTimeout(()=>b.textContent="Compartilhar esta aula",2000);}
+    }catch(e){}
+  };
+}
+
+function naoAchou(){
+  app.innerHTML=`<p class="vazio">Essa aula não está mais aqui. <a href="#/">Voltar para as matérias</a>.</p>`;
+}
+
+function rota(){
+  const [,tipo,id]=(location.hash||"#/").split("/");
+  if(tipo==="materia") telaMateria(id);
+  else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
+  else telaInicio();
+  window.scrollTo(0,0);
+  const h1=app.querySelector("h1");
+  document.title=(tipo&&h1?h1.textContent+" · ":"")+"Aulas do Professor da Fiel";
+}
+
+app.innerHTML='<p class="vazio">Apagando a lousa…</p>';
+carregar().then(()=>{window.addEventListener("hashchange",rota);rota();});
+</script>
+</body>
+</html>
