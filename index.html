@@ -314,17 +314,9 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .menu .mi,.menu .mc{display:none}
 .menu button[hidden]{display:none}
 /* O Professor por aí */
-.lives{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-.live-card{display:flex;flex-direction:column;text-decoration:none;border-radius:var(--r);overflow:hidden;background:var(--lousa-2);transition:transform .15s}
-.live-card:hover{transform:translateY(-3px)}
-.live-card .thumb{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat}
-.live-card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.55))}
-.live-card .thumb .play-yt{position:absolute;left:12px;bottom:10px;z-index:1;width:40px;height:40px;border-radius:50%;background:var(--vermelho);display:grid;place-items:center}
-.live-card .thumb .play-yt svg{width:14px;height:14px;fill:#fff;margin-left:3px}
-.live-card .info-live{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px}
-.live-card .prog-live{font-family:var(--mao);font-size:19px;color:var(--giz-2);line-height:1.1}
-.live-card .ep{font-weight:500;font-size:18px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.live-card .dt{font-family:var(--mao);font-size:17px;color:var(--giz-2)}
+.live-item .ico-live{display:flex;flex-direction:column;align-items:center;gap:2px}
+.live-item .ico-live .ico{width:30px;height:30px}
+.live-item .ico-live small{font-family:var(--mao);font-weight:500;font-size:16px;color:var(--giz-2)}
 .ver-todas{margin-top:18px}
 .palco{margin:0 0 22px}
 .palco .tela16{position:relative;aspect-ratio:16/9;background:#000;border-radius:var(--r);overflow:hidden}
@@ -380,7 +372,6 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .caderno-live .postit .dica{display:none}
   .caderno-live .postit .acao{font-size:13px}
   .caderno-live .navega{grid-template-columns:1fr 1fr;gap:14px}
-  .lives{grid-template-columns:1fr}
   .titulo-bloco{flex-wrap:wrap;row-gap:4px}
   .titulo-bloco h2{flex:1 1 100%}
   .subtitulo .nota{display:none}
@@ -904,7 +895,7 @@ function telaInicio(){
     <section class="bloco" id="sec-turma">${turma()}</section>
     ${LIVES.length?`<section class="bloco" id="sec-porai">
       <div class="titulo-bloco"><h2>O Professor por aí</h2><span class="nota">lives e programas em que o Professor já deu aula</span></div>
-      <div class="lives">${[...LIVES].reverse().slice(0,6).map(cardLive).join("")}</div>
+      <ul class="aulas">${[...LIVES].reverse().slice(0,3).map(cardLive).join("")}</ul>
       <a class="btn ver-todas" href="#/por-ai">Ver todas as ${plural(LIVES.length,"live","lives")}</a>
     </section>`:""}`;
     observarSecoes();
@@ -1007,9 +998,11 @@ function telaAula(cod){
 const dataExtenso=d=>d?d.toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"}):"";
 const dataCurta=d=>d?d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"}):"";
 function cardLive(l){
-  return `<a class="live-card" href="#/live/${encodeURIComponent(l.chave)}">
-    <span class="thumb" style="background-image:url('https://i.ytimg.com/vi/${l.id}/hqdefault.jpg')"><span class="play-yt">${iconePlay}</span></span>
-    <span class="info-live">${l.programa?`<span class="prog-live">${esc(l.programa)}</span>`:""}<span class="ep">${esc(l.episodio)}</span>${l.data?`<span class="dt">${dataCurta(l.data)}</span>`:""}</span></a>`;
+  const meta=[l.programa,dataCurta(l.data)].filter(Boolean).join(", ");
+  return `<li class="aula live-item"><a href="#/live/${encodeURIComponent(l.chave)}">
+    <span class="num ico-live">${svgIco("antena")}<small>live</small></span>
+    <span>${meta?`<span class="mat">${esc(meta)}</span>`:""}<span class="tit">${esc(l.episodio)}</span></span>
+    <span class="play">${iconePlay}</span></a></li>`;
 }
 function telaPorAi(){
   if(!LIVES.length) return naoAchou();
@@ -1020,14 +1013,14 @@ function telaPorAi(){
   <header class="cab-materia">${svgIco("antena")}<h1>O Professor por aí</h1>
     <p>Lives e programas em que o Professor já participou. ${plural(LIVES.length,"live","lives")} até agora.</p></header>
   ${[...grupos].map(([g,ls])=>`<div class="subsec"><div class="subtitulo"><h3>${esc(g)}</h3><span class="nota">${plural(ls.length,"live","lives")}</span></div>
-    <div class="lives">${ls.map(cardLive).join("")}</div></div>`).join("")}`;
+    <ul class="aulas">${ls.map(cardLive).join("")}</ul></div>`).join("")}`;
 }
 function telaLive(chave){
   const l=LIVES.find(x=>x.chave===chave); if(!l) return naoAchou();
   const i=LIVES.indexOf(l), ant=LIVES[i-1], prox=LIVES[i+1];
   const linkYT=`https://www.youtube.com/watch?v=${l.id}${l.t?`&t=${l.t}s`:""}`;
   const ref=x=>esc([x.programa,dataCurta(x.data)].filter(Boolean).join(", "));
-  const outras=[...LIVES].reverse().filter(x=>x!==l).slice(0,6);
+  const outras=[...LIVES].reverse().filter(x=>x!==l).slice(0,4);
   app.innerHTML=`
   <a class="voltar" href="#/por-ai">← O Professor por aí</a>
   <header class="cab-aula">
@@ -1056,7 +1049,7 @@ function telaLive(chave){
     </nav>
   </div>
   ${outras.length?`<section class="bloco"><div class="titulo-bloco"><h2>Mais lives</h2><a class="nota" href="#/por-ai">ver todas</a></div>
-    <div class="lives">${outras.map(cardLive).join("")}</div></section>`:""}`;
+    <ul class="aulas">${outras.map(cardLive).join("")}</ul></section>`:""}`;
   document.getElementById("compartilhar-live").onclick=()=>compartilhar({titulo:"Compartilhar live",sub:l.titulo,url:`${SITE}#/live/${encodeURIComponent(l.chave)}`,texto:`Olha essa live com o Professor da Fiel: ${l.titulo}`});
 }
 
