@@ -218,6 +218,100 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .postit .acao{font-size:14px;white-space:nowrap}
   .convite{grid-template-columns:1fr;padding:20px}
 }
+
+/* ===== v5: caderno (desktop), progresso, certificado, turma, parceiros ===== */
+.sala{grid-template-columns:minmax(0,440px) minmax(0,1fr);grid-template-areas:"video botoes" "video lado" "video nav";grid-template-rows:auto auto 1fr;gap:22px 34px}
+.tela{grid-row:1 / span 3;align-self:start}
+.botoes{max-width:none;grid-template-columns:1fr 1fr;gap:16px 14px;padding-top:10px}
+.sala .navega{grid-area:nav;margin:8px 0 0;grid-template-columns:1fr;gap:20px;align-self:start}
+.lado{display:grid;gap:14px}
+.quadro + .quadro{margin-top:0}
+.postit.feito{background:var(--preto);color:var(--giz);box-shadow:0 0 0 2px var(--giz),0 8px 14px -8px rgba(0,0,0,.7)}
+.postit.feito .dica{color:var(--giz-2)}
+.postit.feito .bola{background:var(--giz);color:var(--preto)}
+.postit.feito::before{background:rgba(242,240,234,.35)}
+.carimbo{display:inline-block;margin-left:14px;padding:4px 12px 2px;border:3px solid var(--giz);border-radius:4px;font-family:var(--giz-font);font-size:22px;line-height:1.1;color:var(--giz);transform:rotate(-7deg);vertical-align:middle;letter-spacing:.04em}
+.quadro.prog-aula .linha{font-weight:400;font-size:17px;margin:0}
+.quadro.prog-aula .btn{margin-top:12px}
+
+/* progresso nos quadros das matérias */
+.prog{display:block;margin-top:10px}
+.barra{position:relative;display:block;height:9px;border-radius:5px;background:rgba(242,240,234,.14);overflow:visible}
+.barra i{display:block;height:100%;border-radius:5px;background:var(--giz);filter:url(#giz)}
+.barra .meta{position:absolute;top:-7px;width:2px;height:23px;background:var(--vermelho)}
+.barra .meta svg{position:absolute;top:-19px;left:-9px;width:20px;height:20px;fill:none;stroke:var(--giz);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.prog-txt{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 10px;margin-top:6px;font-family:var(--mao);font-size:18px;line-height:1.1;color:var(--giz-2)}
+.materia .qtd{display:block}
+.prog-txt span{white-space:nowrap}
+.postit .txt{min-width:0}
+.postit .dica{overflow:hidden;text-overflow:ellipsis}
+.materia.destaque .barra{background:rgba(22,24,22,.15)}
+.materia.destaque .barra i{background:var(--lousa)}
+.materia.destaque .barra .meta svg{stroke:var(--lousa)}
+.materia.destaque .prog-txt{color:#4b4a45}
+.cert-emb{font-family:var(--mao);font-size:17px;color:var(--giz-2);opacity:.8}
+.eletivas .cert-emb{display:block}
+
+/* faixa do certificado na página da matéria */
+.faixa-cert{display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap;margin:0 0 22px;padding:16px 20px;border:2px solid var(--giz);border-radius:var(--r)}
+.faixa-cert.embreve{border-style:dashed;border-color:rgba(242,240,234,.35)}
+.faixa-cert p{margin:0;font-size:17px;max-width:60ch}
+.faixa-cert b{font-weight:700}
+.faixa-cert .prog{min-width:220px;flex:1 1 220px;max-width:360px;margin:0}
+
+/* check nas listas */
+.aula .play.feito{background:var(--giz);border-color:var(--giz)}
+.aula .play.feito svg{width:16px;height:16px;fill:none;stroke:var(--preto);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;margin:0}
+
+/* modal (compartilhar e certificado) */
+.fundo-modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72)}
+.modal{position:relative;width:100%;max-width:520px;max-height:calc(100vh - 40px);overflow:auto;padding:26px 24px 22px;background:var(--lousa);border:2px solid var(--giz);border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.modal h2{font-family:var(--giz-font);font-weight:700;font-size:34px;line-height:1.05;margin:0 0 6px;text-transform:uppercase}
+.modal .sub{margin:0 0 18px;color:var(--giz-2)}
+.fechar{position:absolute;top:10px;right:12px;width:36px;height:36px;border:0;background:transparent;color:var(--giz);font-size:28px;line-height:1;cursor:pointer}
+.opcoes{display:grid;gap:10px}
+.opcoes .btn{justify-content:flex-start;width:100%}
+.campo{display:block;margin:0 0 14px}
+.campo span{display:flex;justify-content:space-between;font-family:var(--mao);font-size:20px;color:var(--giz-2)}
+.campo input{width:100%;margin-top:4px;font:inherit;font-weight:500;font-size:20px;color:var(--lousa);background:#f4efe0;border:0;border-radius:4px;padding:10px 12px}
+.previa{display:block;width:min(240px,62%);margin:4px auto 18px;border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.6)}
+.aviso{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:12px;max-width:calc(100% - 32px);padding:12px 16px;background:#f4efe0;color:var(--lousa);border-radius:4px;box-shadow:0 10px 24px rgba(0,0,0,.6);font-weight:500}
+.aviso a{color:var(--vermelho);font-weight:700;white-space:nowrap}
+
+/* faça parte da turma */
+.turma{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.turma a{display:flex;flex-direction:column;gap:10px;padding:18px;text-decoration:none;border:2px solid rgba(242,240,234,.4);border-radius:var(--r);transition:border-color .15s}
+.turma a:hover{border-color:var(--giz)}
+.turma .t{font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.1}
+.turma .d{font-size:15px;color:var(--giz-2)}
+.turma .status{align-self:flex-start;font-family:var(--mao);font-weight:700;font-size:19px;padding:1px 9px;border-radius:3px;background:var(--giz);color:var(--lousa)}
+.turma .status.agora{background:var(--vermelho);color:#fff}
+.rodape-turma{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 14px}
+.rodape-turma a{color:var(--giz)}
+
+/* parceiros: cupons de papel */
+.cupons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cupom{position:relative;display:flex;flex-direction:column;gap:6px;padding:20px 20px 18px;background:#f4efe0;color:var(--lousa);border-radius:4px;box-shadow:0 10px 18px -10px rgba(0,0,0,.8)}
+.cupom::before,.cupom::after{content:"";position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:var(--lousa)}
+.cupom::before{left:-9px}.cupom::after{right:-9px}
+.cupom .loja{font-family:var(--mao);font-weight:700;font-size:21px;color:#6b665c}
+.cupom .off{font-weight:700;font-size:34px;line-height:1;text-transform:uppercase}
+.cupom .codigo{margin-top:6px;padding:8px 10px;border:2px dashed rgba(22,24,22,.5);border-radius:3px;font-weight:700;letter-spacing:.06em;text-align:center}
+.cupom .acoes-cupom{display:flex;gap:8px;margin-top:8px}
+.cupom .acoes-cupom .btn{flex:1;padding:9px 10px;font-size:15px;border-color:var(--lousa);color:var(--lousa)}
+.cupom .acoes-cupom .btn:hover{background:var(--lousa);color:var(--giz)}
+.cupom .acoes-cupom .btn.cheio{color:#fff;border-color:var(--vermelho)}
+.aviso-publi{font-family:var(--mao);font-size:19px;color:var(--giz-2)}
+
+@media (max-width:760px){
+  .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
+  .tela{grid-row:auto}
+  .sala .navega{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .carimbo{font-size:17px;margin-left:8px}
+  .aula .play.feito{display:grid}
+  .turma,.cupons{grid-template-columns:1fr}
+  .modal h2{font-size:28px}
+}
 </style>
 </head>
 <body>
@@ -231,6 +325,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   <main id="app" aria-live="polite"></main>
   <footer>
     <p class="frase">O Professor explica.</p>
+    <div class="rodape-turma" id="rodape-turma"></div>
     <p>Aulas publicadas no Instagram <a href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">@alehcamisa7</a>. Site de fã, sem vínculo oficial com o Sport Club Corinthians Paulista.</p>
   </footer>
 </div>
@@ -240,9 +335,27 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 const PLANILHA_ID = "1UjWBhjfe7zEHhGIGebdJkmvhNJ9OTBLYFLvq96FY18E"; // "Professor da Fiel | Aulas do site v2"
 const ABA_AULAS = "Aulas", ABA_MATERIAS = "Matérias";
 const PRIMEIRA_MATERIA = "Corinthianês";   // recebe o selo "comece aqui"
-const MIN_AULAS_GRADE = 3;                 // matérias com menos aulas vão para Eletivas
-const DIAS_NOVA = 7;                       // aulas desse período ganham o selo "nova"
+const MIN_AULAS_GRADE = 3;                 // menos que isso: vai para Eletivas
+const MIN_AULAS_CERT = 8;                  // matéria só dá certificado a partir daqui
+const PCT_CERT = 0.8;                      // % de aulas feitas para liberar o certificado
+const DIAS_NOVA = 7;                       // selo "nova"
+const SITE = "https://alehcamisa7.github.io/professordafiel/";
 const FORM_URL = "https://docs.google.com/forms/d/1CYHvJMRQDWwB6XNQiHyAfIuoehqOidM4YqvQ7v8IjKo/viewform";
+const LINKS = {
+  instagram: "https://www.instagram.com/alehcamisa7/",
+  comunidade: "https://www.instagram.com/channel/AbZjvkJnVxvmgeTT/",
+  tiktok: "https://www.tiktok.com/@alehcamisa7",
+  live: "https://www.tiktok.com/@alehcamisa7/live"
+};
+/* Live: toda terça, das 20h às 21h (horário de Brasília) */
+const LIVE = { diaSemana: "Tue", inicio: 20, fim: 21 };
+/* Parceiros comerciais (para mudar, é só editar aqui) */
+const CUPOM = "PROFESSORDAFIEL";
+const PARCEIROS = [
+  { loja: "Olam Sports", arroba: "@olamsports", desconto: "10% OFF", link: "https://www.olam.com.br/" },
+  { loja: "Retrôgol", arroba: "@retrogoloficial", desconto: "20% OFF no Pix", link: "https://www.retrogol.com.br/", materia: "camisa" },
+  { loja: "Sala de Troféus", arroba: "@saladetrofeus", desconto: "R$15 OFF", link: "https://www.saladetrofeus.com.br/" }
+];
 const csvURL = aba => `https://docs.google.com/spreadsheets/d/${PLANILHA_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(aba)}`;
 
 /* Cópia de segurança (usada só se a planilha não abrir). Atualizada em 23/09/2026. */
@@ -277,8 +390,18 @@ function lerData(s){
 const legendaHTML=t=>esc(t)
   .replace(/(^|[\s(])@([A-Za-z0-9._]{2,30})/g,(x,a,u)=>`${a}<a href="https://www.instagram.com/${u.replace(/\.$/,"")}/" target="_blank" rel="noopener">@${u}</a>`)
   .replace(/(^|[\s(])#([\p{L}0-9_]{2,40})/gu,(x,a,h)=>`${a}<a href="https://www.instagram.com/explore/tags/${encodeURIComponent(h)}/" target="_blank" rel="noopener">#${h}</a>`);
+/* Armazenamento no navegador do aluno */
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let FEITAS=new Set(LS.get("pdf_feitas",[]));
+const feita=cod=>FEITAS.has(cod);
+function alternarFeita(cod){ FEITAS.has(cod)?FEITAS.delete(cod):FEITAS.add(cod); LS.set("pdf_feitas",[...FEITAS]); }
+function progresso(m){
+  const total=m.aulas.length, feitas=m.aulas.filter(a=>feita(a.cod)).length;
+  const elegivel=total>=MIN_AULAS_CERT, meta=Math.ceil(total*PCT_CERT);
+  return {total,feitas,elegivel,meta,liberado:elegivel&&feitas>=meta,faltam:Math.max(0,meta-feitas)};
+}
 
-/* Ícones de giz: escolhidos por palavra-chave no nome da matéria */
+/* Ícones de giz */
 const ICONES={
   fala:'<path d="M4 5h16v10H10l-5 4v-4H4z"/><path d="M8 9h8M8 12h5"/>',
   dupla:'<circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 5.5-6s5.5 2.5 5.5 6M14.5 14.3c3.3-.6 6 1.8 6.5 5.7"/>',
@@ -296,30 +419,22 @@ const ICONES={
   nota:'<path d="M9 18V5.5L20 3v12.5"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="15.5" r="3"/>',
   cabide:'<path d="M10 6a2 2 0 1 1 2 2v2"/><path d="M12 10 3 17h18z"/>',
   alvo:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/><path d="M12 12l7-7M16 5h3v3"/>',
-  livro:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/>'
+  livro:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/>',
+  turma:'<circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="12" cy="6.5" r="2.8"/><path d="M2.5 19c0-3 2-5 4.5-5M21.5 19c0-3-2-5-4.5-5M7 20c0-3.5 2.2-6 5-6s5 2.5 5 6"/>',
+  celular:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 9v6l4.5-3z"/>',
+  antena:'<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9.2 9.2 0 0 0 0 13M18.5 5.5a9.2 9.2 0 0 1 0 13"/>'
 };
 const REGRAS=[
-  [["pratica","collab"],"dupla"],
-  [["corinthianes","linguistica","dicionario"],"fala"],
-  [["camisa","uniforme","manto"],"camisa"],
-  [["historia"],"coluna"],
-  [["matematica","estatistica"],"grafico"],
-  [["cidadania","politica","governanca"],"urna"],
-  [["fregues"],"trofeu"],
-  [["brasileir"],"bandeira"],
-  [["comportament","psicolog"],"olho"],
-  [["sobreviv"],"boia"],
-  [["extra","especial"],"estrela"],
-  [["desabafo"],"megafone"],
-  [["tatica","analise"],"prancheta"],
-  [["musica","canto"],"nota"],
-  [["moda","vestuario"],"cabide"],
-  [["estrategia","planejamento"],"alvo"]
+  [["pratica","collab"],"dupla"],[["corinthianes","linguistica","dicionario"],"fala"],[["camisa","uniforme","manto"],"camisa"],
+  [["historia"],"coluna"],[["matematica","estatistica"],"grafico"],[["cidadania","politica","governanca"],"urna"],
+  [["fregues"],"trofeu"],[["brasileir"],"bandeira"],[["comportament","psicolog"],"olho"],[["sobreviv"],"boia"],
+  [["extra","especial"],"estrela"],[["desabafo"],"megafone"],[["tatica","analise"],"prancheta"],[["musica","canto"],"nota"],
+  [["moda","vestuario"],"cabide"],[["estrategia","planejamento"],"alvo"]
 ];
-function iconeMateria(nome){
-  const n=norm(nome), r=REGRAS.find(([ks])=>ks.some(k=>n.includes(k)));
-  return `<span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[r?r[1]:"livro"]}</svg></span>`;
-}
+const svgIco=nome=>`<span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[nome]}</svg></span>`;
+function iconeMateria(nome){ const n=norm(nome), r=REGRAS.find(([ks])=>ks.some(k=>n.includes(k))); return svgIco(r?r[1]:"livro"); }
+const CAPELO='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M21 9v5"/></svg>';
+const CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 
 /* ================= DADOS ================= */
 function montar(linhas, descricoes){
@@ -340,18 +455,11 @@ function montar(linhas, descricoes){
   });
   MATERIAS=[...mapa.values()];
   MATERIAS.forEach(m=>m.aulas.sort((x,y)=>x.num-y.num||x.ordem-y.ordem));
-  MATERIAS.sort((x,y)=>{
-    const p=m=>norm(m.nome)===norm(PRIMEIRA_MATERIA)?-1:0;
-    return p(x)-p(y)||y.aulas.length-x.aulas.length||x.primeira-y.primeira;
-  });
+  MATERIAS.sort((x,y)=>{ const p=m=>norm(m.nome)===norm(PRIMEIRA_MATERIA)?-1:0; return p(x)-p(y)||y.aulas.length-x.aulas.length||x.primeira-y.primeira; });
   GRADE=MATERIAS.filter(m=>m.aulas.length>=MIN_AULAS_GRADE||norm(m.nome)===norm(PRIMEIRA_MATERIA));
   ELETIVAS=MATERIAS.filter(m=>!GRADE.includes(m));
 }
-async function lerAba(aba){
-  const r=await fetch(csvURL(aba),{cache:"no-store"});
-  if(!r.ok) throw new Error(aba+" "+r.status);
-  return parseCSV(await r.text());
-}
+async function lerAba(aba){ const r=await fetch(csvURL(aba),{cache:"no-store"}); if(!r.ok) throw new Error(aba+" "+r.status); return parseCSV(await r.text()); }
 async function carregar(){
   try{
     const [aulas,mats]=await Promise.all([lerAba(ABA_AULAS),lerAba(ABA_MATERIAS).catch(()=>[[]])]);
@@ -360,35 +468,195 @@ async function carregar(){
     if(cols[0]<0||cols[3]<0||cols[5]<0) throw new Error("colunas");
     const linhas=aulas.slice(1).map(r=>cols.map(c=>c>=0?r[c]:""));
     const cm=(mats[0]||[]).map(norm), iM=cm.findIndex(h=>h.startsWith("materia")), iD=cm.findIndex(h=>h.startsWith("descri"));
-    const descricoes=iM>=0&&iD>=0?mats.slice(1).map(r=>[r[iM],r[iD]]):[];
-    montar(linhas,descricoes);
+    montar(linhas, iM>=0&&iD>=0?mats.slice(1).map(r=>[r[iM],r[iD]]):[]);
     if(!AULAS.length) throw new Error("vazia");
-  }catch(e){
-    console.warn("Planilha indisponível, usando cópia de segurança:",e);
-    montar(RESERVA.aulas,RESERVA.materias);
-  }
+  }catch(e){ console.warn("Planilha indisponível, usando cópia de segurança:",e); montar(RESERVA.aulas,RESERVA.materias); }
 }
 
 /* ================= PEÇAS ================= */
 const app=document.getElementById("app");
 const iconePlay='<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>';
 const rotuloParte=a=>a.parte?(/^\d+$/.test(a.parte)?`Parte ${a.parte}`:a.parte):"";
+const plural=(n,s,p)=>`${n} ${n===1?s:p}`;
 function itemAula(a,mostrarMateria,atual){
-  const parte=rotuloParte(a);
-  return `<li class="aula${atual?" atual":""}"><a href="#/aula/${a.cod}">
+  const parte=rotuloParte(a), ok=feita(a.cod);
+  return `<li class="aula${atual?" atual":""}" data-cod="${a.cod}"><a href="#/aula/${a.cod}">
     <span class="num">${dois(a.num)}<small>${parte?esc(parte.replace("Parte ","pt. ")):"aula"}</small></span>
     <span>${mostrarMateria?`<span class="mat">${esc(a.materia)}</span>`:""}<span class="tit">${a.nova?'<span class="selo">nova</span>':""}${esc(a.titulo)}</span></span>
-    <span class="play">${iconePlay}</span></a></li>`;
+    <span class="play${ok?" feito":""}" aria-label="${ok?"aula feita":"assistir"}">${ok?CHECK:iconePlay}</span></a></li>`;
+}
+function barra(m){
+  const p=progresso(m), pct=p.total?Math.min(100,p.feitas/p.total*100):0;
+  return `<span class="prog"><span class="barra"><i style="width:${pct}%"></i>${p.elegivel?`<b class="meta" style="left:${PCT_CERT*100}%" title="certificado">${CAPELO}</b>`:""}</span>
+    <span class="prog-txt"><span>${p.feitas} de ${p.total} feitas</span><span>${p.elegivel?(p.liberado?"certificado liberado":"certificado com 80%"):"certificado em breve"}</span></span></span>`;
 }
 function convite(){
-  return `<aside class="convite">
-    <div><h2>Trabalho de campo</h2>
+  return `<aside class="convite"><div><h2>Trabalho de campo</h2>
       <p>Me mostra como você usa o "Vai Corinthians". Grava, manda pelo formulário, e as melhores aplicações entram numa aula, com o seu @.</p>
       <span class="nota">o professor corrige com carinho</span></div>
-    <a class="btn cheio" href="#/participe">Mandar meu vídeo</a>
-  </aside>`;
+    <a class="btn cheio" href="#/participe">Mandar meu vídeo</a></aside>`;
 }
-const ehCorinthianes=m=>{const n=norm(m.nome);return n.includes("corinthianes")};
+const ehCorinthianes=m=>norm(m.nome).includes("corinthianes");
+
+/* Live no TikTok */
+function statusLive(){
+  try{
+    const p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Sao_Paulo",weekday:"short",hour:"numeric",hourCycle:"h23"}).formatToParts(new Date());
+    const dia=p.find(x=>x.type==="weekday").value, h=+p.find(x=>x.type==="hour").value;
+    if(dia===LIVE.diaSemana&&h>=LIVE.inicio&&h<LIVE.fim) return "agora";
+    if(dia===LIVE.diaSemana&&h<LIVE.inicio) return "hoje";
+  }catch(e){}
+  return "semana";
+}
+function turma(){
+  const st=statusLive();
+  const selo={agora:'<span class="status agora">🔴 Ao vivo agora</span>',hoje:'<span class="status">É hoje, 20h!</span>',semana:'<span class="status">toda terça, 20h</span>'}[st];
+  return `<div class="titulo-bloco"><h2>Faça parte da turma</h2><span class="nota">a aula continua fora do site</span></div>
+  <div class="turma">
+    <a href="${LINKS.comunidade}" target="_blank" rel="noopener">${svgIco("turma")}<span class="t">Comunidade no Instagram</span><span class="d">Recados do Professor, bastidores e aviso de aula nova antes de todo mundo.</span></a>
+    <a href="${LINKS.tiktok}" target="_blank" rel="noopener">${svgIco("celular")}<span class="t">Me segue no TikTok</span><span class="d">As aulas também saem por lá, @alehcamisa7.</span></a>
+    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener">${svgIco("antena")}${selo}<span class="t">Aula ao vivo no TikTok</span><span class="d">Toda terça, das 20h às 21h. Traz a sua dúvida.</span></a>
+  </div>`;
+}
+function rodapeTurma(){
+  const st=statusLive(), live=st==="agora"?"🔴 Live no TikTok agora":st==="hoje"?"Live hoje, 20h, no TikTok":"Live toda terça, 20h, no TikTok";
+  document.getElementById("rodape-turma").innerHTML=`
+    <a href="${LINKS.comunidade}" target="_blank" rel="noopener">Comunidade no Instagram</a>
+    <a href="${LINKS.tiktok}" target="_blank" rel="noopener">TikTok @alehcamisa7</a>
+    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener">${live}</a>
+    <span>Cupom ${CUPOM} nos <a href="#/" onclick="setTimeout(()=>document.getElementById('parceiros')?.scrollIntoView(),60)">parceiros</a></span>`;
+}
+function cupom(p){
+  return `<div class="cupom"><span class="loja">${esc(p.arroba)}</span><span class="off">${esc(p.desconto)}</span>
+    <span class="codigo">${CUPOM}</span>
+    <span class="acoes-cupom"><button class="btn cheio" type="button" data-copiar="${CUPOM}">Copiar cupom</button><a class="btn" href="${p.link}" target="_blank" rel="noopener sponsored">Ir pra loja</a></span></div>`;
+}
+function parceiros(lista){
+  return `<div class="titulo-bloco"><h2>Benefícios do aluno</h2><span class="aviso-publi">parceiros comerciais do Professor</span></div>
+    <div class="cupons">${lista.map(cupom).join("")}</div>`;
+}
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-copiar]"); if(!b) return;
+  try{ await navigator.clipboard.writeText(b.dataset.copiar); }catch(err){}
+  const t=b.textContent; b.textContent="Copiado!"; setTimeout(()=>b.textContent=t,1800);
+});
+
+/* Aviso rápido */
+let timerAviso;
+function aviso(html){
+  document.querySelector(".aviso")?.remove(); clearTimeout(timerAviso);
+  const d=document.createElement("div"); d.className="aviso"; d.setAttribute("role","status"); d.innerHTML=html; document.body.appendChild(d);
+  timerAviso=setTimeout(()=>d.remove(),6000);
+}
+/* Modal */
+function abrirModal(html){
+  fecharModal();
+  const f=document.createElement("div"); f.className="fundo-modal";
+  f.innerHTML=`<div class="modal" role="dialog" aria-modal="true"><button class="fechar" type="button" aria-label="Fechar">×</button>${html}</div>`;
+  f.addEventListener("click",e=>{ if(e.target===f||e.target.closest(".fechar")||e.target.closest("[data-fechar]")) fecharModal(); });
+  document.body.appendChild(f); document.body.style.overflow="hidden";
+  f.querySelector("input,button:not(.fechar),a")?.focus();
+  return f;
+}
+function fecharModal(){ document.querySelector(".fundo-modal")?.remove(); document.body.style.overflow=""; }
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharModal(); });
+const zap=texto=>`https://wa.me/?text=${encodeURIComponent(texto)}`;
+
+function menuCompartilhar(a,m){
+  const url=`${SITE}#/aula/${a.cod}`, texto=`Olha essa aula do Professor da Fiel: ${a.titulo} 👉 ${url}`;
+  const f=abrirModal(`<h2>Compartilhar aula</h2><p class="sub">${esc(m.nome)}: ${esc(a.titulo)}</p>
+    <div class="opcoes">
+      <a class="btn cheio" href="${zap(texto)}" target="_blank" rel="noopener">Mandar no WhatsApp</a>
+      <button class="btn" type="button" id="copiar-link">Copiar link</button>
+      ${navigator.share?'<button class="btn" type="button" id="outros-apps">Outros apps</button>':""}
+    </div>`);
+  f.querySelector("#copiar-link").onclick=async e=>{ try{await navigator.clipboard.writeText(url);}catch(err){} e.target.textContent="Link copiado!"; };
+  const o=f.querySelector("#outros-apps"); if(o) o.onclick=async()=>{ try{ await navigator.share({title:a.titulo,text:`Olha essa aula do Professor da Fiel: ${a.titulo}`,url}); fecharModal(); }catch(err){} };
+}
+
+/* ================= CERTIFICADO ================= */
+const MAX_NOME=40;
+function quebrarLinhas(ctx,texto,largura){
+  const pal=texto.split(/\s+/).filter(Boolean), linhas=[]; let l="";
+  pal.forEach(p=>{ const t=l?l+" "+p:p; if(ctx.measureText(t).width<=largura||!l) l=t; else { linhas.push(l); l=p; } });
+  if(l) linhas.push(l); return linhas;
+}
+function encaixar(ctx,texto,{familia,peso,max,min,largura,linhasMax}){
+  for(let t=max;t>=min;t-=4){ ctx.font=`${peso} ${t}px ${familia}`; const ls=quebrarLinhas(ctx,texto,largura);
+    if(ls.length<=linhasMax&&ls.every(x=>ctx.measureText(x).width<=largura)) return {tam:t,linhas:ls}; }
+  ctx.font=`${peso} ${min}px ${familia}`; return {tam:min,linhas:quebrarLinhas(ctx,texto,largura).slice(0,linhasMax)};
+}
+async function carregarFontes(){
+  try{ await Promise.all(["700 80px 'Cabin Sketch'","700 80px Oswald","500 80px Oswald","700 80px Caveat","500 80px Caveat"].map(f=>document.fonts.load(f))); }catch(e){}
+}
+function desenharCertificado(cv,nome,m,n){
+  const W=1080,H=1920; cv.width=W; cv.height=H; const c=cv.getContext("2d");
+  const GIZ="#f2f0ea",GIZ2="#b9b8b2",VERM="#d8262e";
+  const giz="'Cabin Sketch', 'Chalkboard SE', cursive", osw="Oswald, 'Arial Narrow', Arial, sans-serif", mao="Caveat, 'Comic Sans MS', cursive";
+  c.fillStyle="#161816"; c.fillRect(0,0,W,H);
+  let s=7; const rnd=()=>{s=(s*9301+49297)%233280;return s/233280};
+  for(let i=0;i<14000;i++){ const v=28+rnd()*14|0; c.fillStyle=`rgb(${v},${v+2},${v})`; c.fillRect(rnd()*W,rnd()*H,1.5,1.5); }
+  for(let x=0;x<W;x+=60){ c.fillStyle="#000"; c.fillRect(x,0,30,34); c.fillStyle=GIZ; c.fillRect(x+30,0,30,34); }
+  c.strokeStyle=GIZ; c.lineWidth=4; c.strokeRect(64,96,W-128,H-200); c.lineWidth=1.5; c.strokeRect(82,114,W-164,H-236);
+  c.textAlign="center"; c.textBaseline="alphabetic";
+  c.fillStyle=GIZ2; c.font=`700 40px ${osw}`; c.fillText("PROFESSOR DA FIEL",W/2,230);
+  c.fillStyle=GIZ; c.font=`700 138px ${giz}`; c.fillText("CERTIFICADO",W/2,415);
+  c.font=`700 96px ${giz}`; c.fillText("DE CONCLUSÃO",W/2,540);
+  c.strokeStyle=VERM; c.lineWidth=8; c.lineCap="round"; c.beginPath(); c.moveTo(250,580); c.bezierCurveTo(420,562,660,596,830,572); c.stroke();
+  c.fillStyle=GIZ2; c.font=`500 62px ${mao}`; c.fillText("Certificamos que",W/2,690);
+  const nm=encaixar(c,nome.toUpperCase(),{familia:osw,peso:700,max:104,min:56,largura:880,linhasMax:2});
+  c.fillStyle=GIZ; c.font=`700 ${nm.tam}px ${osw}`;
+  let y=nm.linhas.length===1?850:830; nm.linhas.forEach((l,i)=>c.fillText(l,W/2,y+i*nm.tam*1.08));
+  const yLinha=y+(nm.linhas.length-1)*nm.tam*1.08+34;
+  c.strokeStyle="rgba(242,240,234,.5)"; c.lineWidth=2; c.beginPath(); c.moveTo(160,yLinha); c.lineTo(W-160,yLinha); c.stroke();
+  c.fillStyle=GIZ2; c.font=`500 60px ${mao}`; c.fillText("concluiu",W/2,1090);
+  c.fillStyle=VERM; c.font=`700 88px ${osw}`; c.fillText(`${n} AULAS DE`,W/2,1195);
+  const mt=encaixar(c,m.nome.toUpperCase(),{familia:giz,peso:700,max:96,min:52,largura:860,linhasMax:2});
+  c.fillStyle=GIZ; c.font=`700 ${mt.tam}px ${giz}`; mt.linhas.forEach((l,i)=>c.fillText(l,W/2,1300+i*mt.tam*1.05));
+  const yCurso=1300+(mt.linhas.length-1)*mt.tam*1.05+80;
+  c.fillStyle=GIZ2; c.font=`500 52px ${mao}`; c.fillText("no curso livre do Professor da Fiel",W/2,yCurso);
+  const data=new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"});
+  c.fillText(`São Paulo, ${data}`,W/2,yCurso+70);
+  c.textAlign="left"; c.fillStyle=GIZ; c.font=`700 100px ${mao}`; c.fillText("Prof. Aleh",150,1596);
+  c.strokeStyle=GIZ; c.lineWidth=2; c.beginPath(); c.moveTo(140,1616); c.lineTo(520,1616); c.stroke();
+  c.fillStyle=GIZ2; c.font=`500 30px ${osw}`; c.fillText("O PROFESSOR DA FIEL",150,1656);
+  c.save(); c.translate(860,1585); c.rotate(-.2); c.strokeStyle=VERM; c.fillStyle=VERM; c.lineWidth=6;
+  c.beginPath(); c.arc(0,0,104,0,Math.PI*2); c.stroke(); c.lineWidth=2.5; c.beginPath(); c.arc(0,0,89,0,Math.PI*2); c.stroke();
+  c.textAlign="center"; c.font=`700 31px ${giz}`; c.fillText("APROVADO",0,12);
+  c.font=`700 16px ${osw}`; c.fillText("PROFESSOR DA FIEL",0,-36); c.font=`700 19px ${osw}`; c.fillText(`★ ${new Date().getFullYear()} ★`,0,50); c.restore();
+  c.textAlign="center"; c.fillStyle=GIZ; c.font=`700 40px ${osw}`; c.fillText("@alehcamisa7",W/2,1716);
+  c.fillStyle=GIZ2; c.font=`500 40px ${mao}`; c.fillText("posta e me marca que eu repasso",W/2,1762);
+}
+async function abrirCertificado(m,auto){
+  const p=progresso(m); if(!p.liberado) return;
+  await carregarFontes();
+  const nomeSalvo=LS.get("pdf_nome","");
+  const f=abrirModal(`<h2>${auto?"Certificado liberado!":"Seu certificado"}</h2>
+    <p class="sub">Você fez ${p.feitas} das ${p.total} aulas de ${esc(m.nome)}. 🎓 Como você quer seu nome no certificado?</p>
+    <label class="campo"><span>seu nome <b id="cont">0/${MAX_NOME}</b></span><input id="nome-cert" type="text" maxlength="${MAX_NOME}" autocomplete="name" placeholder="Ex.: Maria Eduarda Silva" value="${esc(nomeSalvo)}"></label>
+    <canvas class="previa" id="previa-cert" aria-label="Prévia do certificado"></canvas>
+    <div class="opcoes">
+      ${navigator.canShare?'<button class="btn cheio" type="button" id="cert-stories">Postar nos Stories</button>':""}
+      <a class="btn ${navigator.canShare?"":"cheio"}" id="cert-zap" target="_blank" rel="noopener">Mandar no WhatsApp</a>
+      <button class="btn" type="button" id="cert-baixar">Baixar imagem</button>
+      <button class="btn" type="button" data-fechar>Agora não</button>
+    </div>`);
+  const inp=f.querySelector("#nome-cert"), cv=f.querySelector("#previa-cert"), cont=f.querySelector("#cont"), z=f.querySelector("#cert-zap");
+  const nomeAtual=()=>inp.value.replace(/\s+/g," ").trim()||"Aluno da Fiel";
+  const redesenhar=()=>{ cont.textContent=`${inp.value.length}/${MAX_NOME}`; desenharCertificado(cv,nomeAtual(),m,p.feitas);
+    z.href=zap(`Tirei meu certificado de ${m.nome} com o Professor da Fiel 🎓 Bora estudar também: ${SITE}`); };
+  let t; inp.addEventListener("input",()=>{ clearTimeout(t); t=setTimeout(redesenhar,120); });
+  redesenhar();
+  const salvarNome=()=>LS.set("pdf_nome",inp.value.replace(/\s+/g," ").trim());
+  const gerarArquivo=()=>new Promise(r=>cv.toBlob(b=>r(new File([b],`certificado-${m.slug}.png`,{type:"image/png"})),"image/png"));
+  f.querySelector("#cert-baixar").onclick=async()=>{ salvarNome(); const arq=await gerarArquivo(); const u=URL.createObjectURL(arq);
+    const l=document.createElement("a"); l.href=u; l.download=arq.name; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); };
+  z.addEventListener("click",salvarNome);
+  const st=f.querySelector("#cert-stories");
+  if(st) st.onclick=async()=>{ salvarNome(); const arq=await gerarArquivo();
+    if(navigator.canShare({files:[arq]})){ try{ await navigator.share({files:[arq],text:`Certificado de ${m.nome} 🎓 @alehcamisa7`}); }catch(e){} }
+    else f.querySelector("#cert-baixar").click(); };
+}
 
 /* ================= TELAS ================= */
 function telaInicio(){
@@ -409,7 +677,7 @@ function telaInicio(){
     const q=norm(inp.value);
     if(q){
       const achou=AULAS.filter(a=>norm(a.titulo+" "+a.materia+" "+a.legenda).includes(q));
-      res.innerHTML=`<section class="bloco"><div class="titulo-bloco"><h2>Busca</h2><span class="nota">${achou.length} ${achou.length===1?"aula":"aulas"}</span></div>
+      res.innerHTML=`<section class="bloco"><div class="titulo-bloco"><h2>Busca</h2><span class="nota">${plural(achou.length,"aula","aulas")}</span></div>
         ${achou.length?`<ul class="aulas">${achou.map(a=>itemAula(a,true)).join("")}</ul>`:`<p class="vazio">Nenhuma aula com esse nome. Tenta outra palavra, tipo "Vai Corinthians" ou "SAFiel".</p>`}</section>`;
       return;
     }
@@ -419,46 +687,71 @@ function telaInicio(){
       <div class="materias">${GRADE.map((m,i)=>`
         <a class="materia${i===0?" destaque":""}" href="#/materia/${m.slug}">
           <span class="topo-card">${iconeMateria(m.nome)}<span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}</span>
-          <span class="qtd"><b>${m.aulas.length}</b>${m.aulas.length===1?"aula":"aulas"}</span>
+          <span><span class="qtd"><b>${m.aulas.length}</b>${m.aulas.length===1?"aula":"aulas"}</span>${barra(m)}</span>
         </a>`).join("")}
       </div>
     </section>
     ${ELETIVAS.length?`<section class="bloco">
       <div class="titulo-bloco"><h2>Eletivas</h2><span class="nota">matérias novas, pra quem quer ir além</span></div>
-      <ul class="eletivas">${ELETIVAS.map(m=>`<li><a href="#/materia/${m.slug}">${iconeMateria(m.nome)}
-        <span><span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}</span>
-        <span class="qtd">${m.aulas.length} ${m.aulas.length===1?"aula":"aulas"}</span></a></li>`).join("")}</ul>
+      <ul class="eletivas">${ELETIVAS.map(m=>{const p=progresso(m);return `<li><a href="#/materia/${m.slug}">${iconeMateria(m.nome)}
+        <span><span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}<span class="cert-emb">certificado em breve</span></span>
+        <span class="qtd">${p.feitas?`${p.feitas}/`:""}${plural(p.total,"aula","aulas")}</span></a></li>`}).join("")}</ul>
     </section>`:""}
     <section class="bloco">${convite()}</section>
+    <section class="bloco">${turma()}</section>
     <section class="bloco">
       <div class="titulo-bloco"><h2>Saiu agora</h2><span class="nota">as últimas aulas</span></div>
       <ul class="aulas">${recentes.map(a=>itemAula(a,true)).join("")}</ul>
-    </section>`;
+    </section>
+    <section class="bloco" id="parceiros">${parceiros(PARCEIROS)}</section>`;
   };
   inp.addEventListener("input",desenhar);
   desenhar();
 }
 
+function faixaCert(m){
+  const p=progresso(m);
+  if(!p.elegivel) return `<div class="faixa-cert embreve"><p><b>Certificado em breve.</b> Libera quando a matéria chegar a ${MIN_AULAS_CERT} aulas. Por enquanto, bora estudar!</p></div>`;
+  return `<div class="faixa-cert"><p>${p.liberado?`<b>Certificado liberado!</b> Você fez ${p.feitas} das ${p.total} aulas.`:`<b>Essa matéria dá certificado:</b> conclua ${p.meta} das ${p.total} aulas. ${p.faltam===1?"Falta":"Faltam"} ${p.faltam}.`}</p>
+    ${p.liberado?`<button class="btn cheio" type="button" id="emitir-cert">Emitir meu certificado</button>`:barra(m)}</div>`;
+}
 function telaMateria(s){
   const m=MATERIAS.find(x=>x.slug===s); if(!m) return naoAchou();
+  const parc=PARCEIROS.filter(p=>p.materia&&norm(m.nome).includes(p.materia));
   app.innerHTML=`
   <a class="voltar" href="#/">← todas as matérias</a>
   <header class="cab-materia">${iconeMateria(m.nome)}<h1>${esc(m.nome)}</h1>
-    ${m.desc?`<p>${esc(m.desc)}</p>`:`<span class="nota">${m.aulas.length} ${m.aulas.length===1?"aula":"aulas"}, na ordem</span>`}</header>
+    ${m.desc?`<p>${esc(m.desc)}</p>`:`<span class="nota">${plural(m.aulas.length,"aula","aulas")}, na ordem</span>`}</header>
+  ${faixaCert(m)}
   <ul class="aulas">${m.aulas.map(a=>itemAula(a,false)).join("")}</ul>
+  ${parc.length?`<section class="bloco">${parceiros(parc)}</section>`:""}
   ${ehCorinthianes(m)?`<section class="bloco">${convite()}</section>`:""}`;
+  document.getElementById("emitir-cert")?.addEventListener("click",()=>abrirCertificado(m,false));
 }
 
+function quadroProgresso(m){
+  const p=progresso(m);
+  if(!p.elegivel) return `<div class="quadro prog-aula"><span class="rot">seu progresso</span><p class="linha">${p.feitas} de ${p.total} aulas feitas. O certificado dessa matéria sai em breve.</p></div>`;
+  return `<div class="quadro prog-aula"><span class="rot">seu progresso</span>
+    <p class="linha">${p.liberado?`Certificado liberado! Você fez ${p.feitas} das ${p.total} aulas.`:`${p.faltam===1?"Falta":"Faltam"} ${plural(p.faltam,"aula","aulas")} pro seu certificado de ${esc(m.nome)}.`}</p>
+    ${barra(m)}${p.liberado?`<button class="btn cheio" type="button" id="emitir-cert">Emitir meu certificado</button>`:""}</div>`;
+}
+function postitFeita(a){
+  const ok=feita(a.cod);
+  return `<button class="postit${ok?" feito":""}" id="marcar-feita" type="button" aria-pressed="${ok}">
+    <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+    <span class="txt"><span class="dica">${ok?"clique pra desmarcar":"risca do caderno"}</span><span class="acao">${ok?"Aula feita":"Fiz essa aula"}</span></span></button>`;
+}
 function telaAula(cod){
   const a=AULAS.find(x=>x.cod===cod); if(!a) return naoAchou();
   const m=MATERIAS.find(x=>x.slug===a.mslug), i=m.aulas.indexOf(a), ant=m.aulas[i-1], prox=m.aulas[i+1];
-  const ultima=m.aulas[m.aulas.length-1].num, parte=rotuloParte(a);
-  const linkIG=`https://www.instagram.com/p/${a.cod}/`;
+  const ultima=m.aulas[m.aulas.length-1].num, parte=rotuloParte(a), linkIG=`https://www.instagram.com/p/${a.cod}/`;
+  const ref=x=>`aula ${dois(x.num)}${x.parte?`, ${esc(rotuloParte(x).toLowerCase())}`:""}`;
   app.innerHTML=`
   <a class="voltar" href="#/materia/${m.slug}">← ${esc(m.nome)}</a>
   <header class="cab-aula">
     <h1>${a.nova?'<span class="selo">nova</span>':""}${esc(a.titulo)}</h1>
-    <span class="num-aula">aula ${dois(a.num)}${parte?`, ${esc(parte.toLowerCase())}`:""} de ${dois(ultima)}</span>
+    <span class="num-aula">aula ${dois(a.num)}${parte?`, ${esc(parte.toLowerCase())}`:""} de ${dois(ultima)}</span><span id="carimbo">${feita(a.cod)?'<span class="carimbo">FEITA ✓</span>':""}</span>
   </header>
   <div class="sala">
     <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
@@ -466,31 +759,44 @@ function telaAula(cod){
       <a class="postit vermelho" href="${linkIG}" target="_blank" rel="noopener">
         <span class="bola"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
         <span class="txt"><span class="dica">abre no app</span><span class="acao">Assistir no Insta</span></span></a>
+      <a class="postit" href="${linkIG}" target="_blank" rel="noopener">
+        <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H10l-5 4v-4H4z"/></svg></span>
+        <span class="txt"><span class="dica">o professor responde lá</span><span class="acao">Comentar</span></span></a>
       <button class="postit" id="compartilhar" type="button">
         <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v7h14v-7"/></svg></span>
-        <span class="txt"><span class="dica" id="compartilhar-dica">manda pro amigo</span><span class="acao">Compartilhar</span></span></button>
+        <span class="txt"><span class="dica">manda pro amigo</span><span class="acao">Compartilhar</span></span></button>
+      ${postitFeita(a)}
     </div>
     <div class="lado">
       ${a.legenda?`<div class="quadro"><span class="rot">legenda do post</span><p>${legendaHTML(a.legenda)}</p></div>`:""}
       ${m.desc?`<div class="quadro"><span class="rot">sobre a matéria</span><p>${esc(m.desc)}</p></div>`:""}
+      <div id="quadro-prog">${quadroProgresso(m)}</div>
     </div>
+    <nav class="navega" aria-label="Navegar entre aulas">
+      ${ant?`<a class="ficha" href="#/aula/${ant.cod}"><span class="rot">← revisar a anterior</span><span class="alvo">${esc(ant.titulo)}</span><span class="ref">${ref(ant)}</span></a>`:`<span class="ficha inativa"><span class="rot">primeira aula</span><span class="alvo">Você está no começo</span></span>`}
+      ${prox?`<a class="ficha prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span><span class="alvo">${esc(prox.titulo)}</span></span><span class="ref">${ref(prox)}</span></a>`:`<a class="ficha prox" href="#/"><span class="rot">matéria concluída ✓</span><span><span class="alvo">Escolher a próxima matéria</span></span><span class="ref">tá voando, hein</span></a>`}
+    </nav>
   </div>
-  <nav class="navega" aria-label="Navegar entre aulas">
-    ${ant?`<a class="ficha" href="#/aula/${ant.cod}"><span class="rot">← revisar a anterior</span><span class="alvo">${esc(ant.titulo)}</span><span class="ref">aula ${dois(ant.num)}${ant.parte?`, ${esc(rotuloParte(ant).toLowerCase())}`:""}</span></a>`:`<span class="ficha inativa"><span class="rot">primeira aula</span><span class="alvo">Você está no começo</span></span>`}
-    ${prox?`<a class="ficha prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span><span class="alvo">${esc(prox.titulo)}</span></span><span class="ref">aula ${dois(prox.num)}${prox.parte?`, ${esc(rotuloParte(prox).toLowerCase())}`:""}</span></a>`:`<a class="ficha prox" href="#/"><span class="rot">matéria concluída ✓</span><span><span class="alvo">Escolher a próxima matéria</span></span><span class="ref">tá voando, hein</span></a>`}
-  </nav>
   ${ehCorinthianes(m)?`<section class="bloco" style="padding-bottom:0">${convite()}</section>`:""}
   <section class="bloco">
-    <div class="titulo-bloco"><h2>Todas de ${esc(m.nome)}</h2><span class="nota">${m.aulas.length} ${m.aulas.length===1?"aula":"aulas"}</span></div>
-    <ul class="aulas">${m.aulas.map(x=>itemAula(x,false,x===a)).join("")}</ul>
+    <div class="titulo-bloco"><h2>Todas de ${esc(m.nome)}</h2><span class="nota">${plural(m.aulas.length,"aula","aulas")}</span></div>
+    <ul class="aulas" id="lista-materia">${m.aulas.map(x=>itemAula(x,false,x===a)).join("")}</ul>
   </section>`;
-  document.getElementById("compartilhar").onclick=async()=>{
-    const url=location.href, d=document.getElementById("compartilhar-dica");
-    try{
-      if(navigator.share) await navigator.share({title:a.titulo,text:`${m.nome}: ${a.titulo}`,url});
-      else{await navigator.clipboard.writeText(url);d.textContent="link copiado!";setTimeout(()=>d.textContent="manda pro amigo",2000);}
-    }catch(e){}
-  };
+  document.getElementById("compartilhar").onclick=()=>menuCompartilhar(a,m);
+  const ligarEmitir=()=>document.getElementById("emitir-cert")?.addEventListener("click",()=>abrirCertificado(m,false));
+  ligarEmitir();
+  const ligarFeita=()=>document.getElementById("marcar-feita").addEventListener("click",()=>{
+    const antes=progresso(m).liberado;
+    alternarFeita(a.cod);
+    const agora=feita(a.cod), depois=progresso(m).liberado;
+    document.getElementById("marcar-feita").outerHTML=postitFeita(a); ligarFeita();
+    document.getElementById("carimbo").innerHTML=agora?'<span class="carimbo">FEITA ✓</span>':"";
+    document.getElementById("quadro-prog").innerHTML=quadroProgresso(m); ligarEmitir();
+    document.getElementById("lista-materia").innerHTML=m.aulas.map(x=>itemAula(x,false,x===a)).join("");
+    if(agora&&!antes&&depois) abrirCertificado(m,true);
+    else if(agora) aviso(`Boa! Conta lá no post o que achou 👀 <a href="${linkIG}" target="_blank" rel="noopener">Comentar</a>`);
+  });
+  ligarFeita();
 }
 
 function telaParticipe(){
@@ -505,11 +811,13 @@ function telaParticipe(){
 function naoAchou(){ app.innerHTML=`<p class="vazio">Essa página não existe mais. <a href="#/">Voltar para as matérias</a>.</p>`; }
 
 function rota(){
+  fecharModal();
   const [,tipo,id]=(location.hash||"#/").split("/");
   if(tipo==="materia") telaMateria(id);
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
   else if(tipo==="participe") telaParticipe();
   else telaInicio();
+  rodapeTurma();
   window.scrollTo(0,0);
   const h1=app.querySelector("h1");
   document.title=(tipo&&h1?h1.textContent.replace(/^nova/,"")+" · ":"")+"Aulas do Professor da Fiel";
