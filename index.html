@@ -310,7 +310,18 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .menu button{flex:none;font:inherit;font-weight:500;font-size:15px;color:var(--giz-2);background:transparent;border:1.5px solid rgba(242,240,234,.25);border-radius:999px;padding:6px 14px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
 .menu button:hover{color:var(--giz);border-color:var(--giz)}
 .menu button.ativo{color:var(--giz);border-color:var(--vermelho);background:rgba(216,38,46,.16)}
-section[id^="sec-"]{scroll-margin-top:70px}
+[id^="sec-"]{scroll-margin-top:70px}
+.submenu{position:fixed;z-index:40;display:grid;gap:4px;min-width:250px;padding:8px;background:var(--lousa);border:1.5px solid var(--giz);border-radius:8px;box-shadow:0 14px 30px rgba(0,0,0,.6)}
+.submenu[hidden]{display:none}
+.submenu button{display:block;text-align:left;font:inherit;color:var(--giz);background:transparent;border:0;border-radius:5px;padding:9px 12px;cursor:pointer}
+.submenu button:hover,.submenu button:focus-visible{background:rgba(242,240,234,.08)}
+.submenu b{display:block;font-weight:500;font-size:17px;line-height:1.1}
+.submenu small{display:block;font-family:var(--mao);font-size:18px;color:var(--giz-2);line-height:1.1}
+.submenu button.ativo b{color:var(--giz);text-decoration:underline;text-decoration-color:var(--vermelho);text-underline-offset:4px}
+.subtitulo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+.subtitulo h3{margin:0;font-weight:700;font-size:clamp(20px,3.6vw,26px);text-transform:uppercase;line-height:1;display:flex;align-items:center;gap:10px}
+.subtitulo h3::before{content:"";width:18px;height:3px;background:var(--vermelho);border-radius:2px}
+.subsec + .subsec{margin-top:36px}
 /* boas-vindas */
 .passos{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px}
 .passos li{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px dashed rgba(242,240,234,.3);border-radius:var(--r)}
@@ -324,6 +335,7 @@ section[id^="sec-"]{scroll-margin-top:70px}
 @media (max-width:760px){
   .passos{grid-template-columns:1fr;gap:8px}
   .menu button{font-size:14px;padding:6px 12px}
+  .subtitulo .nota{display:none}
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
   .tela{grid-row:auto}
   .sala .navega{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -343,12 +355,15 @@ section[id^="sec-"]{scroll-margin-top:70px}
     <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">Seguir<span class="long">&nbsp;no Instagram</span></a>
   </header>
   <nav class="menu" id="menu" aria-label="Seções da página inicial">
-    <button type="button" data-sec="sec-obrigatorias">Obrigatórias</button>
-    <button type="button" data-sec="sec-eletivas">Eletivas</button>
+    <button type="button" data-grupo="sec-materias" id="btn-materias" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-materias">Matérias <span aria-hidden="true">▾</span></button>
     <button type="button" data-sec="sec-ultimas">Últimas aulas</button>
     <button type="button" data-sec="sec-turma">Faça parte da turma</button>
-    <button type="button" data-sec="sec-beneficios">Benefícios</button>
+    <button type="button" data-sec="sec-beneficios">Benefícios do Aluno</button>
   </nav>
+  <div class="submenu" id="submenu-materias" hidden>
+    <button type="button" data-sec="sec-obrigatorias"><b>Obrigatórias</b><small>a grade principal do curso</small></button>
+    <button type="button" data-sec="sec-eletivas"><b>Eletivas</b><small>matérias novas, pra ir além</small></button>
+  </div>
   <main id="app" aria-live="polite"></main>
   <footer>
     <p class="frase">O Professor explica.</p>
@@ -705,8 +720,10 @@ function botaoInicio(primeira){
   return primeira?`<a class="btn cheio" href="#/aula/${primeira.cod}">Começar pela Aula 1</a>`:"";
 }
 let secPendente=null, observador=null, travaMenu=0;
+const grupoDe=id=>(id==="sec-obrigatorias"||id==="sec-eletivas")?"sec-materias":id;
 function irPara(id){
-  marcarMenu(id); travaMenu=Date.now()+1000;
+  fecharSubmenu();
+  marcarMenu(grupoDe(id),id); travaMenu=Date.now()+1000;
   const el=document.getElementById(id);
   if(el){ el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
   const b=document.getElementById("busca");
@@ -717,7 +734,26 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("[data-sec]"); if(!b) return;
   e.preventDefault(); irPara(b.dataset.sec);
 });
-function marcarMenu(id){ document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("ativo",b.dataset.sec===id)); }
+function marcarMenu(id,sub){
+  document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("ativo",!!id&&(b.dataset.sec===id||b.dataset.grupo===id)));
+  document.querySelectorAll("#submenu-materias button").forEach(b=>b.classList.toggle("ativo",!!sub&&b.dataset.sec===sub));
+}
+const btnMaterias=document.getElementById("btn-materias"), submenu=document.getElementById("submenu-materias");
+function abrirSubmenu(){
+  const r=btnMaterias.getBoundingClientRect();
+  submenu.hidden=false;
+  const w=submenu.offsetWidth;
+  submenu.style.top=`${r.bottom+8}px`;
+  submenu.style.left=`${Math.max(12,Math.min(r.left,window.innerWidth-w-12))}px`;
+  btnMaterias.setAttribute("aria-expanded","true");
+  submenu.querySelector("button")?.focus({preventScroll:true});
+}
+function fecharSubmenu(){ if(submenu.hidden) return; submenu.hidden=true; btnMaterias.setAttribute("aria-expanded","false"); }
+btnMaterias.addEventListener("click",e=>{ e.stopPropagation(); submenu.hidden?abrirSubmenu():fecharSubmenu(); });
+document.addEventListener("click",e=>{ if(!submenu.hidden&&!e.target.closest("#submenu-materias")&&!e.target.closest("#btn-materias")) fecharSubmenu(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharSubmenu(); });
+window.addEventListener("resize",fecharSubmenu);
+document.getElementById("menu").addEventListener("scroll",fecharSubmenu,{passive:true});
 function observarSecoes(){
   observador?.disconnect(); if(Date.now()>=travaMenu) marcarMenu(null);
   if(!("IntersectionObserver" in window)) return;
@@ -727,8 +763,10 @@ function observarSecoes(){
     if(Date.now()<travaMenu) return;
     let melhor=null,v=0; visiveis.forEach((r,id)=>{ if(r>v){v=r;melhor=id;} });
     if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-60){ const ss=[...document.querySelectorAll('section[id^="sec-"]')]; if(ss.length) melhor=ss[ss.length-1].id; }
-    marcarMenu(melhor);
-    if(melhor){ document.querySelector(`#menu button[data-sec="${melhor}"]`)?.scrollIntoView({block:"nearest",inline:"nearest"}); }
+    let sub=null;
+    if(melhor==="sec-materias"){ const el=document.getElementById("sec-eletivas"); sub=el&&el.getBoundingClientRect().top<window.innerHeight*.45?"sec-eletivas":"sec-obrigatorias"; }
+    marcarMenu(melhor,sub);
+    if(melhor){ document.querySelector(`#menu button[data-sec="${melhor}"],#menu button[data-grupo="${melhor}"]`)?.scrollIntoView({block:"nearest",inline:"nearest"}); }
   },{rootMargin:"-70px 0px -45% 0px",threshold:[0,.1,.3,.6]});
   document.querySelectorAll('section[id^="sec-"]').forEach(s=>observador.observe(s));
 }
@@ -762,21 +800,24 @@ function telaInicio(){
       return;
     }
     res.innerHTML=`
-    <section class="bloco" id="sec-obrigatorias">
-      <div class="titulo-bloco"><h2>Obrigatórias</h2><span class="nota">a grade principal do curso</span></div>
+    <section class="bloco" id="sec-materias">
+      <div class="titulo-bloco"><h2>Matérias</h2><span class="nota">escolha por onde começar</span></div>
+      <div class="subsec" id="sec-obrigatorias">
+      <div class="subtitulo"><h3>Obrigatórias</h3><span class="nota">a grade principal do curso</span></div>
       <div class="materias">${GRADE.map((m,i)=>`
         <a class="materia${i===0?" destaque":""}" href="#/materia/${m.slug}">
           <span class="topo-card">${iconeMateria(m.nome)}<span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}</span>
           <span><span class="qtd"><b>${m.aulas.length}</b>${m.aulas.length===1?"aula":"aulas"}</span>${barra(m)}</span>
         </a>`).join("")}
       </div>
-    </section>
-    ${ELETIVAS.length?`<section class="bloco" id="sec-eletivas">
-      <div class="titulo-bloco"><h2>Eletivas</h2><span class="nota">matérias novas, pra quem quer ir além</span></div>
+      </div>
+    ${ELETIVAS.length?`<div class="subsec" id="sec-eletivas">
+      <div class="subtitulo"><h3>Eletivas</h3><span class="nota">matérias novas, pra quem quer ir além</span></div>
       <ul class="eletivas">${ELETIVAS.map(m=>{const p=progresso(m);return `<li><a href="#/materia/${m.slug}">${iconeMateria(m.nome)}
         <span><span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}<span class="cert-emb">certificado em breve</span></span>
         <span class="qtd">${p.feitas?`${p.feitas}/`:""}${plural(p.total,"aula","aulas")}</span></a></li>`}).join("")}</ul>
-    </section>`:""}
+    </div>`:""}
+    </section>
     <section class="bloco">${convite()}</section>
     <section class="bloco" id="sec-turma">${turma()}</section>
     <section class="bloco" id="sec-ultimas">
@@ -893,7 +934,7 @@ function telaParticipe(){
 function naoAchou(){ app.innerHTML=`<p class="vazio">Essa página não existe mais. <a href="#/">Voltar para as matérias</a>.</p>`; }
 
 function rota(){
-  fecharModal(); document.querySelector(".aviso")?.remove();
+  fecharModal(); document.querySelector(".aviso")?.remove(); fecharSubmenu();
   const [,tipo,id]=(location.hash||"#/").split("/");
   if(tipo==="materia") telaMateria(id);
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
