@@ -521,7 +521,7 @@ const CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.
 /* ================= DADOS ================= */
 function montar(linhas, descricoes){
   const hoje=new Date(); hoje.setHours(0,0,0,0);
-  const desc=new Map(descricoes.map(([m,d])=>[slug(m),String(d||"").trim()]));
+  const desc=new Map(descricoes.map(([m,d,nc,fr])=>[slug(m),{d:String(d||"").trim(),nc:String(nc||"").trim(),fr:String(fr||"").trim()}]));
   AULAS=[];
   linhas.forEach((l,i)=>{
     const [materia,num,parte,titulo,legenda,link,data]=l.map(x=>String(x??"").trim());
@@ -532,7 +532,7 @@ function montar(linhas, descricoes){
   });
   const mapa=new Map();
   AULAS.forEach(a=>{
-    if(!mapa.has(a.mslug)) mapa.set(a.mslug,{nome:a.materia,slug:a.mslug,aulas:[],primeira:a.ordem,desc:desc.get(a.mslug)||""});
+    if(!mapa.has(a.mslug)){ const x=desc.get(a.mslug)||{}; mapa.set(a.mslug,{nome:a.materia,slug:a.mslug,aulas:[],primeira:a.ordem,desc:x.d||"",certNome:x.nc||"",certFrase:x.fr||""}); }
     mapa.get(a.mslug).aulas.push(a);
   });
   MATERIAS=[...mapa.values()];
@@ -573,8 +573,9 @@ async function carregar(){
     const cols=["materia","n","parte","titulo","legenda","instagram","data"].map(idx);
     if(cols[0]<0||cols[3]<0||cols[5]<0) throw new Error("colunas");
     const linhas=aulas.slice(1).map(r=>cols.map(c=>c>=0?r[c]:""));
-    const cm=(mats[0]||[]).map(norm), iM=cm.findIndex(h=>h.startsWith("materia")), iD=cm.findIndex(h=>h.startsWith("descri"));
-    montar(linhas, iM>=0&&iD>=0?mats.slice(1).map(r=>[r[iM],r[iD]]):[]);
+    const cm=(mats[0]||[]).map(norm), ic=k=>cm.findIndex(h=>h.startsWith(k));
+    const iM=ic("materia"), iD=ic("descri"), iNC=ic("nome no cert"), iFr=ic("frase");
+    montar(linhas, iM>=0?mats.slice(1).map(r=>[r[iM],iD>=0?r[iD]:"",iNC>=0?r[iNC]:"",iFr>=0?r[iFr]:""]):[]);
     if(!AULAS.length) throw new Error("vazia");
   }catch(e){ console.warn("Planilha indisponível, usando cópia de segurança:",e); montar(RESERVA.aulas,RESERVA.materias); }
   await promessaLives;
@@ -699,6 +700,7 @@ function encaixar(ctx,texto,{familia,peso,max,min,largura,linhasMax}){
 async function carregarFontes(){
   try{ await Promise.all(["700 80px 'Cabin Sketch'","700 80px Oswald","500 80px Oswald","700 80px Caveat","500 80px Caveat"].map(f=>document.fonts.load(f))); }catch(e){}
 }
+const FRASE_PADRAO="riscou as aulas do caderno e agora domina o assunto.";
 function desenharCertificado(cv,nome,m,n){
   const W=1080,H=1920; cv.width=W; cv.height=H; const c=cv.getContext("2d");
   const GIZ="#f2f0ea",GIZ2="#b9b8b2",VERM="#d8262e";
@@ -709,33 +711,46 @@ function desenharCertificado(cv,nome,m,n){
   for(let x=0;x<W;x+=60){ c.fillStyle="#000"; c.fillRect(x,0,30,34); c.fillStyle=GIZ; c.fillRect(x+30,0,30,34); }
   c.strokeStyle=GIZ; c.lineWidth=4; c.strokeRect(64,96,W-128,H-200); c.lineWidth=1.5; c.strokeRect(82,114,W-164,H-236);
   c.textAlign="center"; c.textBaseline="alphabetic";
-  c.fillStyle=GIZ2; c.font=`700 40px ${osw}`; c.fillText("PROFESSOR DA FIEL",W/2,230);
-  c.fillStyle=GIZ; c.font=`700 138px ${giz}`; c.fillText("CERTIFICADO",W/2,415);
-  c.font=`700 96px ${giz}`; c.fillText("DE CONCLUSÃO",W/2,540);
-  c.strokeStyle=VERM; c.lineWidth=8; c.lineCap="round"; c.beginPath(); c.moveTo(250,580); c.bezierCurveTo(420,562,660,596,830,572); c.stroke();
-  c.fillStyle=GIZ2; c.font=`500 62px ${mao}`; c.fillText("Certificamos que",W/2,690);
-  const nm=encaixar(c,nome.toUpperCase(),{familia:osw,peso:700,max:104,min:56,largura:880,linhasMax:2});
+  c.fillStyle=GIZ2; c.font=`700 36px ${osw}`; c.fillText("PROFESSOR DA FIEL",W/2,205);
+  c.fillStyle=GIZ; c.font=`700 128px ${giz}`; c.fillText("CERTIFICADO",W/2,370);
+  c.font=`700 88px ${giz}`; c.fillText("DE CONCLUSÃO",W/2,480);
+  c.strokeStyle=VERM; c.lineWidth=8; c.lineCap="round"; c.beginPath(); c.moveTo(260,515); c.bezierCurveTo(420,498,660,530,820,508); c.stroke();
+  c.fillStyle=GIZ2; c.font=`500 56px ${mao}`; c.fillText("O Professor da Fiel certifica que",W/2,610);
+  const nm=encaixar(c,nome.toUpperCase(),{familia:osw,peso:700,max:100,min:56,largura:880,linhasMax:2});
   c.fillStyle=GIZ; c.font=`700 ${nm.tam}px ${osw}`;
-  let y=nm.linhas.length===1?850:830; nm.linhas.forEach((l,i)=>c.fillText(l,W/2,y+i*nm.tam*1.08));
-  const yLinha=y+(nm.linhas.length-1)*nm.tam*1.08+34;
+  const yNome=640+nm.tam*.95; nm.linhas.forEach((l,i)=>c.fillText(l,W/2,yNome+i*nm.tam*1.08));
+  const yLinha=yNome+(nm.linhas.length-1)*nm.tam*1.08+32;
   c.strokeStyle="rgba(242,240,234,.5)"; c.lineWidth=2; c.beginPath(); c.moveTo(160,yLinha); c.lineTo(W-160,yLinha); c.stroke();
-  c.fillStyle=GIZ2; c.font=`500 60px ${mao}`; c.fillText("concluiu",W/2,1090);
-  c.fillStyle=VERM; c.font=`700 88px ${osw}`; c.fillText(`${n} AULAS DE`,W/2,1195);
-  const mt=encaixar(c,m.nome.toUpperCase(),{familia:giz,peso:700,max:96,min:52,largura:860,linhasMax:2});
-  c.fillStyle=GIZ; c.font=`700 ${mt.tam}px ${giz}`; mt.linhas.forEach((l,i)=>c.fillText(l,W/2,1300+i*mt.tam*1.05));
-  const yCurso=1300+(mt.linhas.length-1)*mt.tam*1.05+80;
-  c.fillStyle=GIZ2; c.font=`500 52px ${mao}`; c.fillText("no curso livre do Professor da Fiel",W/2,yCurso);
+  /* bloco central: flui e encolhe se precisar */
+  const materia=(m.certNome||m.nome).toUpperCase();
+  let frase=(m.certFrase||FRASE_PADRAO).trim(); frase=frase.charAt(0).toLowerCase()+frase.slice(1);
+  const topo=yLinha+44, base=1430;
+  let plano=null;
+  for(let k=1;k>=0.62;k-=0.04){
+    const blocos=[], add=(txts,fonte,tam,cor,gap,alt=1.12)=>blocos.push({txts,fonte,tam,cor,gap,alt});
+    add(["fez as"],`500 ${54*k}px ${mao}`,54*k,GIZ2,0);
+    add([`${n} ${n===1?"AULA":"AULAS"} DE`],`700 ${80*k}px ${osw}`,80*k,VERM,4*k);
+    const mt=encaixar(c,materia,{familia:giz,peso:700,max:Math.round(88*k),min:Math.round(46*k),largura:860,linhasMax:2});
+    add(mt.linhas,`700 ${mt.tam}px ${giz}`,mt.tam,GIZ,6*k,1.05);
+    c.font=`500 ${50*k}px ${mao}`; add(quebrarLinhas(c,"e "+frase,820).slice(0,3),`500 ${50*k}px ${mao}`,50*k,GIZ,26*k,1.18);
+    add(["TÁ LIBERADO PRA EXPLICAR PRA QUALQUER UM","POR QUE SER CORINTHIANO EXPLICA TUDO."],`500 ${33*k}px ${osw}`,33*k,GIZ2,34*k,1.35);
+    const total=blocos.reduce((t,b)=>t+b.gap+b.txts.length*b.tam*b.alt,0);
+    plano={blocos,total}; if(topo+total<=base) break;
+  }
+  let y=topo+Math.min(50,Math.max(0,(base-topo-plano.total)/2));
+  plano.blocos.forEach(b=>{ y+=b.gap; c.font=b.fonte; c.fillStyle=b.cor; b.txts.forEach(t=>{ y+=b.tam*b.alt; c.fillText(t,W/2,y-b.tam*(b.alt-1)); }); });
+  /* assinatura, data e carimbo */
+  c.textAlign="left"; c.fillStyle=GIZ; c.font=`700 96px ${mao}`; c.fillText("Prof. Aleh",150,1560);
+  c.strokeStyle=GIZ; c.lineWidth=2; c.beginPath(); c.moveTo(140,1580); c.lineTo(520,1580); c.stroke();
+  c.fillStyle=GIZ2; c.font=`500 28px ${osw}`; c.fillText("O PROFESSOR DA FIEL",150,1616);
   const data=new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"});
-  c.fillText(`São Paulo, ${data}`,W/2,yCurso+70);
-  c.textAlign="left"; c.fillStyle=GIZ; c.font=`700 100px ${mao}`; c.fillText("Prof. Aleh",150,1596);
-  c.strokeStyle=GIZ; c.lineWidth=2; c.beginPath(); c.moveTo(140,1616); c.lineTo(520,1616); c.stroke();
-  c.fillStyle=GIZ2; c.font=`500 30px ${osw}`; c.fillText("O PROFESSOR DA FIEL",150,1656);
-  c.save(); c.translate(860,1585); c.rotate(-.2); c.strokeStyle=VERM; c.fillStyle=VERM; c.lineWidth=6;
+  c.font=`500 36px ${mao}`; c.fillText(`São Paulo, ${data}`,150,1662);
+  c.save(); c.translate(860,1570); c.rotate(-.2); c.strokeStyle=VERM; c.fillStyle=VERM; c.lineWidth=6;
   c.beginPath(); c.arc(0,0,104,0,Math.PI*2); c.stroke(); c.lineWidth=2.5; c.beginPath(); c.arc(0,0,89,0,Math.PI*2); c.stroke();
   c.textAlign="center"; c.font=`700 31px ${giz}`; c.fillText("APROVADO",0,12);
   c.font=`700 16px ${osw}`; c.fillText("PROFESSOR DA FIEL",0,-36); c.font=`700 19px ${osw}`; c.fillText(`★ ${new Date().getFullYear()} ★`,0,50); c.restore();
-  c.textAlign="center"; c.fillStyle=GIZ; c.font=`700 40px ${osw}`; c.fillText("@alehcamisa7",W/2,1716);
-  c.fillStyle=GIZ2; c.font=`500 40px ${mao}`; c.fillText("posta e me marca que eu repasso",W/2,1762);
+  c.textAlign="center"; c.fillStyle=GIZ; c.font=`700 40px ${osw}`; c.fillText("@alehcamisa7",W/2,1730);
+  c.fillStyle=GIZ2; c.font=`500 38px ${mao}`; c.fillText("posta e me marca que eu repasso",W/2,1774);
 }
 async function abrirCertificado(m,auto){
   const p=progresso(m); if(!p.liberado) return;
