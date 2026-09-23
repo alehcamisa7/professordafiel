@@ -132,21 +132,46 @@ section.bloco{padding:34px 0}
 .sala{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);grid-template-areas:"video lado" "botoes lado";gap:16px 34px;align-items:start}
 .tela{grid-area:video;background:#fff;border-radius:var(--r);overflow:hidden;width:100%;max-width:440px}
 .tela iframe{display:block;width:100%;height:min(78vh,720px);min-height:560px;border:0}
-.botoes{grid-area:botoes;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:440px}
+.botoes{grid-area:botoes;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;padding-top:6px}
+/* post-its de apoio */
+.postit{position:relative;display:flex;align-items:center;gap:12px;padding:14px 14px 13px;text-decoration:none;border:0;cursor:pointer;text-align:left;
+  font:inherit;color:var(--lousa);background:#f4efe0;border-radius:2px 2px 10px 2px;
+  box-shadow:0 1px 0 rgba(0,0,0,.25),0 8px 14px -8px rgba(0,0,0,.7);transform:rotate(-1.2deg);transition:transform .15s,box-shadow .15s}
+.postit + .postit{transform:rotate(1deg)}
+.postit::before{content:"";position:absolute;top:-8px;left:50%;width:54px;height:16px;margin-left:-27px;background:rgba(242,240,234,.55);transform:rotate(-3deg);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.postit:hover{transform:rotate(0) translateY(-3px);box-shadow:0 1px 0 rgba(0,0,0,.25),0 14px 20px -10px rgba(0,0,0,.8)}
+.postit .bola{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--lousa);color:var(--giz)}
+.postit .bola svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.postit .txt{display:flex;flex-direction:column;line-height:1.1}
+.postit .dica{font-family:var(--mao);font-size:18px;color:#6b665c}
+.postit .acao{font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.01em}
+.postit.vermelho{background:var(--vermelho);color:#fff}
+.postit.vermelho .dica{color:rgba(255,255,255,.8)}
+.postit.vermelho .bola{background:#fff;color:var(--vermelho)}
+.postit.vermelho .bola svg{fill:currentColor;stroke:none;margin-left:2px}
 .lado{grid-area:lado}
 .quadro{padding:20px 22px;border:2px dashed rgba(242,240,234,.35);border-radius:var(--r)}
 .quadro .rot{display:block;font-family:var(--mao);font-size:22px;color:var(--giz-2);line-height:1;margin-bottom:8px}
 .quadro p{margin:0;font-weight:400;font-size:17px;line-height:1.55;white-space:pre-line;overflow-wrap:anywhere;max-width:62ch}
 .quadro a{color:var(--giz);text-decoration-color:var(--vermelho);text-underline-offset:3px}
 .quadro + .quadro{margin-top:14px}
-.navega{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 0}
-.navega > a,.navega > span{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:20px 22px;min-height:110px;border:2px solid rgba(242,240,234,.4);border-radius:var(--r);text-decoration:none;transition:border-color .15s,background .15s}
-.navega > a:hover{border-color:var(--giz);background:rgba(242,240,234,.04)}
-.navega .rot{font-family:var(--mao);font-size:22px;color:var(--giz-2);line-height:1}
-.navega .alvo{font-weight:500;font-size:20px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.navega .prox{text-align:right;border-color:var(--vermelho);background:rgba(216,38,46,.1)}
-.navega .prox:hover{background:rgba(216,38,46,.18);border-color:var(--vermelho)}
-.navega > span{opacity:.4}
+.navega{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:40px 0 0}
+/* ficha pautada de cursinho */
+.ficha{position:relative;display:flex;flex-direction:column;gap:4px;min-height:132px;padding:22px 24px 20px 58px;text-decoration:none;color:var(--lousa);
+  background:#f4efe0 linear-gradient(transparent 0 29px,rgba(80,120,190,.28) 29px 30px) 0 18px/100% 30px;
+  border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 10px 18px -10px rgba(0,0,0,.8);transition:transform .15s,box-shadow .15s}
+.ficha::before{content:"";position:absolute;top:0;bottom:0;left:40px;width:2px;background:rgba(216,38,46,.55)}
+.ficha::after{content:"";position:absolute;top:-9px;left:50%;width:70px;height:18px;margin-left:-35px;background:rgba(242,240,234,.5);transform:rotate(2deg);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+a.ficha:hover{transform:translateY(-3px) rotate(-.4deg);box-shadow:0 1px 0 rgba(0,0,0,.25),0 16px 24px -12px rgba(0,0,0,.9)}
+.ficha .rot{font-family:var(--mao);font-weight:700;font-size:23px;line-height:1;color:#6b665c}
+.ficha .alvo{font-weight:700;font-size:21px;line-height:1.25;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ficha .ref{font-family:var(--mao);font-size:19px;color:#6b665c;margin-top:auto}
+.ficha.prox{text-align:right;padding:22px 58px 20px 24px}
+.ficha.prox::before{left:auto;right:40px}
+.ficha.prox::after{background:rgba(216,38,46,.75)}
+.ficha.prox .rot{color:var(--vermelho)}
+.ficha.prox .alvo{background:linear-gradient(transparent 58%,rgba(216,38,46,.22) 58%);display:inline;-webkit-line-clamp:unset}
+.ficha.inativa{opacity:.35;box-shadow:none}
 
 /* convite Trabalho de Campo */
 .convite{display:grid;grid-template-columns:1fr auto;gap:20px 28px;align-items:center;padding:26px;border:2px solid var(--giz);border-radius:3px 12px 4px 10px / 10px 3px 12px 4px;background:linear-gradient(90deg,rgba(216,38,46,.16),transparent 70%)}
@@ -178,9 +203,19 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado"}
   .tela,.botoes{max-width:none}
   .tela iframe{min-height:520px;height:72vh}
-  .navega{gap:10px}
-  .navega > a,.navega > span{padding:14px;min-height:96px}
-  .navega .alvo{font-size:16px}
+  .navega{gap:14px;margin-top:32px}
+  .ficha{min-height:116px;padding:18px 12px 14px 34px}
+  .ficha::before{left:24px}
+  .ficha.prox{padding:18px 34px 14px 12px}
+  .ficha.prox::before{right:24px}
+  .ficha .rot{font-size:20px}
+  .ficha .alvo{font-size:16px}
+  .botoes{gap:12px}
+  .postit{padding:12px 10px;gap:8px}
+  .postit .bola{width:28px;height:28px}
+  .postit .bola svg{width:14px;height:14px}
+  .postit .dica{font-size:16px;white-space:nowrap}
+  .postit .acao{font-size:14px;white-space:nowrap}
   .convite{grid-template-columns:1fr;padding:20px}
 }
 </style>
@@ -428,8 +463,12 @@ function telaAula(cod){
   <div class="sala">
     <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
     <div class="botoes">
-      <a class="btn cheio" href="${linkIG}" target="_blank" rel="noopener">Assistir no Instagram</a>
-      <button class="btn" id="compartilhar">Compartilhar aula</button>
+      <a class="postit vermelho" href="${linkIG}" target="_blank" rel="noopener">
+        <span class="bola"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
+        <span class="txt"><span class="dica">abre no app</span><span class="acao">Assistir no Insta</span></span></a>
+      <button class="postit" id="compartilhar" type="button">
+        <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v7h14v-7"/></svg></span>
+        <span class="txt"><span class="dica" id="compartilhar-dica">manda pro amigo</span><span class="acao">Compartilhar</span></span></button>
     </div>
     <div class="lado">
       ${a.legenda?`<div class="quadro"><span class="rot">legenda do post</span><p>${legendaHTML(a.legenda)}</p></div>`:""}
@@ -437,8 +476,8 @@ function telaAula(cod){
     </div>
   </div>
   <nav class="navega" aria-label="Navegar entre aulas">
-    ${ant?`<a href="#/aula/${ant.cod}"><span class="rot">← aula anterior</span><span class="alvo">${esc(ant.titulo)}</span></a>`:`<span><span class="rot">primeira aula</span><span class="alvo">Você está no começo</span></span>`}
-    ${prox?`<a class="prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span class="alvo">${esc(prox.titulo)}</span></a>`:`<a class="prox" href="#/"><span class="rot">matéria concluída</span><span class="alvo">Escolher outra matéria</span></a>`}
+    ${ant?`<a class="ficha" href="#/aula/${ant.cod}"><span class="rot">← revisar a anterior</span><span class="alvo">${esc(ant.titulo)}</span><span class="ref">aula ${dois(ant.num)}${ant.parte?`, ${esc(rotuloParte(ant).toLowerCase())}`:""}</span></a>`:`<span class="ficha inativa"><span class="rot">primeira aula</span><span class="alvo">Você está no começo</span></span>`}
+    ${prox?`<a class="ficha prox" href="#/aula/${prox.cod}"><span class="rot">próxima aula →</span><span><span class="alvo">${esc(prox.titulo)}</span></span><span class="ref">aula ${dois(prox.num)}${prox.parte?`, ${esc(rotuloParte(prox).toLowerCase())}`:""}</span></a>`:`<a class="ficha prox" href="#/"><span class="rot">matéria concluída ✓</span><span><span class="alvo">Escolher a próxima matéria</span></span><span class="ref">tá voando, hein</span></a>`}
   </nav>
   ${ehCorinthianes(m)?`<section class="bloco" style="padding-bottom:0">${convite()}</section>`:""}
   <section class="bloco">
@@ -446,10 +485,10 @@ function telaAula(cod){
     <ul class="aulas">${m.aulas.map(x=>itemAula(x,false,x===a)).join("")}</ul>
   </section>`;
   document.getElementById("compartilhar").onclick=async()=>{
-    const url=location.href, b=document.getElementById("compartilhar");
+    const url=location.href, d=document.getElementById("compartilhar-dica");
     try{
       if(navigator.share) await navigator.share({title:a.titulo,text:`${m.nome}: ${a.titulo}`,url});
-      else{await navigator.clipboard.writeText(url);b.textContent="Link copiado";setTimeout(()=>b.textContent="Compartilhar aula",2000);}
+      else{await navigator.clipboard.writeText(url);d.textContent="link copiado!";setTimeout(()=>d.textContent="manda pro amigo",2000);}
     }catch(e){}
   };
 }
