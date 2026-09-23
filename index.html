@@ -303,6 +303,14 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .cupom .acoes-cupom .btn.cheio{color:#fff;border-color:var(--vermelho)}
 .aviso-publi{font-family:var(--mao);font-size:19px;color:var(--giz-2)}
 
+/* aviso de cookies */
+.cookies{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;transform:translateX(-50%);width:min(640px,calc(100% - 24px));
+  display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:16px 18px;background:var(--lousa);border:2px solid var(--giz);border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.65)}
+.cookies p{flex:1 1 280px;margin:0;font-size:15px;line-height:1.4}
+.cookies p b{font-family:var(--mao);font-size:21px;font-weight:700;display:block;line-height:1}
+.cookies .bts{display:flex;gap:8px}
+.cookies .btn{padding:8px 16px;font-size:15px}
+.link-cookies{background:none;border:0;padding:0;font:inherit;color:var(--giz-2);text-decoration:underline;cursor:pointer}
 /* menu de âncoras */
 .menu{position:sticky;top:0;z-index:30;margin:0 -20px;padding:10px 20px;background:rgba(22,24,22,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(242,240,234,.12);
   display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -365,6 +373,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .menu .mc{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
   [id^="sec-"]{scroll-margin-top:12px}
   .aviso{bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+  .cookies{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   .caderno-live{grid-template-columns:1fr;gap:16px}
   .caderno-live .botoes{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .caderno-live .postit{flex-direction:column;justify-content:center;text-align:center;padding:14px 6px 12px;gap:6px}
@@ -391,7 +400,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 <div class="wrap">
   <header class="topo">
     <a class="marca" href="#/">PROFESSOR DA FIEL<small>@alehcamisa7</small></a>
-    <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">Seguir<span class="long">&nbsp;no Instagram</span></a>
+    <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener" data-social="instagram_seguir">Seguir<span class="long">&nbsp;no Instagram</span></a>
   </header>
   <nav class="menu" id="menu" aria-label="Seções da página inicial">
     <button type="button" data-grupo="sec-materias" id="btn-materias" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-materias"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/></svg></span><span class="ml">Matérias <span class="seta" aria-hidden="true">▾</span></span><span class="mc">Matérias</span></button>
@@ -408,7 +417,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   <footer>
     <p class="frase">O Professor explica.</p>
     <div class="rodape-turma" id="rodape-turma"></div>
-    <p>Aulas publicadas no Instagram <a href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">@alehcamisa7</a>. Site de fã, sem vínculo oficial com o Sport Club Corinthians Paulista.</p>
+    <p>Aulas publicadas no Instagram <a href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener" data-social="instagram_perfil">@alehcamisa7</a>. Site de fã, sem vínculo oficial com o Sport Club Corinthians Paulista. <button type="button" class="link-cookies" id="pref-cookies">Preferências de cookies</button></p>
   </footer>
 </div>
 
@@ -622,23 +631,23 @@ function turma(){
   return `<div class="titulo-bloco"><h2>Faça parte da turma</h2><span class="nota">a aula continua fora do site</span></div>
   <div class="turma-campo">${convite()}</div>
   <div class="turma">
-    <a href="${LINKS.comunidade}" target="_blank" rel="noopener">${svgIco("turma")}<span class="t">Comunidade no Instagram</span><span class="d">Recados do Professor, bastidores e aviso de aula nova antes de todo mundo.</span></a>
-    <a href="${LINKS.tiktok}" target="_blank" rel="noopener">${svgIco("celular")}<span class="t">Me segue no TikTok</span><span class="d">As aulas também saem por lá, @alehcamisa7.</span></a>
-    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener">${svgIco("antena")}${selo}<span class="t">Aula ao vivo no TikTok</span><span class="d">Toda terça, das 20h às 21h. Traz a sua dúvida.</span></a>
+    <a href="${LINKS.comunidade}" target="_blank" rel="noopener" data-social="comunidade">${svgIco("turma")}<span class="t">Comunidade no Instagram</span><span class="d">Recados do Professor, bastidores e aviso de aula nova antes de todo mundo.</span></a>
+    <a href="${LINKS.tiktok}" target="_blank" rel="noopener" data-social="tiktok">${svgIco("celular")}<span class="t">Me segue no TikTok</span><span class="d">As aulas também saem por lá, @alehcamisa7.</span></a>
+    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener" data-social="live_tiktok">${svgIco("antena")}${selo}<span class="t">Aula ao vivo no TikTok</span><span class="d">Toda terça, das 20h às 21h. Traz a sua dúvida.</span></a>
   </div>`;
 }
 function rodapeTurma(){
   const st=statusLive(), live=st==="agora"?"🔴 Live no TikTok agora":st==="hoje"?"Live hoje, 20h, no TikTok":"Live toda terça, 20h, no TikTok";
   document.getElementById("rodape-turma").innerHTML=`
-    <a href="${LINKS.comunidade}" target="_blank" rel="noopener">Comunidade no Instagram</a>
-    <a href="${LINKS.tiktok}" target="_blank" rel="noopener">TikTok @alehcamisa7</a>
-    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener">${live}</a>
+    <a href="${LINKS.comunidade}" target="_blank" rel="noopener" data-social="comunidade">Comunidade no Instagram</a>
+    <a href="${LINKS.tiktok}" target="_blank" rel="noopener" data-social="tiktok">TikTok @alehcamisa7</a>
+    <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener" data-social="live_tiktok">${live}</a>
     <span>Cupom ${CUPOM} nos <a href="#/" data-sec="sec-beneficios">parceiros</a></span>`;
 }
 function cupom(p){
   return `<div class="cupom"><span class="loja">${esc(p.arroba)}</span><span class="off">${esc(p.desconto)}</span>
     <span class="codigo">${CUPOM}</span>
-    <span class="acoes-cupom"><button class="btn cheio" type="button" data-copiar="${CUPOM}">Copiar cupom</button><a class="btn" href="${p.link}" target="_blank" rel="noopener sponsored">Ir pra loja</a></span></div>`;
+    <span class="acoes-cupom"><button class="btn cheio" type="button" data-copiar="${CUPOM}" data-parceiro="${esc(p.loja)}">Copiar cupom</button><a class="btn" href="${p.link}" target="_blank" rel="noopener sponsored" data-loja="${esc(p.loja)}">Ir pra loja</a></span></div>`;
 }
 function parceiros(lista){
   return `<div class="titulo-bloco"><h2>Benefícios do aluno</h2><span class="aviso-publi">parceiros comerciais do Professor</span></div>
@@ -646,6 +655,7 @@ function parceiros(lista){
 }
 document.addEventListener("click",async e=>{
   const b=e.target.closest("[data-copiar]"); if(!b) return;
+  ev("cupom_copiado",{parceiro:b.dataset.parceiro||"",cupom:b.dataset.copiar});
   try{ await navigator.clipboard.writeText(b.dataset.copiar); }catch(err){}
   const t=b.textContent; b.textContent="Copiado!"; setTimeout(()=>b.textContent=t,1800);
 });
@@ -672,18 +682,62 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharModal(); });
 const zap=texto=>`https://wa.me/?text=${encodeURIComponent(texto)}`;
 
 function menuCompartilhar(a,m){
-  compartilhar({titulo:"Compartilhar aula",sub:`${m.nome}: ${a.titulo}`,url:`${SITE}#/aula/${a.cod}`,texto:`Olha essa aula do Professor da Fiel: ${a.titulo}`});
+  compartilhar({titulo:"Compartilhar aula",sub:`${m.nome}: ${a.titulo}`,url:`${SITE}#/aula/${a.cod}`,texto:`Olha essa aula do Professor da Fiel: ${a.titulo}`,tipo:"aula",item:`${m.nome} ${dois(a.num)}`});
 }
-function compartilhar({titulo,sub,url,texto}){
+function compartilhar({titulo,sub,url,texto,tipo,item}){
+  const rastro=canal=>ev("compartilhar",{method:canal,content_type:tipo||"",item_id:item||""});
   const f=abrirModal(`<h2>${esc(titulo)}</h2><p class="sub">${esc(sub)}</p>
     <div class="opcoes">
-      <a class="btn cheio" href="${zap(`${texto} 👉 ${url}`)}" target="_blank" rel="noopener">Mandar no WhatsApp</a>
+      <a class="btn cheio" id="zap-link" href="${zap(`${texto} 👉 ${url}`)}" target="_blank" rel="noopener">Mandar no WhatsApp</a>
       <button class="btn" type="button" id="copiar-link">Copiar link</button>
       ${navigator.share?'<button class="btn" type="button" id="outros-apps">Outros apps</button>':""}
     </div>`);
-  f.querySelector("#copiar-link").onclick=async e=>{ try{await navigator.clipboard.writeText(url);}catch(err){} e.target.textContent="Link copiado!"; };
-  const o=f.querySelector("#outros-apps"); if(o) o.onclick=async()=>{ try{ await navigator.share({title:sub,text:texto,url}); fecharModal(); }catch(err){} };
+  f.querySelector("#zap-link").addEventListener("click",()=>rastro("whatsapp"));
+  f.querySelector("#copiar-link").onclick=async e=>{ rastro("copiar_link"); try{await navigator.clipboard.writeText(url);}catch(err){} e.target.textContent="Link copiado!"; };
+  const o=f.querySelector("#outros-apps"); if(o) o.onclick=async()=>{ rastro("outros_apps"); try{ await navigator.share({title:sub,text:texto,url}); fecharModal(); }catch(err){} };
 }
+
+/* ================= GOOGLE ANALYTICS 4 (só com consentimento) ================= */
+const GA_ID = "G-XKB6XLLVT2";
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+var gaAtivo = false;
+function iniciarGA(){
+  if(gaAtivo) return; gaAtivo=true;
+  gtag("consent","default",{analytics_storage:"granted",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});
+  if(!window.__gaCarregado){
+    window.__gaCarregado=true;
+    const sc=document.createElement("script"); sc.async=true; sc.src=`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`; document.head.appendChild(sc);
+    gtag("js",new Date());
+  }
+  gtag("config",GA_ID,{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false});
+}
+function pararGA(){
+  gaAtivo=false; gtag("consent","update",{analytics_storage:"denied"});
+  document.cookie.split(";").forEach(c=>{ const n=c.split("=")[0].trim(); if(/^_ga/.test(n)){ const dom=location.hostname; document.cookie=`${n}=; Max-Age=0; path=/`; document.cookie=`${n}=; Max-Age=0; path=/; domain=.${dom}`; } });
+}
+function ev(nome,params){ if(gaAtivo) gtag("event",nome,params||{}); }
+function paginaVista(){
+  if(!gaAtivo) return;
+  const rota=(location.hash||"#/").replace(/^#\/?/,"");
+  gtag("event","page_view",{page_location:SITE+rota,page_title:document.title});
+}
+function mostrarCookies(){
+  document.querySelector(".cookies")?.remove();
+  const d=document.createElement("div"); d.className="cookies"; d.setAttribute("role","dialog"); d.setAttribute("aria-label","Aviso de cookies");
+  d.innerHTML=`<p><b>Um recado do Professor</b>Usamos cookies do Google Analytics só pra entender como o site é usado e melhorar as aulas. Nada de anúncio.</p>
+    <span class="bts"><button class="btn" type="button" data-cookies="nao">Recusar</button><button class="btn cheio" type="button" data-cookies="sim">Aceitar</button></span>`;
+  document.body.appendChild(d);
+}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-cookies]");
+  if(c){ const sim=c.dataset.cookies==="sim"; LS.set("pdf_cookies",sim?"sim":"nao"); document.querySelector(".cookies")?.remove();
+    if(sim){ iniciarGA(); paginaVista(); } else pararGA(); return; }
+  if(e.target.closest("#pref-cookies")){ mostrarCookies(); return; }
+  const soc=e.target.closest("[data-social]"); if(soc) ev("clique_social",{destino:soc.dataset.social,item:soc.dataset.item||""});
+  const loja=e.target.closest("[data-loja]"); if(loja) ev("clique_loja",{parceiro:loja.dataset.loja});
+});
+(function(){ const escolha=LS.get("pdf_cookies",null); if(escolha==="sim") iniciarGA(); else if(escolha===null) setTimeout(mostrarCookies,1200); })();
 
 /* ================= CERTIFICADO ================= */
 const MAX_NOME=40;
@@ -774,12 +828,13 @@ async function abrirCertificado(m,auto){
   redesenhar();
   const salvarNome=()=>LS.set("pdf_nome",inp.value.replace(/\s+/g," ").trim());
   const gerarArquivo=()=>new Promise(r=>cv.toBlob(b=>r(new File([b],`certificado-${m.slug}.png`,{type:"image/png"})),"image/png"));
-  f.querySelector("#cert-baixar").onclick=async()=>{ salvarNome(); const arq=await gerarArquivo(); const u=URL.createObjectURL(arq);
+  const emitido=metodo=>ev("certificado_emitido",{materia:m.nome,aulas_feitas:p.feitas,metodo});
+  f.querySelector("#cert-baixar").onclick=async()=>{ salvarNome(); emitido("download"); const arq=await gerarArquivo(); const u=URL.createObjectURL(arq);
     const l=document.createElement("a"); l.href=u; l.download=arq.name; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); };
-  z.addEventListener("click",salvarNome);
+  z.addEventListener("click",()=>{ salvarNome(); emitido("whatsapp"); });
   const st=f.querySelector("#cert-stories");
   if(st) st.onclick=async()=>{ salvarNome(); const arq=await gerarArquivo();
-    if(navigator.canShare({files:[arq]})){ try{ await navigator.share({files:[arq],text:`Certificado de ${m.nome} 🎓 @alehcamisa7`}); }catch(e){} }
+    if(navigator.canShare({files:[arq]})){ emitido("stories"); try{ await navigator.share({files:[arq],text:`Certificado de ${m.nome} 🎓 @alehcamisa7`}); }catch(e){} }
     else f.querySelector("#cert-baixar").click(); };
 }
 
@@ -915,6 +970,7 @@ function telaInicio(){
     </section>`:""}`;
     observarSecoes();
   };
+  let tBusca; inp.addEventListener("input",()=>{ clearTimeout(tBusca); const q=inp.value.trim(); if(q.length>=3) tBusca=setTimeout(()=>ev("search",{search_term:q}),1200); });
   inp.addEventListener("input",desenhar);
   desenhar();
 }
@@ -955,6 +1011,7 @@ function postitFeita(a){
 function telaAula(cod){
   const a=AULAS.find(x=>x.cod===cod); if(!a) return naoAchou();
   LS.set("pdf_ultima",a.cod);
+  setTimeout(()=>ev("aula_aberta",{materia:a.materia,aula:`${a.materia} ${dois(a.num)}`,titulo:a.titulo}),0);
   const m=MATERIAS.find(x=>x.slug===a.mslug), i=m.aulas.indexOf(a), ant=m.aulas[i-1], prox=m.aulas[i+1];
   const ultima=m.aulas[m.aulas.length-1].num, parte=rotuloParte(a), linkIG=`https://www.instagram.com/p/${a.cod}/`;
   const ref=x=>`aula ${dois(x.num)}${x.parte?`, ${esc(rotuloParte(x).toLowerCase())}`:""}`;
@@ -967,10 +1024,10 @@ function telaAula(cod){
   <div class="sala">
     <div class="tela"><iframe src="https://www.instagram.com/p/${a.cod}/embed/" title="${esc(a.titulo)}" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
     <div class="botoes">
-      <a class="postit vermelho" href="${linkIG}" target="_blank" rel="noopener">
+      <a class="postit vermelho" href="${linkIG}" target="_blank" rel="noopener" data-social="instagram_assistir" data-item="${esc(m.nome)} ${dois(a.num)}">
         <span class="bola"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
         <span class="txt"><span class="dica">abre no app</span><span class="acao">Assistir no Insta</span></span></a>
-      <a class="postit" href="${linkIG}" target="_blank" rel="noopener">
+      <a class="postit" href="${linkIG}" target="_blank" rel="noopener" data-social="instagram_comentar" data-item="${esc(m.nome)} ${dois(a.num)}">
         <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H10l-5 4v-4H4z"/></svg></span>
         <span class="txt"><span class="dica">o professor responde lá</span><span class="acao">Comentar</span></span></a>
       <button class="postit" id="compartilhar" type="button">
@@ -1004,8 +1061,9 @@ function telaAula(cod){
     document.getElementById("carimbo").innerHTML=agora?'<span class="carimbo">FEITA ✓</span>':"";
     document.getElementById("quadro-prog").innerHTML=quadroProgresso(m); ligarEmitir();
     document.getElementById("lista-materia").innerHTML=m.aulas.map(x=>itemAula(x,false,x===a)).join("");
-    if(agora&&!antes&&depois) abrirCertificado(m,true);
-    else if(agora) aviso(`Boa! Conta lá no post o que achou 👀 <a href="${linkIG}" target="_blank" rel="noopener">Comentar</a>`);
+    if(agora) ev("aula_feita",{materia:m.nome,aula:`${m.nome} ${dois(a.num)}`,titulo:a.titulo});
+    if(agora&&!antes&&depois){ ev("certificado_liberado",{materia:m.nome,aulas_feitas:progresso(m).feitas}); abrirCertificado(m,true); }
+    else if(agora) aviso(`Boa! Conta lá no post o que achou 👀 <a href="${linkIG}" target="_blank" rel="noopener" data-social="instagram_comentar" data-item="${esc(m.nome)} ${dois(a.num)}">Comentar</a>`);
   });
   ligarFeita();
 }
@@ -1032,6 +1090,7 @@ function telaPorAi(){
 }
 function telaLive(chave){
   const l=LIVES.find(x=>x.chave===chave); if(!l) return naoAchou();
+  setTimeout(()=>ev("live_aberta",{programa:l.programa||"",titulo:l.titulo}),0);
   const i=LIVES.indexOf(l), ant=LIVES[i-1], prox=LIVES[i+1];
   const linkYT=`https://www.youtube.com/watch?v=${l.id}${l.t?`&t=${l.t}s`:""}`;
   const ref=x=>esc([x.programa,dataCurta(x.data)].filter(Boolean).join(", "));
@@ -1042,14 +1101,14 @@ function telaLive(chave){
     <h1>${esc(l.episodio)}</h1>
     <span class="num-aula">${esc([l.programa,dataExtenso(l.data)].filter(Boolean).join(", ")||"live")}</span>
   </header>
-  <div class="palco"><div class="tela16"><iframe src="https://www.youtube-nocookie.com/embed/${l.id}?rel=0${l.t?`&start=${l.t}`:""}" title="${esc(l.titulo)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+  <div class="palco"><div class="tela16"><iframe src="https://www.youtube.com/embed/${l.id}?rel=0&enablejsapi=1&origin=${encodeURIComponent(location.origin)}${l.t?`&start=${l.t}`:""}" title="${esc(l.titulo)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
   <div class="caderno-live">
     <div class="col">
       <div class="botoes">
-        <a class="postit vermelho" href="${linkYT}" target="_blank" rel="noopener">
+        <a class="postit vermelho" href="${linkYT}" target="_blank" rel="noopener" data-social="youtube_assistir" data-item="${esc(l.titulo)}">
           <span class="bola"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg></span>
           <span class="txt"><span class="dica">abre no app</span><span class="acao">No YouTube</span></span></a>
-        <a class="postit" href="${linkYT}" target="_blank" rel="noopener">
+        <a class="postit" href="${linkYT}" target="_blank" rel="noopener" data-social="youtube_comentar" data-item="${esc(l.titulo)}">
           <span class="bola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H10l-5 4v-4H4z"/></svg></span>
           <span class="txt"><span class="dica">deixa sua opinião</span><span class="acao">Comentar</span></span></a>
         <button class="postit" id="compartilhar-live" type="button">
@@ -1065,7 +1124,7 @@ function telaLive(chave){
   </div>
   ${outras.length?`<section class="bloco"><div class="titulo-bloco"><h2>Mais lives</h2><a class="nota" href="#/por-ai">ver todas</a></div>
     <ul class="aulas">${outras.map(cardLive).join("")}</ul></section>`:""}`;
-  document.getElementById("compartilhar-live").onclick=()=>compartilhar({titulo:"Compartilhar live",sub:l.titulo,url:`${SITE}#/live/${encodeURIComponent(l.chave)}`,texto:`Olha essa live com o Professor da Fiel: ${l.titulo}`});
+  document.getElementById("compartilhar-live").onclick=()=>compartilhar({titulo:"Compartilhar live",sub:l.titulo,url:`${SITE}#/live/${encodeURIComponent(l.chave)}`,texto:`Olha essa live com o Professor da Fiel: ${l.titulo}`,tipo:"live",item:l.titulo});
 }
 
 function telaParticipe(){
@@ -1094,6 +1153,7 @@ function rota(){
   else window.scrollTo(0,0);
   const h1=app.querySelector("h1");
   document.title=(tipo&&h1?h1.textContent.replace(/^nova/,"")+" · ":"")+"Aulas do Professor da Fiel";
+  paginaVista();
 }
 app.innerHTML='<p class="vazio">Apagando a lousa…</p>';
 carregar().then(()=>{window.addEventListener("hashchange",rota);rota();});
