@@ -64,7 +64,7 @@ a{color:inherit}
 .risco path{fill:none;stroke:var(--vermelho);stroke-width:5;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600;animation:traco 1s .35s ease-out forwards}
 @keyframes traco{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.risco path{animation:none;stroke-dashoffset:0}}
-.hero p.lead{font-family:var(--mao);font-size:clamp(24px,5vw,32px);color:var(--giz-2);margin:22px 0 26px;max-width:32ch;line-height:1.15}
+.hero p.lead{font-family:var(--mao);font-size:clamp(24px,5vw,32px);color:var(--giz-2);margin:22px 0 26px;max-width:44ch;line-height:1.15}
 .hero .acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .busca{position:relative;flex:1 1 260px;max-width:420px}
 .busca input{width:100%;font:inherit;font-weight:400;color:var(--giz);background:transparent;border:0;border-bottom:2px dashed var(--giz-2);padding:10px 4px;font-size:18px}
@@ -303,7 +303,27 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .cupom .acoes-cupom .btn.cheio{color:#fff;border-color:var(--vermelho)}
 .aviso-publi{font-family:var(--mao);font-size:19px;color:var(--giz-2)}
 
+/* menu de âncoras */
+.menu{position:sticky;top:0;z-index:30;margin:0 -20px;padding:10px 20px;background:rgba(22,24,22,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(242,240,234,.12);
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.menu::-webkit-scrollbar{display:none}
+.menu button{flex:none;font:inherit;font-weight:500;font-size:15px;color:var(--giz-2);background:transparent;border:1.5px solid rgba(242,240,234,.25);border-radius:999px;padding:6px 14px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+.menu button:hover{color:var(--giz);border-color:var(--giz)}
+.menu button.ativo{color:var(--giz);border-color:var(--vermelho);background:rgba(216,38,46,.16)}
+section[id^="sec-"]{scroll-margin-top:70px}
+/* boas-vindas */
+.passos{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px}
+.passos li{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px dashed rgba(242,240,234,.3);border-radius:var(--r)}
+.passos .n{font-family:var(--giz-font);font-weight:700;font-size:34px;line-height:1;color:var(--vermelho)}
+.passos .ico{width:30px;height:30px}
+.passos b{display:block;font-weight:500;font-size:17px;line-height:1.1}
+.passos small{display:block;font-family:var(--mao);font-size:18px;color:var(--giz-2);line-height:1.1}
+.btn .sub-btn{display:block;font-family:var(--mao);font-weight:500;font-size:17px;line-height:1;opacity:.9}
+.btn.duplo{flex-direction:column;align-items:flex-start;gap:2px;padding:8px 18px}
+
 @media (max-width:760px){
+  .passos{grid-template-columns:1fr;gap:8px}
+  .menu button{font-size:14px;padding:6px 12px}
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
   .tela{grid-row:auto}
   .sala .navega{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -322,6 +342,13 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
     <a class="marca" href="#/">PROFESSOR DA FIEL<small>@alehcamisa7</small></a>
     <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener">Seguir<span class="long">&nbsp;no Instagram</span></a>
   </header>
+  <nav class="menu" id="menu" aria-label="Seções da página inicial">
+    <button type="button" data-sec="sec-obrigatorias">Obrigatórias</button>
+    <button type="button" data-sec="sec-eletivas">Eletivas</button>
+    <button type="button" data-sec="sec-ultimas">Últimas aulas</button>
+    <button type="button" data-sec="sec-turma">Faça parte da turma</button>
+    <button type="button" data-sec="sec-beneficios">Benefícios</button>
+  </nav>
   <main id="app" aria-live="polite"></main>
   <footer>
     <p class="frase">O Professor explica.</p>
@@ -524,7 +551,7 @@ function rodapeTurma(){
     <a href="${LINKS.comunidade}" target="_blank" rel="noopener">Comunidade no Instagram</a>
     <a href="${LINKS.tiktok}" target="_blank" rel="noopener">TikTok @alehcamisa7</a>
     <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener">${live}</a>
-    <span>Cupom ${CUPOM} nos <a href="#/" onclick="setTimeout(()=>document.getElementById('parceiros')?.scrollIntoView(),60)">parceiros</a></span>`;
+    <span>Cupom ${CUPOM} nos <a href="#/" data-sec="sec-beneficios">parceiros</a></span>`;
 }
 function cupom(p){
   return `<div class="cupom"><span class="loja">${esc(p.arroba)}</span><span class="off">${esc(p.desconto)}</span>
@@ -658,6 +685,54 @@ async function abrirCertificado(m,auto){
     else f.querySelector("#cert-baixar").click(); };
 }
 
+/* ================= CONTINUAR / MENU ================= */
+function proximaParaFazer(){
+  const ult=LS.get("pdf_ultima",null);
+  if(!FEITAS.size&&!ult) return null;
+  const a=AULAS.find(x=>x.cod===ult);
+  if(a){
+    const m=MATERIAS.find(x=>x.slug===a.mslug);
+    if(!feita(a.cod)) return a;
+    const i=m.aulas.indexOf(a), nx=m.aulas.slice(i+1).find(x=>!feita(x.cod))||m.aulas.find(x=>!feita(x.cod));
+    if(nx) return nx;
+  }
+  for(const m of MATERIAS){ const nx=m.aulas.find(x=>!feita(x.cod)); if(nx) return nx; }
+  return null;
+}
+function botaoInicio(primeira){
+  const nx=proximaParaFazer();
+  if(nx) return `<a class="btn cheio duplo" href="#/aula/${nx.cod}">Continuar de onde parei<span class="sub-btn">${esc(nx.materia)}, aula ${dois(nx.num)}</span></a>`;
+  return primeira?`<a class="btn cheio" href="#/aula/${primeira.cod}">Começar pela Aula 1</a>`:"";
+}
+let secPendente=null, observador=null, travaMenu=0;
+function irPara(id){
+  marcarMenu(id); travaMenu=Date.now()+1000;
+  const el=document.getElementById(id);
+  if(el){ el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+  const b=document.getElementById("busca");
+  if(b&&b.value){ b.value=""; b.dispatchEvent(new Event("input")); document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); return; }
+  secPendente=id; location.hash="#/";
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-sec]"); if(!b) return;
+  e.preventDefault(); irPara(b.dataset.sec);
+});
+function marcarMenu(id){ document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("ativo",b.dataset.sec===id)); }
+function observarSecoes(){
+  observador?.disconnect(); if(Date.now()>=travaMenu) marcarMenu(null);
+  if(!("IntersectionObserver" in window)) return;
+  const visiveis=new Map();
+  observador=new IntersectionObserver(ents=>{
+    ents.forEach(en=>visiveis.set(en.target.id,en.isIntersecting?en.intersectionRatio:0));
+    if(Date.now()<travaMenu) return;
+    let melhor=null,v=0; visiveis.forEach((r,id)=>{ if(r>v){v=r;melhor=id;} });
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-60){ const ss=[...document.querySelectorAll('section[id^="sec-"]')]; if(ss.length) melhor=ss[ss.length-1].id; }
+    marcarMenu(melhor);
+    if(melhor){ document.querySelector(`#menu button[data-sec="${melhor}"]`)?.scrollIntoView({block:"nearest",inline:"nearest"}); }
+  },{rootMargin:"-70px 0px -45% 0px",threshold:[0,.1,.3,.6]});
+  document.querySelectorAll('section[id^="sec-"]').forEach(s=>observador.observe(s));
+}
+
 /* ================= TELAS ================= */
 function telaInicio(){
   const primeira=MATERIAS[0]?.aulas[0];
@@ -665,11 +740,16 @@ function telaInicio(){
   app.innerHTML=`
   <section class="hero">
     <h1>Ser corinthiano <span class="risco">explica tudo.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 70 4, 150 18, 297 6"/></svg></span></h1>
-    <p class="lead">Todas as ${AULAS.length} aulas do Professor da Fiel, separadas por matéria e na ordem certa.</p>
+    <p class="lead">Bem-vindo à sala de aula da Fiel. Aqui estão todas as ${AULAS.length} aulas do Professor, separadas por matéria e na ordem certa, pra você maratonar sem se perder.</p>
     <div class="acoes">
-      ${primeira?`<a class="btn cheio" href="#/aula/${primeira.cod}">Assistir a Aula 1</a>`:""}
+      ${botaoInicio(primeira)}
       <label class="busca"><span class="sr">Buscar aula</span><input id="busca" type="search" placeholder="Procurar uma aula…" autocomplete="off"></label>
     </div>
+    <ol class="passos" aria-label="Como funciona">
+      <li><span class="n">1</span>${svgIco("livro")}<span><b>Escolha a matéria</b><small>comece pelo Corinthianês</small></span></li>
+      <li><span class="n">2</span>${svgIco("celular")}<span><b>Assista e marque ✓</b><small>risca do caderno</small></span></li>
+      <li><span class="n">3</span><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M21 9v5"/></svg></span><span><b>Tire seu certificado</b><small>nas matérias com 8+ aulas</small></span></li>
+    </ol>
   </section>
   <div id="resultado"></div>`;
   const inp=document.getElementById("busca"), res=document.getElementById("resultado");
@@ -682,8 +762,8 @@ function telaInicio(){
       return;
     }
     res.innerHTML=`
-    <section class="bloco">
-      <div class="titulo-bloco"><h2>Matérias</h2><span class="nota">escolha por onde começar</span></div>
+    <section class="bloco" id="sec-obrigatorias">
+      <div class="titulo-bloco"><h2>Obrigatórias</h2><span class="nota">a grade principal do curso</span></div>
       <div class="materias">${GRADE.map((m,i)=>`
         <a class="materia${i===0?" destaque":""}" href="#/materia/${m.slug}">
           <span class="topo-card">${iconeMateria(m.nome)}<span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}</span>
@@ -691,19 +771,20 @@ function telaInicio(){
         </a>`).join("")}
       </div>
     </section>
-    ${ELETIVAS.length?`<section class="bloco">
+    ${ELETIVAS.length?`<section class="bloco" id="sec-eletivas">
       <div class="titulo-bloco"><h2>Eletivas</h2><span class="nota">matérias novas, pra quem quer ir além</span></div>
       <ul class="eletivas">${ELETIVAS.map(m=>{const p=progresso(m);return `<li><a href="#/materia/${m.slug}">${iconeMateria(m.nome)}
         <span><span class="nome">${esc(m.nome)}</span>${m.desc?`<span class="desc">${esc(m.desc)}</span>`:""}<span class="cert-emb">certificado em breve</span></span>
         <span class="qtd">${p.feitas?`${p.feitas}/`:""}${plural(p.total,"aula","aulas")}</span></a></li>`}).join("")}</ul>
     </section>`:""}
     <section class="bloco">${convite()}</section>
-    <section class="bloco">${turma()}</section>
-    <section class="bloco">
-      <div class="titulo-bloco"><h2>Saiu agora</h2><span class="nota">as últimas aulas</span></div>
+    <section class="bloco" id="sec-turma">${turma()}</section>
+    <section class="bloco" id="sec-ultimas">
+      <div class="titulo-bloco"><h2>Últimas aulas</h2><span class="nota">acabou de sair do forno</span></div>
       <ul class="aulas">${recentes.map(a=>itemAula(a,true)).join("")}</ul>
     </section>
-    <section class="bloco" id="parceiros">${parceiros(PARCEIROS)}</section>`;
+    <section class="bloco" id="sec-beneficios">${parceiros(PARCEIROS)}</section>`;
+    observarSecoes();
   };
   inp.addEventListener("input",desenhar);
   desenhar();
@@ -744,6 +825,7 @@ function postitFeita(a){
 }
 function telaAula(cod){
   const a=AULAS.find(x=>x.cod===cod); if(!a) return naoAchou();
+  LS.set("pdf_ultima",a.cod);
   const m=MATERIAS.find(x=>x.slug===a.mslug), i=m.aulas.indexOf(a), ant=m.aulas[i-1], prox=m.aulas[i+1];
   const ultima=m.aulas[m.aulas.length-1].num, parte=rotuloParte(a), linkIG=`https://www.instagram.com/p/${a.cod}/`;
   const ref=x=>`aula ${dois(x.num)}${x.parte?`, ${esc(rotuloParte(x).toLowerCase())}`:""}`;
@@ -811,14 +893,16 @@ function telaParticipe(){
 function naoAchou(){ app.innerHTML=`<p class="vazio">Essa página não existe mais. <a href="#/">Voltar para as matérias</a>.</p>`; }
 
 function rota(){
-  fecharModal();
+  fecharModal(); document.querySelector(".aviso")?.remove();
   const [,tipo,id]=(location.hash||"#/").split("/");
   if(tipo==="materia") telaMateria(id);
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
   else if(tipo==="participe") telaParticipe();
   else telaInicio();
   rodapeTurma();
-  window.scrollTo(0,0);
+  if(tipo){ observador?.disconnect(); marcarMenu(null); }
+  if(secPendente&&!tipo){ const id=secPendente; secPendente=null; setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"}),80); }
+  else window.scrollTo(0,0);
   const h1=app.querySelector("h1");
   document.title=(tipo&&h1?h1.textContent.replace(/^nova/,"")+" · ":"")+"Aulas do Professor da Fiel";
 }
