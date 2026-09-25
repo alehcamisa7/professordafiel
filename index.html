@@ -279,7 +279,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .aviso a{color:var(--vermelho);font-weight:700;white-space:nowrap}
 
 /* faça parte da turma */
-.turma{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.turma{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
 .turma a{display:flex;flex-direction:column;gap:10px;padding:18px;text-decoration:none;border:2px solid rgba(242,240,234,.4);border-radius:var(--r);transition:border-color .15s}
 .turma a:hover{border-color:var(--giz)}
 .turma .t{font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.1}
@@ -303,6 +303,32 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .cupom .acoes-cupom .btn.cheio{color:#fff;border-color:var(--vermelho)}
 .aviso-publi{font-family:var(--mao);font-size:19px;color:var(--giz-2)}
 
+/* presença e quadro de honra */
+.btn.presenca svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn.presenca.feito{background:var(--giz);border-color:var(--giz);color:var(--lousa)}
+.menu .so-desktop .ml{display:inline}
+.campo + .campo{margin-top:-2px}
+.aviso-campo{margin:-4px 0 16px;font-size:14px;color:var(--giz-2)}
+.erro-presenca{margin:0 0 12px;color:#ff8a8f;font-size:15px}
+.link-simples{background:none;border:0;padding:0;font:inherit;color:var(--giz-2);text-decoration:underline;cursor:pointer}
+.chamada-topo{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin:0 0 30px}
+.chamada-topo .info{font-family:var(--mao);font-size:21px;color:var(--giz-2)}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:grid;grid-template-columns:46px minmax(0,1fr) minmax(90px,38%) 70px;gap:14px;align-items:center;padding:11px 14px;background:var(--lousa-2);border-radius:var(--r)}
+.rank li.top{padding:15px 14px}
+.rank .pos{display:grid;place-items:center;font-weight:700;font-size:20px;color:var(--giz-2)}
+.rank .pos svg{width:32px;height:32px;fill:none;stroke:var(--vermelho);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;filter:url(#giz)}
+.medalha{display:grid;place-items:center;width:32px;height:32px;border:2px solid var(--giz);border-radius:50%;font-weight:700;font-size:14px;color:var(--giz)}
+.rank .quem{min-width:0}
+.rank .quem a{display:block;font-weight:500;font-size:18px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank .quem a:hover{text-decoration:underline;text-decoration-color:var(--vermelho)}
+.rank .quem .tag{font-family:var(--mao);font-size:17px;color:var(--vermelho);font-weight:700}
+.rank .barra-r{height:12px;border-radius:6px;background:rgba(242,240,234,.1)}
+.rank .barra-r i{display:block;height:100%;border-radius:6px;background:var(--giz);filter:url(#giz)}
+.rank li.lider .barra-r i{background:var(--vermelho)}
+.rank .dias{font-family:var(--mao);font-size:20px;color:var(--giz-2);text-align:right;white-space:nowrap}
+.rank .dias b{font-family:var(--display);font-size:22px;color:var(--giz);margin-right:3px}
+.rank li.eu{outline:2px solid var(--vermelho);outline-offset:-2px}
 /* aviso de cookies */
 .cookies{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;transform:translateX(-50%);width:min(640px,calc(100% - 24px));
   display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:16px 18px;background:var(--lousa);border:2px solid var(--giz);border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.65)}
@@ -358,6 +384,7 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .btn .sub-btn{display:block;font-family:var(--mao);font-weight:500;font-size:17px;line-height:1;opacity:.9}
 .btn.duplo{flex-direction:column;align-items:flex-start;gap:2px;padding:8px 18px}
 
+@media (max-width:360px){ .btn.presenca .lp{display:none} }
 @media (max-width:760px){
   .passos{grid-template-columns:1fr;gap:8px}
   /* menu vira barra inferior estilo app */
@@ -384,6 +411,10 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .titulo-bloco{flex-wrap:wrap;row-gap:4px}
   .titulo-bloco h2{flex:1 1 100%}
   .subtitulo .nota{display:none}
+  .menu .so-desktop{display:none}
+  .rank li{grid-template-columns:36px minmax(0,1fr) 62px;gap:10px;padding:10px 12px}
+  .rank .barra-r{grid-column:2 / 4;grid-row:2}
+  .rank .quem a{font-size:16px}
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
   .tela{grid-row:auto}
   .sala .navega{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -400,18 +431,23 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 <div class="wrap">
   <header class="topo">
     <a class="marca" href="#/">PROFESSOR DA FIEL<small>@alehcamisa7</small></a>
-    <a class="btn peq cheio" href="https://www.instagram.com/alehcamisa7/" target="_blank" rel="noopener" data-social="instagram_seguir">Seguir<span class="long">&nbsp;no Instagram</span></a>
+    <button class="btn peq cheio presenca" id="btn-presenca" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 10h7M8.5 14h7M8.5 18h4"/></svg><span class="lp">Presença</span></button>
   </header>
   <nav class="menu" id="menu" aria-label="Seções da página inicial">
     <button type="button" data-grupo="sec-materias" id="btn-materias" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-materias"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M8 7h7"/></svg></span><span class="ml">Matérias <span class="seta" aria-hidden="true">▾</span></span><span class="mc">Matérias</span></button>
     <button type="button" data-sec="sec-ultimas"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9v6l5-3z"/></svg></span><span class="ml">Últimas aulas</span><span class="mc">Aulas</span></button>
     <button type="button" data-sec="sec-beneficios"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/></svg></span><span class="ml">Benefícios do Aluno</span><span class="mc">Benefícios</span></button>
-    <button type="button" data-sec="sec-turma"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="12" cy="6.5" r="2.8"/><path d="M2.5 19c0-3 2-5 4.5-5M21.5 19c0-3-2-5-4.5-5M7 20c0-3.5 2.2-6 5-6s5 2.5 5 6"/></svg></span><span class="ml">Faça parte da turma</span><span class="mc">Turma</span></button>
+    <button type="button" data-grupo="sec-turma" data-marca="quadro" id="btn-turma" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-turma"><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="12" cy="6.5" r="2.8"/><path d="M2.5 19c0-3 2-5 4.5-5M21.5 19c0-3-2-5-4.5-5M7 20c0-3.5 2.2-6 5-6s5 2.5 5 6"/></svg></span><span class="ml">Faça parte da turma</span><span class="mc">Turma</span></button>
+    <button type="button" class="so-desktop" data-rota="quadro" data-marca="quadro"><span class="ml">Quadro de honra</span></button>
     <button type="button" data-sec="sec-porai" id="btn-porai" hidden><span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9.2 9.2 0 0 0 0 13M18.5 5.5a9.2 9.2 0 0 1 0 13"/></svg></span><span class="ml">O Professor por aí</span><span class="mc">Por aí</span></button>
   </nav>
   <div class="submenu" id="submenu-materias" hidden>
     <button type="button" data-sec="sec-obrigatorias"><b>Obrigatórias</b><small>a grade principal do curso</small></button>
     <button type="button" data-sec="sec-eletivas"><b>Eletivas</b><small>matérias novas, pra ir além</small></button>
+  </div>
+  <div class="submenu" id="submenu-turma" hidden>
+    <button type="button" data-sec="sec-turma"><b>Faça parte da turma</b><small>comunidade, TikTok e live</small></button>
+    <button type="button" data-rota="quadro"><b>Quadro de honra</b><small>o ranking da lista de presença</small></button>
   </div>
   <main id="app" aria-live="polite"></main>
   <footer>
@@ -631,6 +667,7 @@ function turma(){
   return `<div class="titulo-bloco"><h2>Faça parte da turma</h2><span class="nota">a aula continua fora do site</span></div>
   <div class="turma-campo">${convite()}</div>
   <div class="turma">
+    <a href="${LINKS.instagram}" target="_blank" rel="noopener" data-social="instagram_seguir"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8"/></svg></span><span class="t">Me segue no Instagram</span><span class="d">É lá que as aulas nascem. @alehcamisa7.</span></a>
     <a href="${LINKS.comunidade}" target="_blank" rel="noopener" data-social="comunidade">${svgIco("turma")}<span class="t">Comunidade no Instagram</span><span class="d">Recados do Professor, bastidores e aviso de aula nova antes de todo mundo.</span></a>
     <a href="${LINKS.tiktok}" target="_blank" rel="noopener" data-social="tiktok">${svgIco("celular")}<span class="t">Me segue no TikTok</span><span class="d">As aulas também saem por lá, @alehcamisa7.</span></a>
     <a href="${st==="agora"?LINKS.live:LINKS.tiktok}" target="_blank" rel="noopener" data-social="live_tiktok">${svgIco("antena")}${selo}<span class="t">Aula ao vivo no TikTok</span><span class="d">Toda terça, das 20h às 21h. Traz a sua dúvida.</span></a>
@@ -738,6 +775,125 @@ document.addEventListener("click",e=>{
   const loja=e.target.closest("[data-loja]"); if(loja) ev("clique_loja",{parceiro:loja.dataset.loja});
 });
 (function(){ const escolha=LS.get("pdf_cookies",null); if(escolha==="sim") iniciarGA(); else if(escolha===null) setTimeout(mostrarCookies,1200); })();
+
+/* ================= LISTA DE PRESENÇA ================= */
+const PRESENCA_URL = "https://script.google.com/macros/s/AKfycbxfEvtocff7jCpz8I78CynSvdre_lb7GWzck9foZ9ToL_JPD-49XKvk_oZW8-w3mDnMHQ/exec";
+const MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+function hojeBR(){ try{ return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
+const limparIG=t=>String(t||"").trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/^@+/,"").replace(/\/.*$/,"").toLowerCase().replace(/[^a-z0-9._]/g,"").slice(0,30);
+const alunoSalvo=()=>LS.get("pdf_aluno",null);
+const presenteHoje=()=>LS.get("pdf_presenca_dia",null)===hojeBR();
+let cacheRanking=null;
+function atualizarBotaoPresenca(){
+  const b=document.getElementById("btn-presenca"); if(!b) return;
+  const ok=presenteHoje(); b.classList.toggle("feito",ok);
+  b.querySelector(".lp").textContent=ok?"Presente ✓":"Presença";
+  b.setAttribute("aria-label",ok?"Presença de hoje confirmada":"Assinar a lista de presença");
+}
+function modalConfirmado(){
+  const al=alunoSalvo()||{};
+  abrirModal(`<h2>Presença confirmada! ✓</h2>
+    <p class="sub">Você assinou a chamada de hoje${al.ig?`, @${esc(al.ig)}`:""}. Volta amanhã pra somar mais um dia no Quadro de honra.</p>
+    <p class="sub" style="margin-bottom:10px">Já segue o Professor no Instagram?</p>
+    <div class="opcoes">
+      <a class="btn cheio" href="${LINKS.instagram}" target="_blank" rel="noopener" data-social="instagram_seguir">Seguir @alehcamisa7</a>
+      <a class="btn" href="#/quadro" data-fechar>Ver o Quadro de honra</a>
+    </div>`);
+}
+async function enviarPresenca(nome,ig,botao,erroEl){
+  botao.disabled=true; const txt=botao.textContent; botao.textContent="Assinando…"; erroEl.textContent="";
+  try{
+    const u=`${PRESENCA_URL}?acao=presenca&nome=${encodeURIComponent(nome)}&instagram=${encodeURIComponent(ig)}`;
+    const r=await fetch(u,{cache:"no-store"}); const j=await r.json();
+    if(!j.ok) throw new Error(j.erro||"falhou");
+    LS.set("pdf_aluno",{nome,ig}); LS.set("pdf_presenca_dia",hojeBR()); cacheRanking=null;
+    ev("presenca_assinada",{repetida:!!j.repetida});
+    atualizarBotaoPresenca(); modalConfirmado();
+    if((location.hash||"").startsWith("#/quadro")) telaQuadro();
+  }catch(e){
+    botao.disabled=false; botao.textContent=txt;
+    erroEl.textContent="Não consegui registrar agora. Confere a internet e tenta de novo.";
+  }
+}
+function abrirPresenca(forcarForm){
+  if(presenteHoje()&&!forcarForm) return modalConfirmado();
+  const al=alunoSalvo();
+  if(al&&!forcarForm){
+    const f=abrirModal(`<h2>Lista de presença</h2>
+      <p class="sub">Bom te ver de novo, ${esc(al.nome.split(" ")[0])}! Assina a chamada de hoje com um toque.</p>
+      <p class="erro-presenca" id="erro-presenca" role="alert"></p>
+      <div class="opcoes">
+        <button class="btn cheio" type="button" id="assinar-rapido">Marcar presença como @${esc(al.ig)}</button>
+      </div>
+      <p style="margin:14px 0 0"><button class="link-simples" type="button" id="trocar-dados">Não é você? Trocar nome e @</button></p>`);
+    f.querySelector("#assinar-rapido").onclick=e=>enviarPresenca(al.nome,al.ig,e.currentTarget,f.querySelector("#erro-presenca"));
+    f.querySelector("#trocar-dados").onclick=()=>abrirPresenca(true);
+    return;
+  }
+  const f=abrirModal(`<h2>Lista de presença</h2>
+    <p class="sub">Assina a chamada e conta presença na faculdade do corintianismo. Cada dia que você assina vale um ponto no Quadro de honra.</p>
+    <label class="campo"><span>seu nome</span><input id="pres-nome" type="text" maxlength="40" autocomplete="name" placeholder="Ex.: Maria Eduarda" value="${esc(al?.nome||LS.get("pdf_nome","")||"")}"></label>
+    <label class="campo"><span>seu @ do Instagram</span><input id="pres-ig" type="text" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@seuperfil" value="${al?.ig?"@"+esc(al.ig):""}"></label>
+    <p class="aviso-campo">Seu @ vai aparecer no Quadro de honra. O nome fica só com o Professor.</p>
+    <p class="erro-presenca" id="erro-presenca" role="alert"></p>
+    <div class="opcoes"><button class="btn cheio" type="button" id="assinar">Assinar a chamada</button></div>`);
+  const nome=f.querySelector("#pres-nome"), ig=f.querySelector("#pres-ig"), err=f.querySelector("#erro-presenca");
+  f.querySelector("#assinar").onclick=e=>{
+    const n=nome.value.replace(/\s+/g," ").trim(), i=limparIG(ig.value);
+    if(n.length<2){ err.textContent="Escreve seu nome, por favor."; nome.focus(); return; }
+    if(i.length<2){ err.textContent="Escreve seu @ do Instagram."; ig.focus(); return; }
+    enviarPresenca(n,i,e.currentTarget,err);
+  };
+  [nome,ig].forEach(x=>x.addEventListener("keydown",e=>{ if(e.key==="Enter") f.querySelector("#assinar").click(); }));
+}
+document.getElementById("btn-presenca").addEventListener("click",()=>abrirPresenca(false));
+
+async function buscarRanking(){
+  if(cacheRanking&&Date.now()-cacheRanking.t<60000) return cacheRanking.d;
+  const r=await fetch(`${PRESENCA_URL}?t=${Date.now()}`,{cache:"no-store"}); const d=await r.json();
+  cacheRanking={t:Date.now(),d}; return d;
+}
+const COROA='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z"/><path d="M5 21h14"/></svg>';
+function listaRanking(lista,destaque){
+  if(!lista.length) return "";
+  const max=Math.max(...lista.map(x=>x.dias)), eu=alunoSalvo()?.ig;
+  return `<ol class="rank">${lista.map((x,i)=>{
+    const pos=i+1, lider=destaque&&pos===1;
+    const marca=destaque&&pos===1?COROA:destaque&&pos<=3?`<span class="medalha">${pos}º</span>`:`${pos}º`;
+    return `<li class="${pos<=3&&destaque?"top ":""}${lider?"lider ":""}${x.ig===eu?"eu":""}">
+      <span class="pos">${marca}</span>
+      <span class="quem"><a href="https://www.instagram.com/${esc(x.ig)}/" target="_blank" rel="noopener">@${esc(x.ig)}</a>${x.ig===eu?'<span class="tag">você está aqui</span>':""}</span>
+      <span class="barra-r"><i style="width:${Math.max(6,x.dias/max*100)}%"></i></span>
+      <span class="dias"><b>${x.dias}</b>${x.dias===1?"dia":"dias"}</span></li>`;
+  }).join("")}</ol>`;
+}
+async function telaQuadro(){
+  const hoje=presenteHoje();
+  app.innerHTML=`
+  <a class="voltar" href="#/">← página inicial</a>
+  <header class="cab-materia">${svgIco("trofeu")}<h1>Quadro de honra</h1>
+    <p>A lista de presença da faculdade do corintianismo. Cada dia que você assina a chamada vale um ponto.</p></header>
+  <div class="chamada-topo">
+    <button class="btn ${hoje?"":"cheio"}" type="button" id="assinar-quadro">${hoje?"Presente hoje ✓":"Assinar a chamada de hoje"}</button>
+    <span class="info" id="info-quadro">carregando a chamada…</span>
+  </div>
+  <div id="rankings"><p class="vazio">Contando as presenças…</p></div>`;
+  document.getElementById("assinar-quadro").onclick=()=>abrirPresenca(false);
+  try{
+    const d=await buscarRanking();
+    if(!(location.hash||"").startsWith("#/quadro")) return;
+    const [ano,m]=(d.mes||"").split("-"), nomeMes=MESES[(+m||1)-1]||"do mês";
+    document.getElementById("info-quadro").textContent=`${plural(d.alunos||0,"aluno já assinou","alunos já assinaram")} a chamada`;
+    document.getElementById("rankings").innerHTML=`
+      <div class="subsec"><div class="subtitulo"><h3>Alunos de ${nomeMes}</h3><span class="nota">zera todo mês, qualquer um pode chegar lá</span></div>
+        ${d.mensal?.length?listaRanking(d.mensal,true):`<p class="vazio">Ninguém assinou a chamada em ${nomeMes} ainda. Seja o primeiro!</p>`}</div>
+      <div class="subsec"><div class="subtitulo"><h3>Veteranos</h3><span class="nota">os que estão sempre lá, desde o começo</span></div>
+        ${d.geral?.length?listaRanking(d.geral,false):`<p class="vazio">A turma ainda está se formando.</p>`}</div>`;
+  }catch(e){
+    document.getElementById("rankings").innerHTML=`<p class="vazio">Não consegui carregar o ranking agora. Tenta de novo daqui a pouco.</p>`;
+    document.getElementById("info-quadro").textContent="";
+  }
+}
 
 /* ================= CERTIFICADO ================= */
 const MAX_NOME=40;
@@ -873,23 +1029,36 @@ document.addEventListener("click",e=>{
   e.preventDefault(); irPara(b.dataset.sec);
 });
 function marcarMenu(id,sub){
-  document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("ativo",!!id&&(b.dataset.sec===id||b.dataset.grupo===id)));
-  document.querySelectorAll("#submenu-materias button").forEach(b=>b.classList.toggle("ativo",!!sub&&b.dataset.sec===sub));
+  document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("ativo",!!id&&(b.dataset.sec===id||b.dataset.grupo===id||(b.dataset.marca===id&&(b.id!=="btn-turma"||celular())))));
+  document.querySelectorAll(".submenu button").forEach(b=>b.classList.toggle("ativo",!!sub&&(b.dataset.sec===sub||b.dataset.rota===sub)));
 }
-const btnMaterias=document.getElementById("btn-materias"), submenu=document.getElementById("submenu-materias");
-function abrirSubmenu(){
-  const r=btnMaterias.getBoundingClientRect();
-  submenu.hidden=false;
-  const w=submenu.offsetWidth, celular=window.matchMedia("(max-width:760px)").matches;
-  if(celular){ submenu.style.top="auto"; submenu.style.bottom=`${window.innerHeight-r.top+8}px`; }
-  else { submenu.style.bottom="auto"; submenu.style.top=`${r.bottom+8}px`; }
-  submenu.style.left=`${Math.max(12,Math.min(r.left,window.innerWidth-w-12))}px`;
-  btnMaterias.setAttribute("aria-expanded","true");
-  submenu.querySelector("button")?.focus({preventScroll:true});
+const celular=()=>window.matchMedia("(max-width:760px)").matches;
+const SUBMENUS=[["btn-materias","submenu-materias",()=>true],["btn-turma","submenu-turma",celular]];
+function abrirSub(btnId,subId){
+  fecharSubmenu();
+  const btn=document.getElementById(btnId), sm=document.getElementById(subId), r=btn.getBoundingClientRect();
+  sm.hidden=false;
+  const w=sm.offsetWidth;
+  if(celular()){ sm.style.top="auto"; sm.style.bottom=`${window.innerHeight-r.top+8}px`; }
+  else { sm.style.bottom="auto"; sm.style.top=`${r.bottom+8}px`; }
+  sm.style.left=`${Math.max(12,Math.min(r.left,window.innerWidth-w-12))}px`;
+  btn.setAttribute("aria-expanded","true");
+  sm.querySelector("button")?.focus({preventScroll:true});
 }
-function fecharSubmenu(){ if(submenu.hidden) return; submenu.hidden=true; btnMaterias.setAttribute("aria-expanded","false"); }
-btnMaterias.addEventListener("click",e=>{ e.stopPropagation(); submenu.hidden?abrirSubmenu():fecharSubmenu(); });
-document.addEventListener("click",e=>{ if(!submenu.hidden&&!e.target.closest("#submenu-materias")&&!e.target.closest("#btn-materias")) fecharSubmenu(); });
+function fecharSubmenu(){
+  SUBMENUS.forEach(([b,sm])=>{ const el=document.getElementById(sm); if(!el.hidden){ el.hidden=true; document.getElementById(b).setAttribute("aria-expanded","false"); } });
+}
+SUBMENUS.forEach(([b,sm,usa])=>{
+  document.getElementById(b).addEventListener("click",e=>{
+    e.stopPropagation();
+    if(!usa()){ if(b==="btn-turma") irPara("sec-turma"); return; }
+    document.getElementById(sm).hidden?abrirSub(b,sm):fecharSubmenu();
+  });
+});
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".submenu")&&!e.target.closest("#btn-materias")&&!e.target.closest("#btn-turma")) fecharSubmenu();
+  const r=e.target.closest("[data-rota]"); if(r){ e.preventDefault(); fecharSubmenu(); location.hash=`#/${r.dataset.rota}`; }
+});
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharSubmenu(); });
 window.addEventListener("resize",fecharSubmenu);
 document.getElementById("menu").addEventListener("scroll",fecharSubmenu,{passive:true});
@@ -1145,10 +1314,12 @@ function rota(){
   else if(tipo==="aula") telaAula(decodeURIComponent(id||""));
   else if(tipo==="participe") telaParticipe();
   else if(tipo==="por-ai") telaPorAi();
+  else if(tipo==="quadro") telaQuadro();
   else if(tipo==="live") telaLive(decodeURIComponent(id||""));
   else telaInicio();
   rodapeTurma();
-  if(tipo){ observador?.disconnect(); marcarMenu(null); }
+  if(tipo){ observador?.disconnect(); marcarMenu(tipo==="quadro"?"quadro":null,tipo==="quadro"?"quadro":null); }
+  atualizarBotaoPresenca();
   if(secPendente&&!tipo){ const id=secPendente; secPendente=null; setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"}),80); }
   else window.scrollTo(0,0);
   const h1=app.querySelector("h1");
