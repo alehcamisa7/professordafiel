@@ -329,6 +329,43 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
 .rank .dias{font-family:var(--mao);font-size:20px;color:var(--giz-2);text-align:right;white-space:nowrap}
 .rank .dias b{font-family:var(--display);font-size:22px;color:var(--giz);margin-right:3px}
 .rank li.eu{outline:2px solid var(--vermelho);outline-offset:-2px}
+/* sequência */
+.btn.presenca .fogo{font-family:var(--mao);font-weight:700;font-size:17px;line-height:1;padding:1px 6px;border-radius:10px;background:rgba(0,0,0,.18)}
+.btn.presenca.feito .fogo{background:rgba(22,24,22,.1)}
+.seq-modal{display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:10px 14px;border:1.5px dashed var(--vermelho);border-radius:var(--r);font-weight:500}
+.seq-modal b{font-family:var(--giz-font);font-size:28px;color:var(--giz)}
+/* aulas novas desde a última visita */
+.novidades{position:relative;margin:18px 0 0;padding:16px 46px 16px 18px;border:2px solid var(--giz);border-left:6px solid var(--vermelho);border-radius:var(--r);background:rgba(216,38,46,.08)}
+.novidades h2{margin:0 0 8px;font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.15}
+.novidades ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.novidades li a{font-weight:400;text-decoration-color:var(--vermelho);text-underline-offset:3px}
+.novidades li small{font-family:var(--mao);font-size:18px;color:var(--giz-2);margin-left:6px}
+.novidades .mais{display:inline-block;margin-top:8px;font-family:var(--mao);font-size:20px;color:var(--giz-2)}
+.novidades .fechar{top:6px;right:6px}
+/* pódio */
+.podio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:18px;max-width:560px;margin:10px auto 26px;padding:0 6px}
+.degrau{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;text-align:center}
+.degrau .quem-p{max-width:100%;min-width:0}
+.degrau .quem-p a{display:block;font-weight:500;font-size:18px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.degrau .quem-p a:hover{text-decoration:underline;text-decoration-color:var(--vermelho)}
+.degrau .quem-p .tag{display:block;font-family:var(--mao);font-weight:700;font-size:17px;color:var(--vermelho);line-height:1}
+.degrau .coroa svg{width:44px;height:44px;fill:none;stroke:var(--vermelho);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:url(#giz)}
+.coluna{position:relative;width:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:10px 4px 8px;border:3px solid var(--giz);border-bottom-width:4px;border-radius:6px 6px 0 0;
+  background:repeating-linear-gradient(-45deg,rgba(242,240,234,.42) 0 2.5px,transparent 2.5px 10px);filter:url(#giz);transform-origin:bottom;animation:subir .9s cubic-bezier(.2,.8,.3,1) both}
+.degrau:nth-child(1) .coluna{animation-delay:.25s}.degrau:nth-child(3) .coluna{animation-delay:.45s}
+@keyframes subir{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.coluna{animation:none}}
+.coluna .dias-p{font-family:var(--mao);font-weight:700;font-size:22px;line-height:1;background:var(--lousa);padding:2px 8px;border-radius:4px}
+.coluna .dias-p b{font-family:var(--display);font-size:26px;margin-right:3px}
+.coluna .lugar{font-family:var(--giz-font);font-weight:700;font-size:38px;line-height:1;background:var(--lousa);padding:0 8px;border-radius:4px}
+.degrau.primeiro .coluna{border-color:var(--vermelho);background:repeating-linear-gradient(-45deg,rgba(216,38,46,.7) 0 3px,transparent 3px 9px)}
+.degrau.primeiro .lugar{color:var(--vermelho)}
+.degrau.eu .coluna{box-shadow:0 0 0 3px var(--lousa),0 0 0 5px var(--vermelho)}
+.degrau.vago .coluna{border-style:dashed;border-color:rgba(242,240,234,.35);background:none;animation:none}
+.degrau.vago .quem-p{font-family:var(--mao);font-size:18px;color:var(--giz-2);line-height:1.1}
+.degrau.vago .lugar{color:rgba(242,240,234,.5);background:none}
+.rank.compacto li{grid-template-columns:46px minmax(0,1fr) 70px}
+.rank.compacto .barra-r{display:none}
 /* aviso de cookies */
 .cookies{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;transform:translateX(-50%);width:min(640px,calc(100% - 24px));
   display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:16px 18px;background:var(--lousa);border:2px solid var(--giz);border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.65)}
@@ -415,6 +452,13 @@ footer .frase{font-family:var(--mao);font-size:30px;color:var(--giz);margin:0 0 
   .rank li{grid-template-columns:36px minmax(0,1fr) 62px;gap:10px;padding:10px 12px}
   .rank .barra-r{grid-column:2 / 4;grid-row:2}
   .rank .quem a{font-size:16px}
+  .rank.compacto li{grid-template-columns:36px minmax(0,1fr) 62px}
+  .podio{gap:10px;padding:0}
+  .degrau .quem-p a{font-size:14px}
+  .degrau .coroa svg{width:34px;height:34px}
+  .coluna .lugar{font-size:30px}
+  .coluna .dias-p{font-size:18px}
+  .coluna .dias-p b{font-size:21px}
   .sala{grid-template-columns:1fr;grid-template-areas:"video" "botoes" "lado" "nav";grid-template-rows:auto;gap:16px}
   .tela{grid-row:auto}
   .sala .navega{grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -521,7 +565,7 @@ const legendaHTML=t=>esc(t)
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let FEITAS=new Set(LS.get("pdf_feitas",[]));
 const feita=cod=>FEITAS.has(cod);
-function alternarFeita(cod){ FEITAS.has(cod)?FEITAS.delete(cod):FEITAS.add(cod); LS.set("pdf_feitas",[...FEITAS]); }
+function alternarFeita(cod){ FEITAS.has(cod)?FEITAS.delete(cod):FEITAS.add(cod); LS.set("pdf_feitas",[...FEITAS]); salvarProgresso(); }
 function progresso(m){
   const total=m.aulas.length, feitas=m.aulas.filter(a=>feita(a.cod)).length;
   const elegivel=total>=MIN_AULAS_CERT, meta=Math.ceil(total*PCT_CERT);
@@ -782,18 +826,47 @@ const MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agos
 function hojeBR(){ try{ return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
 const limparIG=t=>String(t||"").trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/^@+/,"").replace(/\/.*$/,"").toLowerCase().replace(/[^a-z0-9._]/g,"").slice(0,30);
 const alunoSalvo=()=>LS.get("pdf_aluno",null);
+function ontemBR(){ const [a,m,d]=hojeBR().split("-").map(Number); const dt=new Date(Date.UTC(a,m-1,d-1)); return dt.toISOString().slice(0,10); }
+function sequenciaAtual(){ const s=LS.get("pdf_seq",null); if(!s||!s.n) return 0; return (s.ultimo===hojeBR()||s.ultimo===ontemBR())?s.n:0; }
+function guardarSequencia(n,presenteAgora){ LS.set("pdf_seq",{n:n||0,ultimo:n?(presenteAgora?hojeBR():ontemBR()):null}); }
+/* progresso na nuvem, pelo @ */
+let timerSalvar, sincronizado=false;
+function salvarProgresso(){
+  const al=alunoSalvo(); if(!al) return;
+  clearTimeout(timerSalvar);
+  timerSalvar=setTimeout(()=>{ fetch(`${PRESENCA_URL}?acao=salvar&instagram=${encodeURIComponent(al.ig)}&aulas=${encodeURIComponent([...FEITAS].join(","))}`,{cache:"no-store"}).catch(()=>{}); },1500);
+}
+async function sincronizarProgresso(){
+  const al=alunoSalvo(); if(!al) return;
+  try{
+    const j=await (await fetch(`${PRESENCA_URL}?acao=progresso&instagram=${encodeURIComponent(al.ig)}`,{cache:"no-store"})).json();
+    if(!j.ok) return;
+    sincronizado=true;
+    const remotas=new Set(j.aulas||[]), antes=FEITAS.size;
+    remotas.forEach(c=>FEITAS.add(c));
+    LS.set("pdf_feitas",[...FEITAS]);
+    if(typeof j.sequencia==="number") guardarSequencia(j.sequencia,presenteHoje());
+    atualizarBotaoPresenca();
+    if([...FEITAS].some(c=>!remotas.has(c))) salvarProgresso();
+    const tipo=(location.hash||"#/").split("/")[1];
+    if(FEITAS.size!==antes&&tipo!=="aula"&&tipo!=="quadro"&&window.scrollY<300&&!document.querySelector(".fundo-modal")) rota();
+  }catch(e){}
+}
 const presenteHoje=()=>LS.get("pdf_presenca_dia",null)===hojeBR();
 let cacheRanking=null;
 function atualizarBotaoPresenca(){
   const b=document.getElementById("btn-presenca"); if(!b) return;
   const ok=presenteHoje(); b.classList.toggle("feito",ok);
   b.querySelector(".lp").textContent=ok?"Presente ✓":"Presença";
+  const n=sequenciaAtual(); let f=b.querySelector(".fogo");
+  if(n>=2){ if(!f){ f=document.createElement("span"); f.className="fogo"; b.appendChild(f); } f.textContent=`🔥${n}`; f.title=`${n} dias seguidos`; } else f?.remove();
   b.setAttribute("aria-label",ok?"Presença de hoje confirmada":"Assinar a lista de presença");
 }
 function modalConfirmado(){
   const al=alunoSalvo()||{};
   abrirModal(`<h2>Presença confirmada! ✓</h2>
-    <p class="sub">Você assinou a chamada de hoje${al.ig?`, @${esc(al.ig)}`:""}. Volta amanhã pra somar mais um dia no Quadro de honra.</p>
+    <p class="sub">Você assinou a chamada de hoje${al.ig?`, @${esc(al.ig)}`:""}.</p>
+    ${(()=>{ const n=sequenciaAtual(); return n>=2?`<div class="seq-modal"><b>🔥 ${n}</b><span>dias seguidos! Volta amanhã pra não quebrar a sequência.</span></div>`:`<div class="seq-modal"><b>🔥 1</b><span>Começou a sua sequência. Volta amanhã pra manter o fogo aceso.</span></div>`; })()}
     <p class="sub" style="margin-bottom:10px">Já segue o Professor no Instagram?</p>
     <div class="opcoes">
       <a class="btn cheio" href="${LINKS.instagram}" target="_blank" rel="noopener" data-social="instagram_seguir">Seguir @alehcamisa7</a>
@@ -806,9 +879,12 @@ async function enviarPresenca(nome,ig,botao,erroEl){
     const u=`${PRESENCA_URL}?acao=presenca&nome=${encodeURIComponent(nome)}&instagram=${encodeURIComponent(ig)}`;
     const r=await fetch(u,{cache:"no-store"}); const j=await r.json();
     if(!j.ok) throw new Error(j.erro||"falhou");
+    const trocouAluno=(alunoSalvo()?.ig||"")!==ig;
     LS.set("pdf_aluno",{nome,ig}); LS.set("pdf_presenca_dia",hojeBR()); cacheRanking=null;
-    ev("presenca_assinada",{repetida:!!j.repetida});
+    guardarSequencia(j.sequencia||1,true);
+    ev("presenca_assinada",{repetida:!!j.repetida,sequencia:j.sequencia||1});
     atualizarBotaoPresenca(); modalConfirmado();
+    if(trocouAluno||!sincronizado) sincronizarProgresso(); else salvarProgresso();
     if((location.hash||"").startsWith("#/quadro")) telaQuadro();
   }catch(e){
     botao.disabled=false; botao.textContent=txt;
@@ -821,6 +897,7 @@ function abrirPresenca(forcarForm){
   if(al&&!forcarForm){
     const f=abrirModal(`<h2>Lista de presença</h2>
       <p class="sub">Bom te ver de novo, ${esc(al.nome.split(" ")[0])}! Assina a chamada de hoje com um toque.</p>
+      ${sequenciaAtual()>=1?`<div class="seq-modal"><b>🔥 ${sequenciaAtual()}</b><span>${sequenciaAtual()===1?"dia na sequência":"dias seguidos"}. Assina hoje pra não quebrar!</span></div>`:""}
       <p class="erro-presenca" id="erro-presenca" role="alert"></p>
       <div class="opcoes">
         <button class="btn cheio" type="button" id="assinar-rapido">Marcar presença como @${esc(al.ig)}</button>
@@ -831,7 +908,7 @@ function abrirPresenca(forcarForm){
     return;
   }
   const f=abrirModal(`<h2>Lista de presença</h2>
-    <p class="sub">Assina a chamada e conta presença na faculdade do corintianismo. Cada dia que você assina vale um ponto no Quadro de honra.</p>
+    <p class="sub">Assina a chamada e conta presença na faculdade do corintianismo. Cada dia vale um ponto no Quadro de honra, e o seu progresso nas aulas fica salvo no seu @, em qualquer aparelho.</p>
     <label class="campo"><span>seu nome</span><input id="pres-nome" type="text" maxlength="40" autocomplete="name" placeholder="Ex.: Maria Eduarda" value="${esc(al?.nome||LS.get("pdf_nome","")||"")}"></label>
     <label class="campo"><span>seu @ do Instagram</span><input id="pres-ig" type="text" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@seuperfil" value="${al?.ig?"@"+esc(al.ig):""}"></label>
     <p class="aviso-campo">Seu @ vai aparecer no Quadro de honra. O nome fica só com o Professor.</p>
@@ -867,6 +944,27 @@ function listaRanking(lista,destaque){
       <span class="dias"><b>${x.dias}</b>${x.dias===1?"dia":"dias"}</span></li>`;
   }).join("")}</ol>`;
 }
+function podio(lista){
+  const eu=alunoSalvo()?.ig, max=Math.max(1,...lista.map(x=>x.dias));
+  const degrau=(x,pos)=>{
+    const cls=pos===1?"primeiro":"";
+    if(!x) return `<div class="degrau vago"><span class="quem-p">esse lugar<br>pode ser seu</span>
+      <span class="coluna" style="height:${pos===1?120:pos===2?95:80}px"><span class="lugar">?</span><span></span></span></div>`;
+    const h=Math.round(90+130*(x.dias/max)*(pos===1?1:.92));
+    return `<div class="degrau ${cls} ${x.ig===eu?"eu":""}">
+      ${pos===1?`<span class="coroa">${COROA}</span>`:""}
+      <span class="quem-p"><a href="https://www.instagram.com/${esc(x.ig)}/" target="_blank" rel="noopener">@${esc(x.ig)}</a>${x.ig===eu?'<span class="tag">você</span>':""}</span>
+      <span class="coluna" style="height:${h}px"><span class="dias-p"><b>${x.dias}</b>${x.dias===1?"dia":"dias"}</span><span class="lugar">${pos}º</span></span></div>`;
+  };
+  return `<div class="podio" role="img" aria-label="Pódio do mês">${degrau(lista[1],2)}${degrau(lista[0],1)}${degrau(lista[2],3)}</div>`;
+}
+function listaCompacta(lista,inicio){
+  if(!lista.length) return "";
+  const eu=alunoSalvo()?.ig;
+  return `<ol class="rank compacto">${lista.map((x,i)=>`<li class="${x.ig===eu?"eu":""}"><span class="pos">${inicio+i}º</span>
+    <span class="quem"><a href="https://www.instagram.com/${esc(x.ig)}/" target="_blank" rel="noopener">@${esc(x.ig)}</a>${x.ig===eu?'<span class="tag">você está aqui</span>':""}</span>
+    <span class="dias"><b>${x.dias}</b>${x.dias===1?"dia":"dias"}</span></li>`).join("")}</ol>`;
+}
 async function telaQuadro(){
   const hoje=presenteHoje();
   app.innerHTML=`
@@ -886,7 +984,7 @@ async function telaQuadro(){
     document.getElementById("info-quadro").textContent=`${plural(d.alunos||0,"aluno já assinou","alunos já assinaram")} a chamada`;
     document.getElementById("rankings").innerHTML=`
       <div class="subsec"><div class="subtitulo"><h3>Alunos de ${nomeMes}</h3><span class="nota">zera todo mês, qualquer um pode chegar lá</span></div>
-        ${d.mensal?.length?listaRanking(d.mensal,true):`<p class="vazio">Ninguém assinou a chamada em ${nomeMes} ainda. Seja o primeiro!</p>`}</div>
+        ${podio(d.mensal||[])}${listaCompacta((d.mensal||[]).slice(3),4)}</div>
       <div class="subsec"><div class="subtitulo"><h3>Veteranos</h3><span class="nota">os que estão sempre lá, desde o começo</span></div>
         ${d.geral?.length?listaRanking(d.geral,false):`<p class="vazio">A turma ainda está se formando.</p>`}</div>`;
   }catch(e){
@@ -1079,11 +1177,30 @@ function observarSecoes(){
   document.querySelectorAll('section[id^="sec-"]').forEach(s=>observador.observe(s));
 }
 
+/* ================= AULAS NOVAS DESDE A ÚLTIMA VISITA ================= */
+let NOVAS_SESSAO=[], novidadesFechadas=false;
+function calcularNovidades(){
+  const vistos=LS.get("pdf_vistos",null), agora=AULAS.map(a=>a.cod);
+  if(Array.isArray(vistos)){
+    const set=new Set(vistos);
+    NOVAS_SESSAO=AULAS.filter(a=>!set.has(a.cod)).sort((x,y)=>(y.data||0)-(x.data||0)||y.ordem-x.ordem);
+  }
+  LS.set("pdf_vistos",agora);
+}
+function blocoNovidades(){
+  if(novidadesFechadas||!NOVAS_SESSAO.length) return "";
+  const n=NOVAS_SESSAO.length;
+  return `<aside class="novidades" id="novidades"><button class="fechar" type="button" id="fechar-novidades" aria-label="Fechar">×</button>
+    <h2>${n===1?"Saiu 1 aula":"Saíram "+n+" aulas"} desde a sua última visita</h2>
+    <ul>${NOVAS_SESSAO.slice(0,3).map(a=>`<li><a href="#/aula/${a.cod}">${esc(a.titulo)}</a><small>${esc(a.materia)}</small></li>`).join("")}</ul>
+    ${n>3?`<a class="mais" href="#/" data-sec="sec-ultimas">ver todas as últimas aulas →</a>`:""}</aside>`;
+}
+
 /* ================= TELAS ================= */
 function telaInicio(){
   const primeira=MATERIAS[0]?.aulas[0];
   const recentes=[...AULAS].sort((x,y)=>(y.data||0)-(x.data||0)||y.ordem-x.ordem).slice(0,6);
-  app.innerHTML=`
+  app.innerHTML=`${blocoNovidades()}
   <section class="hero">
     <h1>Ser corinthiano <span class="risco">explica tudo.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 70 4, 150 18, 297 6"/></svg></span></h1>
     <p class="lead">Bem-vindo à sala de aula da Fiel. Aqui estão todas as ${AULAS.length} aulas do Professor, separadas por matéria e na ordem certa, pra você maratonar sem se perder.</p>
@@ -1098,6 +1215,7 @@ function telaInicio(){
     </ol>
   </section>
   <div id="resultado"></div>`;
+  document.getElementById("fechar-novidades")?.addEventListener("click",()=>{ novidadesFechadas=true; document.getElementById("novidades")?.remove(); });
   const inp=document.getElementById("busca"), res=document.getElementById("resultado");
   const desenhar=()=>{
     const q=norm(inp.value);
@@ -1327,7 +1445,7 @@ function rota(){
   paginaVista();
 }
 app.innerHTML='<p class="vazio">Apagando a lousa…</p>';
-carregar().then(()=>{window.addEventListener("hashchange",rota);rota();});
+carregar().then(()=>{ calcularNovidades(); window.addEventListener("hashchange",rota); rota(); sincronizarProgresso(); });
 </script>
 </body>
 </html>
